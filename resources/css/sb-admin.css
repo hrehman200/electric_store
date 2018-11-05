@@ -4,7 +4,11 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin/blob/master/LICENSE)
  */
 body {
-  background: #292b2c; }
+  background: #f8f8f8; }
+
+.login-panel {
+  margin-top: 25%;
+}
 
 body.fixed-nav {
   padding-top: 54px; }
