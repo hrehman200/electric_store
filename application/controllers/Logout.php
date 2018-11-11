@@ -5,7 +5,7 @@ class Logout extends CI_Controller {
 
 	public function index()
 	{ 
-		$this->Admin_model->logout();
+		$this->User_model->logout();
 		redirect(base_url(), 'auto');
 		
 	}

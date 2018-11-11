@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <form class="form-signin" action="<?= base_url() ?>login" method="POST">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Username" name="usernmae" type="text"
+                                <input class="form-control" placeholder="Username" name="username" type="text"
                                        autofocus="">
                             </div>
                             <div class="form-group">

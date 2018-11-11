@@ -20,7 +20,7 @@ class Login extends CI_Controller
                     $data["error"] = 1;
                     $this->load->view('login', $data);
                 } else {
-                    $auth = $this->Admin_model->adminLogin($postData);
+                    $auth = $this->User_model->adminLogin($postData);
                     if ($auth == true) {
                         redirect(base_url(), "auto");
                     } else {
@@ -32,7 +32,7 @@ class Login extends CI_Controller
                 echo "1";
                 $this->session->set_userdata("loginattempts", 0);
                 $postData = $this->input->post();
-                $auth = $this->Admin_model->adminLogin($postData);
+                $auth = $this->User_model->adminLogin($postData);
                 if ($auth == true) {
                     redirect(base_url(), "auto");
                 } else {
