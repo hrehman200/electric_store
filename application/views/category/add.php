@@ -12,14 +12,9 @@
 						<div class="form-group">
 							<select name="parent_id" class="form-control">
 								<option value="">None</option>
-								<?php 
-								foreach($all_categories as $category)
-								{
-									$selected = ($category['id'] == $this->input->post('parent_id')) ? ' selected="selected"' : "";
-
-									echo '<option value="'.$category['id'].'" '.$selected.'>'.$category['name'].'</option>';
-								} 
-								?>
+                                <?php
+                                echo $all_categories;
+                                ?>
 							</select>
 						</div>
 					</div>

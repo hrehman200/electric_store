@@ -43,7 +43,7 @@ class Category extends CI_Controller
             $category_id = $this->Category_model->add_category($params);
             redirect('category/index');
         } else {
-            $data['all_categories'] = $this->Category_model->get_all_categories();
+            $data['all_categories'] = $this->Category_model->get_categories_dropdown_html();
 
             $data['_view'] = 'category/add';
             $this->load->view('layouts/main', $data);

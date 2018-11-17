@@ -13,10 +13,7 @@
 							<select name="category_id" class="form-control">
 								<option value="">select category</option>
 								<?php 
-								foreach($all_categories as $category) {
-									$selected = ($category['id'] == $this->input->post('category_id')) ? ' selected="selected"' : "";
-									echo '<option value="'.$category['id'].'" '.$selected.'>'.$category['name'].'</option>';
-								} 
+								echo $all_categories;
 								?>
 							</select>
 						</div>

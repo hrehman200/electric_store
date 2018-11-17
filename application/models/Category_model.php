@@ -26,6 +26,46 @@ class Category_model extends CI_Model
         return $this->db->get('categories')->result_array();
     }
 
+    /**
+     * @param null $parent_category
+     * @return mixed
+     */
+    function get_categories(&$parent_category = null) {
+        $categories =  $this->db->where('parent_id', $parent_category['id'])
+            ->get('categories')
+            ->result_array();
+
+        foreach($categories as &$c) {
+            $c['sub_categories'] = $this->get_categories($c);
+        }
+
+        return $categories;
+    }
+
+    /**
+     * @return string
+     */
+    function get_categories_dropdown_html() {
+
+        $categories = $this->get_categories();
+
+        $html = '';
+        foreach($categories as $c1) {
+            $html .= sprintf('<option value="%d">%s</option>', $c1['id'], $c1['name']);
+            foreach($c1['sub_categories'] as $c2) {
+                $html .= sprintf('<option value="%d">&nbsp;&nbsp;&nbsp;&nbsp;%s</option>', $c2['id'], $c2['name']);
+                foreach($c2['sub_categories'] as $c3) {
+                    $html .= sprintf('<option value="%d">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%s</option>', $c3['id'], $c3['name']);
+                    foreach($c3['sub_categories'] as $c4) {
+                        $html .= sprintf('<option value="%d">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%s</option>', $c4['id'], $c4['name']);
+                    }
+                }
+            }
+        }
+
+        return $html;
+    }
+
     /*
      * function to add new category
      */
