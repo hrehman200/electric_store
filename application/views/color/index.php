@@ -10,13 +10,11 @@
             <div class="box-body">
                 <table class="table table-striped">
                     <tr>
-						<th>ID</th>
 						<th>Name</th>
 						<th>Actions</th>
                     </tr>
                     <?php foreach($colors as $c){ ?>
                     <tr>
-						<td><?php echo $c['id']; ?></td>
 						<td><?php echo $c['name']; ?></td>
 						<td>
                             <a href="<?php echo site_url('color/edit/'.$c['id']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a> 

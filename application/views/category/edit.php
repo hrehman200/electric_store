@@ -8,10 +8,10 @@
 			<div class="box-body">
 				<div class="row clearfix">
 					<div class="col-md-6">
-						<label for="parent_id" class="control-label">Category</label>
+						<label for="parent_id" class="control-label">Parent Category</label>
 						<div class="form-group">
 							<select name="parent_id" class="form-control">
-								<option value="">select category</option>
+								<option value="">None</option>
 								<?php 
 								foreach($all_categories as $category)
 								{

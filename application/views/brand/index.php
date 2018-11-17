@@ -10,13 +10,11 @@
             <div class="box-body">
                 <table class="table table-striped">
                     <tr>
-						<th>ID</th>
 						<th>Name</th>
 						<th>Actions</th>
                     </tr>
                     <?php foreach($brands as $b){ ?>
                     <tr>
-						<td><?php echo $b['id']; ?></td>
 						<td><?php echo $b['name']; ?></td>
 						<td>
                             <a href="<?php echo site_url('brand/edit/'.$b['id']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a> 
