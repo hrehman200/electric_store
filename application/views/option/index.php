@@ -18,7 +18,7 @@
                     <?php foreach($options as $o){ ?>
                     <tr>
 						<td><?php echo $o['id']; ?></td>
-						<td><?php echo $o['category_id']; ?></td>
+						<td><?php echo $o['category']; ?></td>
 						<td><?php echo $o['name']; ?></td>
 						<td>
                             <a href="<?php echo site_url('option/edit/'.$o['id']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a> 

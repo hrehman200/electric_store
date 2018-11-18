@@ -11,14 +11,9 @@
 						<label for="category_id" class="control-label">Category</label>
 						<div class="form-group">
 							<select name="category_id" class="form-control">
-								<option value="">select category</option>
+								<option value="">Select Category</option>
 								<?php 
-								foreach($all_categories as $category)
-								{
-									$selected = ($category['id'] == $this->input->post('category_id')) ? ' selected="selected"' : "";
-
-									echo '<option value="'.$category['id'].'" '.$selected.'>'.$category['id'].'</option>';
-								} 
+								echo $all_categories;
 								?>
 							</select>
 						</div>

@@ -19,6 +19,21 @@
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
         <link rel="stylesheet" href="<?php echo site_url('resources/css/_all-skins.min.css');?>">
+
+        <!-- jQuery 2.2.3 -->
+        <script src="<?php echo site_url('resources/js/jquery-2.2.3.min.js');?>"></script>
+        <!-- Bootstrap 3.3.6 -->
+        <script src="<?php echo site_url('resources/js/bootstrap.min.js');?>"></script>
+        <!-- FastClick -->
+        <script src="<?php echo site_url('resources/js/fastclick.js');?>"></script>
+        <!-- AdminLTE App -->
+        <script src="<?php echo site_url('resources/js/app.min.js');?>"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="<?php echo site_url('resources/js/demo.js');?>"></script>
+        <!-- DatePicker -->
+        <script src="<?php echo site_url('resources/js/moment.js');?>"></script>
+        <script src="<?php echo site_url('resources/js/bootstrap-datetimepicker.min.js');?>"></script>
+        <script src="<?php echo site_url('resources/js/global.js');?>"></script>
     </head>
     
     <body class="hold-transition skin-blue sidebar-mini">
@@ -98,7 +113,7 @@
                         </li>
 						<li>
                             <a href="#">
-                                <i class="fa fa-desktop"></i> <span>Accessory</span>
+                                <span>Accessory</span>
                             </a>
                             <ul class="treeview-menu">
 								<li class="active">
@@ -111,7 +126,7 @@
                         </li>
 						<li>
                             <a href="#">
-                                <i class="fa fa-desktop"></i> <span>Brand</span>
+                                <span>Brand</span>
                             </a>
                             <ul class="treeview-menu">
 								<li class="active">
@@ -124,7 +139,7 @@
                         </li>
 						<li>
                             <a href="#">
-                                <i class="fa fa-desktop"></i> <span>Category</span>
+                                <span>Category</span>
                             </a>
                             <ul class="treeview-menu">
 								<li class="active">
@@ -137,7 +152,7 @@
                         </li>
 						<li>
                             <a href="#">
-                                <i class="fa fa-desktop"></i> <span>Color Category Map</span>
+                                <span>Color Category Map</span>
                             </a>
                             <ul class="treeview-menu">
 								<li class="active">
@@ -150,7 +165,7 @@
                         </li>
 						<li>
                             <a href="#">
-                                <i class="fa fa-desktop"></i> <span>Color</span>
+                                <span>Color</span>
                             </a>
                             <ul class="treeview-menu">
 								<li class="active">
@@ -163,7 +178,7 @@
                         </li>
 						<li>
                             <a href="#">
-                                <i class="fa fa-desktop"></i> <span>Condition</span>
+                                <span>Condition</span>
                             </a>
                             <ul class="treeview-menu">
 								<li class="active">
@@ -176,7 +191,7 @@
                         </li>
 						<li>
                             <a href="#">
-                                <i class="fa fa-desktop"></i> <span>Option</span>
+                                <span>Option</span>
                             </a>
                             <ul class="treeview-menu">
 								<li class="active">
@@ -189,7 +204,7 @@
                         </li>
 						<li>
                             <a href="#">
-                                <i class="fa fa-desktop"></i> <span>Permission Group</span>
+                                <span>Permission Group</span>
                             </a>
                             <ul class="treeview-menu">
 								<li class="active">
@@ -202,7 +217,7 @@
                         </li>
 						<li>
                             <a href="#">
-                                <i class="fa fa-desktop"></i> <span>Permission Map</span>
+                                <span>Permission Map</span>
                             </a>
                             <ul class="treeview-menu">
 								<li class="active">
@@ -215,7 +230,7 @@
                         </li>
 						<li>
                             <a href="#">
-                                <i class="fa fa-desktop"></i> <span>Permission</span>
+                                <span>Permission</span>
                             </a>
                             <ul class="treeview-menu">
 								<li class="active">
@@ -228,7 +243,7 @@
                         </li>
 						<li>
                             <a href="#">
-                                <i class="fa fa-desktop"></i> <span>Product Picture</span>
+                                <span>Product Picture</span>
                             </a>
                             <ul class="treeview-menu">
 								<li class="active">
@@ -241,7 +256,7 @@
                         </li>
 						<li>
                             <a href="#">
-                                <i class="fa fa-desktop"></i> <span>Product</span>
+                                <span>Product</span>
                             </a>
                             <ul class="treeview-menu">
 								<li class="active">
@@ -254,7 +269,7 @@
                         </li>
 						<li>
                             <a href="#">
-                                <i class="fa fa-desktop"></i> <span>Tag</span>
+                                <span>Tag</span>
                             </a>
                             <ul class="treeview-menu">
 								<li class="active">
@@ -267,7 +282,7 @@
                         </li>
 						<li>
                             <a href="#">
-                                <i class="fa fa-desktop"></i> <span>User</span>
+                                <span>User</span>
                             </a>
                             <ul class="treeview-menu">
 								<li class="active">
@@ -324,20 +339,5 @@
             <div class="control-sidebar-bg"></div>
         </div>
         <!-- ./wrapper -->
-
-        <!-- jQuery 2.2.3 -->
-        <script src="<?php echo site_url('resources/js/jquery-2.2.3.min.js');?>"></script>
-        <!-- Bootstrap 3.3.6 -->
-        <script src="<?php echo site_url('resources/js/bootstrap.min.js');?>"></script>
-        <!-- FastClick -->
-        <script src="<?php echo site_url('resources/js/fastclick.js');?>"></script>
-        <!-- AdminLTE App -->
-        <script src="<?php echo site_url('resources/js/app.min.js');?>"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="<?php echo site_url('resources/js/demo.js');?>"></script>
-        <!-- DatePicker -->
-        <script src="<?php echo site_url('resources/js/moment.js');?>"></script>
-        <script src="<?php echo site_url('resources/js/bootstrap-datetimepicker.min.js');?>"></script>
-        <script src="<?php echo site_url('resources/js/global.js');?>"></script>
     </body>
 </html>
