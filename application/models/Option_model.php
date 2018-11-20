@@ -9,6 +9,7 @@ class Option_model extends CI_Model
 {
     function __construct() {
         parent::__construct();
+        $this->load->model('Category_model');
     }
 
     /*
@@ -33,9 +34,23 @@ class Option_model extends CI_Model
      * @return mixed
      */
     function get_options_of_category($category_id) {
-        return $this->db->where('category_id', $category_id)
+
+        $options = $this->db->where('category_id', $category_id)
             ->get('options')
             ->result_array();
+
+        if(count($options) == 0) {
+            $category = $this->Category_model->get_category($category_id);
+
+            // if this is a child category
+            if ($category['parent_id'] > 0) {
+                $options = $this->db->where('category_id', $category['parent_id'])
+                    ->get('options')
+                    ->result_array();
+            }
+        }
+
+        return $options;
     }
 
     /*
