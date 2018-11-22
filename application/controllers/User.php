@@ -28,7 +28,16 @@ class User extends CI_Controller
      * Adding a new user
      */
     function add() {
+        $data['permission_groups'] = $this->Permission_group_model->get_all_permission_groups();
+        $data['_view'] = 'user/add';
+
         if (isset($_POST) && count($_POST) > 0) {
+
+            $this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]|max_length[50]|valid_email');
+            $this->form_validation->set_rules('name', 'Name', 'required|is_unique[users.name]|max_length[50]|alpha_numeric_spaces');
+            $this->form_validation->set_rules('address', 'Address', 'required|max_length[255]');
+            $this->form_validation->set_rules('password', 'password', 'required|min_length[6]|max_length[50]');
+
             $params = array(
                 'password' => $this->input->post('password'),
                 'email' => $this->input->post('email'),
@@ -37,11 +46,14 @@ class User extends CI_Controller
                 'address' => $this->input->post('address')
             );
 
-            $user_id = $this->User_model->add_user($params);
-            redirect('user/index');
+            if ($this->form_validation->run()) {
+                $user_id = $this->User_model->add_user($params);
+                redirect('user/index');
+            } else {
+                $this->load->view('layouts/main', $data);
+            }
 
         } else {
-            $data['_view'] = 'user/add';
             $this->load->view('layouts/main', $data);
         }
     }

@@ -11,24 +11,28 @@
                         <label for="name" class="control-label">Name</label>
                         <div class="form-group">
                             <input type="text" name="name" value="<?php echo ($this->input->post('name') ? $this->input->post('name') : ''); ?>" class="form-control" id="name" />
+                            <span class="text-danger"><?php echo form_error('name');?></span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label for="address" class="control-label">Address</label>
                         <div class="form-group">
                             <input type="text" name="address" value="<?php echo ($this->input->post('address') ? $this->input->post('address') : ''); ?>" class="form-control" id="address" />
+                            <span class="text-danger"><?php echo form_error('address');?></span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label for="email" class="control-label">Email</label>
                         <div class="form-group">
                             <input type="text" name="email" value="<?php echo ($this->input->post('email') ? $this->input->post('email') : ''); ?>" class="form-control" id="email" />
+                            <span class="text-danger"><?php echo form_error('email');?></span>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label for="email" class="control-label">Password</label>
                         <div class="form-group">
-                            <input type="text" name="email" value="<?php echo ($this->input->post('password') ? $this->input->post('password') : ''); ?>" class="form-control" id="email" />
+                            <input type="text" name="password" value="<?php echo ($this->input->post('password') ? $this->input->post('password') : ''); ?>" class="form-control" id="email" />
+                            <span class="text-danger"><?php echo form_error('password');?></span>
                         </div>
                     </div>
                     <div class="col-md-6">
