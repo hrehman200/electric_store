@@ -7,6 +7,30 @@
             <?php echo form_open('permission_map/add'); ?>
           	<div class="box-body">
           		<div class="row clearfix">
+                    <div class="col-md-2">
+                        <label for="product_title_format" class="control-label">Permission</label>
+                        <div class="form-group">
+                            <select name="permissionID">
+                                <?php
+                                foreach($permissions as $p) {
+                                    echo sprintf('<option value="%d">%s</option>', $p['permissionID'], $p['permission']);
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="product_title_format" class="control-label">Group</label>
+                        <div class="form-group">
+                            <select name="groupID">
+                                <?php
+                                foreach($permission_groups as $pg) {
+                                    echo sprintf('<option value="%d">%s</option>', $pg['id'], $pg['name']);
+                                }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
 				</div>
 			</div>
           	<div class="box-footer">

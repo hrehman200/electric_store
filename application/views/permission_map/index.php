@@ -10,16 +10,15 @@
             <div class="box-body">
                 <table class="table table-striped">
                     <tr>
-						<th>GroupID</th>
-						<th>PermissionID</th>
+						<th>Group</th>
+						<th>Permission</th>
 						<th>Actions</th>
                     </tr>
                     <?php foreach($permission_map as $p){ ?>
                     <tr>
-						<td><?php echo $p['groupID']; ?></td>
-						<td><?php echo $p['permissionID']; ?></td>
+						<td><?php echo $p['name']; ?></td>
+						<td><?php echo $p['permission']; ?></td>
 						<td>
-                            <a href="<?php echo site_url('permission_map/edit/'.$p['groupID']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a> 
                             <a href="<?php echo site_url('permission_map/remove/'.$p['groupID']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a>
                         </td>
                     </tr>
