@@ -42,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="container">
 
     <div class="row">
-        <div class="col-md-4 offset-md-4">
+        <div class="col-md-4 offset-md-4" style="margin-top:100px;">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Please Sign In</h3>
@@ -51,14 +51,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <form class="form-signin" action="<?= base_url() ?>login" method="POST">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Username" name="username" type="text"
+                                <input class="form-control" placeholder="Email" name="email" type="text"
                                        autofocus="">
                             </div>
                             <div class="form-group">
                                 <input class="form-control" placeholder="Password" name="password" type="password"
                                        value="">
                             </div>
-                            <!-- Change this to a button or input when using this as a form -->
+                            <div class="alert alert-danger" style="display:<?=$error?'block':'none'?>;" ><?=$error?></div>
                             <input type="submit" class="btn btn-lg btn-success btn-block" value="Login"/>
                         </fieldset>
                     </form>

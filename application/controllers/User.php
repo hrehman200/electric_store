@@ -18,6 +18,11 @@ class User extends CI_Controller
      * Listing of users
      */
     function index() {
+
+        if (!$this->permission->has_permission('view_users')) {
+            show_error('You do not have this permission!');
+        }
+
         $data['users'] = $this->User_model->get_all_users();
 
         $data['_view'] = 'user/index';
@@ -28,6 +33,11 @@ class User extends CI_Controller
      * Adding a new user
      */
     function add() {
+
+        if (!$this->permission->has_permission('create_user')) {
+            show_error('You do not have this permission!');
+        }
+
         $data['permission_groups'] = $this->Permission_group_model->get_all_permission_groups();
         $data['_view'] = 'user/add';
 
@@ -62,6 +72,11 @@ class User extends CI_Controller
      * Editing a user
      */
     function edit($id) {
+
+        if (!$this->permission->has_permission('edit_user')) {
+            show_error('You do not have this permission!');
+        }
+
         $data['_view'] = 'user/edit';
         $data['permission_groups'] = $this->Permission_group_model->get_all_permission_groups();
         // check if the user exists before trying to edit it
@@ -104,6 +119,11 @@ class User extends CI_Controller
      * Deleting user
      */
     function remove($id) {
+
+        if (!$this->permission->has_permission('delete_user')) {
+            show_error('You do not have this permission!');
+        }
+
         $user = $this->User_model->get_user($id);
 
         // check if the user exists before trying to delete it

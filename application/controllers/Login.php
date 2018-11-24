@@ -4,45 +4,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Login extends CI_Controller
 {
     public function index() {
-        /*
-        Error List:
-        0 - No Error
-        1 - Too Many Login Attempts
-        2 - Bad Credentials
-        */
-        $data["error"] = 0;
+        $data["error"] = '';
         if ($this->input->post()) {
-            if ($this->session->userdata("loginattempts")) {
-                echo "2";
-                $postData = $this->input->post();
-                $loginattempts = $this->session->userdata("loginattempts");
-                if ($loginattempts > 4) {
-                    $data["error"] = 1;
-                    $this->load->view('login', $data);
-                } else {
-                    $auth = $this->User_model->adminLogin($postData);
-                    if ($auth == true) {
-                        redirect(base_url(), "auto");
-                    } else {
-                        $data["error"] = 2;
-                        $this->load->view('login', $data);
-                    }
-                }
+            $this->session->set_userdata("loginattempts", 0);
+            $postData = $this->input->post();
+            $user = $this->User_model->login($postData);
+            if ($user) {
+                $this->session->set_userdata('user_id', $user['id']);
+                $this->session->set_userdata('permission_group_id', $user['permission_group']);
+                $this->session->set_userdata('name', $user['name']);
+                redirect(base_url('product'));
             } else {
-                echo "1";
-                $this->session->set_userdata("loginattempts", 0);
-                $postData = $this->input->post();
-                $auth = $this->User_model->adminLogin($postData);
-                if ($auth == true) {
-                    redirect(base_url(), "auto");
-                } else {
-                    $data["error"] = 2;
-                    $this->load->view('login', $data);
-                }
+                $data['error'] = 'Invalid login';
+                $this->load->view('login', $data);
             }
         } else {
             $this->load->view('login', $data);
         }
-
     }
 }

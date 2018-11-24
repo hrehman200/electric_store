@@ -5,7 +5,9 @@
  * www.crudigniter.com
  */
 
-class Product extends CI_Controller
+require_once __DIR__.'/Auth_Controller.php';
+
+class Product extends Auth_Controller
 {
     function __construct() {
         parent::__construct();

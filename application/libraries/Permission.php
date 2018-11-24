@@ -79,6 +79,15 @@ class Permission
         }
     }
 
+    /**
+     * @param $permission_key
+     * @return bool
+     */
+    function has_permission($permission_key) {
+        $permission_keys = $this->get_permissions($this->CI->session->userdata('permission_group_id'));
+        return in_array($permission_key, $permission_keys);
+    }
+
     // get all permissions, or permissions from a group for the purposes of listing them in a form
     function get_permissions($groupID = '') {
         // select

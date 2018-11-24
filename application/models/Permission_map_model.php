@@ -18,15 +18,21 @@ class Permission_map_model extends CI_Model
         return $this->db->get_where('permission_map', array('groupID' => $groupID))->row_array();
     }
 
-    /*
-     * Get all permission_map
+    /**
+     * @param null $permission_group_id
+     * @return mixed
      */
-    function get_all_permission_map() {
-        return $this->db->select('permission_map.*, permission_groups.name, permissions.permission')
+    function get_all_permission_map($permission_group_id = null) {
+        $this->db->select('permission_map.*, permission_groups.name, permissions.permission, permissions.key')
             ->join('permission_groups', 'permission_map.groupID = permission_groups.id', 'INNER')
             ->join('permissions', 'permission_map.permissionID = permissions.permissionID', 'INNER')
-            ->order_by('permission_groups.name', 'asc')
-            ->get('permission_map')
+            ->order_by('permission_groups.name', 'asc');
+
+        if($permission_group_id) {
+            $this->db->where('permission_map.groupID', $permission_group_id);
+        }
+
+        return $this->db->get('permission_map')
             ->result_array();
     }
 

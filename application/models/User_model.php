@@ -6,7 +6,7 @@ class User_model extends CI_Model
 
     public function __construct() {
         parent::__construct();
-        // Your own constructor code
+        $this->load->model('permission_map_model');
     }
 
     public function get_all_users() {
@@ -46,6 +46,26 @@ class User_model extends CI_Model
 
     function delete_user($id) {
         return $this->db->delete('users', array('id' => $id));
+    }
+
+    function login($params) {
+        $result = $this->db->where('email', $params['email'])
+            ->where('password', 'sha1("'.$params['password'].'")', false)
+            ->limit(1)
+            ->get('users');
+
+        if($result->num_rows() > 0) {
+            $user = $result->result_array()[0];
+            return $user;
+        } else {
+            return false;
+        }
+    }
+
+    function get_permissions($permission_group_id) {
+        $this->load->model('Permission_map_model');
+        $permissions = $this->permission_map_model->get_all_permission_map($permission_group_id);
+        return $permissions;
     }
 
 }
