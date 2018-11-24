@@ -1,6 +1,8 @@
 <?php
 
-class Ajax extends CI_Controller
+require_once __DIR__.'/Auth_Controller.php';
+
+class Ajax extends Auth_Controller
 {
     function __construct() {
         parent::__construct();
