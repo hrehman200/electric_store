@@ -84,7 +84,7 @@ class Permission
      * @return bool
      */
     function has_permission($permission_key) {
-        $permission_keys = $this->get_permissions($this->CI->session->userdata('permission_group_id'));
+        $permission_keys = $this->get_user_permissions($this->CI->session->userdata('permission_group_id'));
         return in_array($permission_key, $permission_keys);
     }
 
