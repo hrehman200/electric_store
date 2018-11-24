@@ -41,7 +41,7 @@
                         <div class="col-md-3" style="padding-left:0;">
                             <label for="category_id" class="control-label">Category</label>
                             <div class="form-group">
-                                <select name="category_id" class="form-control selCategory">
+                                <select name="category_id1[]" class="form-control selCategory">
                                     <?php
                                     echo $all_categories;
                                     ?>
@@ -51,7 +51,7 @@
                         <div class="col-md-3 hidden" style="padding-left:0;">
                             <label for="category_id" class="control-label">Subcategory</label>
                             <div class="form-group">
-                                <select name="category_id" class="form-control selCategory">
+                                <select name="category_id1[]" class="form-control selCategory">
                                     <?php
                                     ?>
                                 </select>
@@ -60,7 +60,7 @@
                         <div class="col-md-3 hidden" style="padding-left:0;">
                             <label for="category_id" class="control-label">Subcategory</label>
                             <div class="form-group">
-                                <select name="category_id" class="form-control selCategory">
+                                <select name="category_id1[]" class="form-control selCategory">
                                     <?php
                                     ?>
                                 </select>
@@ -69,7 +69,7 @@
                         <div class="col-md-3 hidden" style="padding-left:0;">
                             <label for="category_id" class="control-label">Subcategory</label>
                             <div class="form-group">
-                                <select name="category_id" class="form-control selCategory">
+                                <select name="category_id1[]" class="form-control selCategory">
                                     <?php
                                     ?>
                                 </select>
@@ -86,7 +86,7 @@
                             <div class="col-md-3 hidden" style="padding-left:0;">
                                 <label for="category_id" class="control-label">Subcategory</label>
                                 <div class="form-group">
-                                    <select name="category_id[]" class="form-control selCategory">
+                                    <select name="category_id1[]" class="form-control selCategory">
                                         <?php
                                         ?>
                                     </select>
@@ -95,7 +95,7 @@
                             <div class="col-md-3 hidden" style="padding-left:0;">
                                 <label for="category_id" class="control-label">Subcategory</label>
                                 <div class="form-group">
-                                    <select name="category_id[]" class="form-control selCategory">
+                                    <select name="category_id1[]" class="form-control selCategory">
                                         <?php
                                         ?>
                                     </select>
@@ -106,7 +106,7 @@
                         <div class="col-md-12 ">
                             <label for="option_id" class="control-label">Option</label>
                             <div class="form-group">
-                                <div class="checkbox options1">
+                                <div class="checkbox options1" data-index="1">
                                 </div>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                         <div class="col-md-6">
                             <label for="condition_id" class="control-label">Condition</label>
                             <div class="form-group">
-                                <select name="condition_id1" id="condition_id1" class="form-control" data-index="1">
+                                <select name="condition_id1[]" id="condition_id1" class="form-control" data-index="1">
                                     <?php
                                     foreach ($all_conditions as $condition) {
                                         echo sprintf('<option value="%d" data-description="%s">%s</option>', $condition['id'], $condition['description'], $condition['name']);
@@ -166,7 +166,7 @@
                         <div class="col-md-3 hidden">
                             <label for="category_id" class="control-label">Subcategory</label>
                             <div class="form-group">
-                                <select name="category_id[]" class="form-control selCategory">
+                                <select name="category_id2[]" class="form-control selCategory">
                                     <?php
                                     ?>
                                 </select>
@@ -178,7 +178,7 @@
                         <div class="col-md-12 ">
                             <label for="option_id" class="control-label">Option</label>
                             <div class="form-group">
-                                <div class="checkbox options2">
+                                <div class="checkbox options2" data-index="2">
                                 </div>
                             </div>
                         </div>
@@ -263,8 +263,8 @@
                     <div class="col-md-4">
                         <label for="cubic_feet" class="control-label">Cubic Feet</label>
                         <div class="form-group">
-                            <input type="text" name="cubic_feet" value="<?php echo $this->input->post('cubic_feet'); ?>"
-                                   class="form-control" id="cubic_feet"/>
+                            <input type="text" name="cubic_feet1" value="<?php echo $this->input->post('cubic_feet1'); ?>"
+                                   class="form-control" id="cubic_feet1"/>
                         </div>
                     </div>
                 </div>
@@ -393,6 +393,7 @@
         function getOptions(categoryId, optionsDiv) {
 
             console.log(optionsDiv);
+            var index = $(optionsDiv).closest('.checkbox').data('index');
 
             $.ajax({
                 url: '<?=base_url()?>ajax/get_options/' + categoryId,
@@ -402,7 +403,7 @@
                     if (result.length > 0) {
                         $(optionsDiv).html('');
                         for (var i in result) {
-                            $(optionsDiv).append('<label><input type="checkbox" name="option_id2[]" value="' + result[i].id + '">' + result[i].name + '</label><br/>');
+                            $(optionsDiv).append('<label><input type="checkbox" name="option_id'+index+'[]" value="' + result[i].id + '">' + result[i].name + '</label><br/>');
                         }
                     }
                 }

@@ -75,4 +75,13 @@ class Category_model extends CI_Model
     function delete_category($id) {
         return $this->db->delete('categories', array('id' => $id));
     }
+
+    /**
+     * @param $category_id
+     * @return mixed
+     */
+    function get_title_format_of_category($category_id) {
+        $category = $this->get_category($category_id);
+        return $category['product_title_format'];
+    }
 }
