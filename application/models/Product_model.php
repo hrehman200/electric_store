@@ -115,20 +115,62 @@ class Product_model extends CI_Model
         $format = $this->Category_model->get_title_format_of_category($params['category_id1'][0]);
         $title = $format;
 
-        $color = $this->Color_model->get_color($params['color_id'])['name'];
-        $brand = $this->Brand_model->get_brand($params['brand_id'])['name'];
-        $subcategory = $this->Category_model->get_category($params['category_id1'][1])['name'];
+        $color1 = $this->Color_model->get_color($params['color_id1'])['name'];
+        $brand1 = $this->Brand_model->get_brand($params['brand_id1'])['name'];
+        $color2 = $this->Color_model->get_color($params['color_id2'])['name'];
+        $brand2 = $this->Brand_model->get_brand($params['brand_id2'])['name'];
+        $subcategory1 = $this->Category_model->get_category($params['category_id1'][1])['name'];
+        $subcategory2 = $this->Category_model->get_category($params['category_id2'][0])['name'];
         $user_selected_options1 = $this->get_options($params['option_id1']);
+        $user_selected_options2 = $this->get_options($params['option_id2']);
 
-        $title = str_replace('Color', $color, $title);
-        $title = str_replace('Brand', $brand, $title);
-        $title = str_replace('Cu Ft', $params['cubic_feet1'].' cu Ft.', $title);
-        $title = str_replace('Sub Category', $subcategory, $title);
+        if(($params['category_id1'][0] == WASHER_DRYER_SET && $params['cubic_feet1'] >= 3.8 && $params['cubic_feet2'] >= 7.0)
+            ||
+            ($params['category_id1'][0] == WASHER && $params['cubic_feet1'] >= 3.8)
+            ||
+            ($params['category_id1'][0] == DRYER && $params['cubic_feet1'] >= 7.0)
+        ) {
+            $title = 'HUGE '.$title;
+        }
 
-        $allowed_options_in_title = ['Energy Star', 'Counter Depth'];
-        foreach($allowed_options_in_title as $allowed) {
-            if(!in_array($allowed, $user_selected_options1)) {
-                $title = str_replace($allowed, '', $title);
+        if($params['category_id1'][0] == WASHER_DRYER_SET) {
+
+            $subcategory1 = $this->Category_model->get_category($params['category_id1'][2])['name'];
+
+            if($params['brand_id1'] == $params['brand_id2']) {
+                $title = str_replace('Brand', $brand1, $title);
+            } else {
+                $title = str_replace('Brand', '', $title);
+            }
+
+            $title = $this->_str_replace_first('CuFt', $params['cubic_feet1'].' Cu Ft.', $title);
+            $title = $this->_str_replace_first('CuFt', $params['cubic_feet2'].' Cu Ft.', $title);
+
+            $title = $this->_str_replace_first('Sub Category', $subcategory1.' Washer', $title);
+            $title = $this->_str_replace_first('Sub Category', $subcategory2.' Dryer', $title);
+
+            $allowed_options_in_title = ['Steam'];
+            foreach($allowed_options_in_title as $allowed) {
+                if(!in_array($allowed, $user_selected_options1)) {
+                    $title = $this->_str_replace_first($allowed, '', $title);
+                }
+
+                if(!in_array($allowed, $user_selected_options2)) {
+                    $title = $this->_str_replace_first($allowed, '', $title);
+                }
+            }
+
+        } else {
+            $title = str_replace('Brand', $brand1, $title);
+            $title = str_replace('Color', $color1, $title);
+            $title = str_replace('CuFt', $params['cubic_feet1'].' Cu Ft.', $title);
+            $title = str_replace('Sub Category', $subcategory1, $title);
+
+            $allowed_options_in_title = ['Energy Star', 'Counter Depth', 'Convection', '5 Burners', 'Double Oven', 'Glasstop', 'Steam'];
+            foreach($allowed_options_in_title as $allowed) {
+                if(!in_array($allowed, $user_selected_options1)) {
+                    $title = str_replace($allowed, '', $title);
+                }
             }
         }
 
@@ -136,5 +178,10 @@ class Product_model extends CI_Model
         $title = str_replace(')', '', $title);
 
         return $title;
+    }
+
+    private function _str_replace_first($from, $to, $content) {
+        $from = '/' . preg_quote($from, '/') . '/';
+        return preg_replace($from, $to, $content, 1);
     }
 }

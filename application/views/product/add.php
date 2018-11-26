@@ -78,6 +78,16 @@
                     </div>
                 </div>
 
+                <div class="row title-row hidden">
+                    <div class="col-md-6">
+                        <label for="title" class="control-label">Title</label>
+                        <div class="form-group ">
+                            <input type="text" name="title" value="<?php echo $this->input->post('title'); ?>"
+                                   class="form-control" id="title"/>
+                        </div>
+                    </div>
+                </div>
+
                 <fieldset class="fieldset-border">
                     <legend class="fieldset-border"> Washer</legend>
                     <div class="row">
@@ -115,7 +125,7 @@
                         <div class="col-md-6">
                             <label for="condition_id" class="control-label">Condition</label>
                             <div class="form-group">
-                                <select name="condition_id1[]" id="condition_id1" class="form-control" data-index="1">
+                                <select name="condition_id1" id="condition_id1" class="form-control" data-index="1">
                                     <?php
                                     foreach ($all_conditions as $condition) {
                                         echo sprintf('<option value="%d" data-description="%s">%s</option>', $condition['id'], $condition['description'], $condition['name']);
@@ -154,6 +164,41 @@
                             <div class="form-group">
                                 <input type="text" name="depth1" value="<?php echo $this->input->post('depth1'); ?>"
                                        class="form-control" id="depth1"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="brand_id1" class="control-label">Brand</label>
+                            <div class="form-group">
+                                <select name="brand_id1" class="form-control">
+                                    <?php
+                                    foreach ($all_brands as $brand) {
+                                        $selected = ($brand['id'] == $this->input->post('brand_id1')) ? ' selected="selected"' : "";
+                                        echo '<option value="' . $brand['id'] . '" ' . $selected . '>' . $brand['name'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="color_id1" class="control-label">Color</label>
+                            <div class="form-group">
+                                <select name="color_id1" class="form-control">
+                                    <?php
+                                    foreach ($all_colors as $color) {
+                                        $selected = ($color['id'] == $this->input->post('color_id1')) ? ' selected="selected"' : "";
+                                        echo '<option value="' . $color['id'] . '" ' . $selected . '>' . $color['name'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="cubic_feet1" class="control-label">Cubic Feet</label>
+                            <div class="form-group">
+                                <input type="text" name="cubic_feet1" value="<?php echo $this->input->post('cubic_feet2'); ?>"
+                                       class="form-control" id="cubic_feet1"/>
                             </div>
                         </div>
                     </div>
@@ -229,45 +274,43 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="brand_id2" class="control-label">Brand</label>
+                            <div class="form-group">
+                                <select name="brand_id2" class="form-control">
+                                    <?php
+                                    foreach ($all_brands as $brand) {
+                                        $selected = ($brand['id'] == $this->input->post('brand_id2')) ? ' selected="selected"' : "";
+                                        echo '<option value="' . $brand['id'] . '" ' . $selected . '>' . $brand['name'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="color_id1" class="control-label">Color</label>
+                            <div class="form-group">
+                                <select name="color_id2" class="form-control">
+                                    <?php
+                                    foreach ($all_colors as $color) {
+                                        $selected = ($color['id'] == $this->input->post('color_id2')) ? ' selected="selected"' : "";
+                                        echo '<option value="' . $color['id'] . '" ' . $selected . '>' . $color['name'] . '</option>';
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="cubic_feet1" class="control-label">Cubic Feet</label>
+                            <div class="form-group">
+                                <input type="text" name="cubic_feet2" value="<?php echo $this->input->post('cubic_feet2'); ?>"
+                                       class="form-control" id="cubic_feet2"/>
+                            </div>
+                        </div>
+                    </div>
                 </fieldset>
 
-                <div class="row">
-                    <div class="col-md-4">
-                        <label for="brand_id" class="control-label">Brand</label>
-                        <div class="form-group">
-                            <select name="brand_id" class="form-control">
-                                <?php
-                                foreach ($all_brands as $brand) {
-                                    $selected = ($brand['id'] == $this->input->post('brand_id')) ? ' selected="selected"' : "";
-
-                                    echo '<option value="' . $brand['id'] . '" ' . $selected . '>' . $brand['name'] . '</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="color_id" class="control-label">Color</label>
-                        <div class="form-group">
-                            <select name="color_id" class="form-control">
-                                <?php
-                                foreach ($all_colors as $color) {
-                                    $selected = ($color['id'] == $this->input->post('color_id')) ? ' selected="selected"' : "";
-
-                                    echo '<option value="' . $color['id'] . '" ' . $selected . '>' . $color['name'] . '</option>';
-                                }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="cubic_feet" class="control-label">Cubic Feet</label>
-                        <div class="form-group">
-                            <input type="text" name="cubic_feet1" value="<?php echo $this->input->post('cubic_feet1'); ?>"
-                                   class="form-control" id="cubic_feet1"/>
-                        </div>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="col-md-4">
                         <label for="feature1" class="control-label">Feature1</label>
@@ -309,13 +352,6 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <label for="title" class="control-label">Title</label>
-                        <div class="form-group">
-                            <input type="text" name="title" value="<?php echo $this->input->post('title'); ?>"
-                                   class="form-control" id="title"/>
-                        </div>
-                    </div>
                     <div class="col-md-6">
                         <label for="description" class="control-label">Description</label>
                         <div class="form-group">
@@ -367,13 +403,9 @@
 <script type="text/javascript">
     $(function () {
 
-        var WASHER_DRYER_SET_ID = 34;
-        var WASHER_ID = 35;
-        var DRYER_ID = 38;
-
         function toggleWasherDryerSet() {
 
-            if($('.selCategory:first').val() == WASHER_DRYER_SET_ID) {
+            if($('.selCategory:first').val() == <?=WASHER_DRYER_SET?>) {
                 $('.selCategory:eq(1), .selCategory:eq(2), .selCategory:eq(3)').parent().parent().addClass('hidden');
                 $('.selCategory:eq(4), .selCategory:eq(5), .selCategory:eq(6), .selCategory:eq(7), .selCategory:eq(8)').parent().parent().removeClass('hidden');
 
@@ -392,7 +424,6 @@
 
         function getOptions(categoryId, optionsDiv) {
 
-            console.log(optionsDiv);
             var index = $(optionsDiv).closest('.checkbox').data('index');
 
             $.ajax({
@@ -434,6 +465,12 @@
 
         $('.selCategory').on('change', function (e) {
 
+            if($('.selCategory:first').val() == <?=MISCELLANIOUS?>) {
+                $('.title-row').removeClass('hidden').find('#title').val('');
+            } else {
+                $('.title-row').addClass('hidden').find('#title').val('');
+            }
+
             var parentDiv = $(this).parent().parent();
             var categoryId = $(this).val();
             var nextDiv = $(parentDiv).next('div');
@@ -444,14 +481,14 @@
             }
             toggleWasherDryerSet();
 
-            if($('.selCategory:first').val() == WASHER_DRYER_SET_ID && $(this)[0] == $('.selCategory:first')[0]) {
+            if($('.selCategory:first').val() == <?=WASHER_DRYER_SET?> && $(this)[0] == $('.selCategory:first')[0]) {
                 selCategory = $('.selCategory:eq(4)');
                 nextDiv = $(selCategory).parent().parent().next('div');
-                getCategories(WASHER_ID, selCategory, nextDiv, optionsDiv);
+                getCategories(<?=WASHER?>, selCategory, nextDiv, optionsDiv);
 
                 selCategory = $('.selCategory:eq(6)');
                 nextDiv = $(selCategory).parent().parent().next('div');
-                getCategories(DRYER_ID, selCategory, nextDiv, optionsDiv);
+                getCategories(<?=DRYER?>, selCategory, nextDiv, optionsDiv);
 
             } else {
                 getCategories(categoryId, selCategory, nextDiv, optionsDiv);

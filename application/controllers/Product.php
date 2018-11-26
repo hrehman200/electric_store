@@ -35,7 +35,11 @@ class Product extends Auth_Controller
 
             $this->form_validation->set_rules('source', 'Source', 'required');
 
-            $title = $this->Product_model->get_product_title($this->input->post());
+            if(strlen($this->input->post('title')) == 0) {
+                $title = $this->Product_model->get_product_title($this->input->post());
+            } else {
+                $title = $this->input->post('title');
+            }
 
             $category_id1 = $this->input->post('category_id1');
             $category_id1 = $category_id1[count($category_id1) - 1];
@@ -50,13 +54,15 @@ class Product extends Auth_Controller
                 'serial_no' => $this->input->post('serial_no'),
                 'category_id1' => $category_id1,
                 'category_id2' => $category_id2,
-                'brand_id' => $this->input->post('brand_id'),
-                'color_id' => $this->input->post('color_id'),
+                'brand_id1' => $this->input->post('brand_id1'),
+                'brand_id2' => $this->input->post('brand_id2'),
+                'color_id1' => $this->input->post('color_id1'),
+                'color_id2' => $this->input->post('color_id2'),
                 'condition_id1' => $this->input->post('condition_id1'),
                 'condition_id2' => $this->input->post('condition_id2'),
                 'warranty_date1' => $this->input->post('condition_date_1'),
                 'warranty_date2' => $this->input->post('condition_date_2'),
-                'cubic_feet' => $this->input->post('cubic_feet'),
+                'cubic_feet' => $this->input->post('cubic_feet1'),
                 'feature1' => $this->input->post('feature1'),
                 'feature2' => $this->input->post('feature2'),
                 'feature3' => $this->input->post('feature3'),
@@ -68,7 +74,7 @@ class Product extends Auth_Controller
                 'height2' => $this->input->post('height2'),
                 'width2' => $this->input->post('width2'),
                 'depth2' => $this->input->post('depth2'),
-                'title' => $this->input->post('title'),
+                'title' => $title,
                 'description' => $this->input->post('description'),
                 'tags' => $this->input->post('tags'),
                 'accessories' => $this->input->post('accessories'),
