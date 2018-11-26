@@ -23,6 +23,7 @@
 						<td><?php echo $p['serial_no']; ?></td>
 						<td><?php echo $p['title']; ?></td>
 						<td>
+                            <a href="<?php echo site_url('product/sticker/'.$p['id']); ?>" class="btn btn-warning btn-xs" target="_blank"><span class=""></span> Sticker</a>
                             <a href="<?php echo site_url('product/edit/'.$p['id']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a> 
                             <a href="<?php echo site_url('product/remove/'.$p['id']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a>
                         </td>

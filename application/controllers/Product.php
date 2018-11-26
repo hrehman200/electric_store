@@ -25,6 +25,28 @@ class Product extends Auth_Controller
         $this->load->view('layouts/main', $data);
     }
 
+    function sticker($product_id) {
+        $sql = sprintf('SELECT 
+            p.title, p.price, p.comparable_price, 
+            p.feature1, p.feature2, p.feature3, 
+            p.height1, p.width1, p.depth1,
+            p.height2, p.width2, p.depth2,
+            p.tracking_no,
+            c1.name AS condition1, c1.description AS condition_desc1,
+            c2.name AS condition2, c2.description AS condition_desc2
+            FROM products p
+            INNER JOIN conditions c1 ON p.condition_id1 = c1.id
+            LEFT JOIN conditions c2 ON p.condition_id2 = c2.id
+            WHERE p.id = %d', $product_id);
+
+        $query = $this->db->query($sql);
+        if($query->num_rows() > 0) {
+            $product = $query->row_array();
+            $data = $product;
+            $this->load->view('sticker/print', $data);
+        }
+    }
+
     /*
      * Adding a new product
      */
