@@ -70,10 +70,13 @@ class Product extends Auth_Controller
             $category_id2 = $category_id2[count($category_id2) - 1];
 
             $params = array(
-                'source' => $this->input->post('source'),
                 'tracking_no' => $this->input->post('tracking_no'),
-                'model_no' => $this->input->post('model_no'),
-                'serial_no' => $this->input->post('serial_no'),
+                'source1' => $this->input->post('source1'),
+                'model_no1' => $this->input->post('model_no1'),
+                'serial_no1' => $this->input->post('serial_no1'),
+                'source2' => $this->input->post('source2'),
+                'model_no2' => $this->input->post('model_no2'),
+                'serial_no2' => $this->input->post('serial_no2'),
                 'category_id1' => $category_id1,
                 'category_id2' => $category_id2,
                 'brand_id1' => $this->input->post('brand_id1'),
