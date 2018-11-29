@@ -88,3 +88,21 @@ define('WASHER', 10);
 define('DRYER', 13);
 define('WASHER_DRYER_SET', 34);
 define('MISCELLANIOUS', 33);
+
+const SOURCES_TO_APPLY_REFURBISHED_CONDITION = [
+    '01',
+    '02',
+    '03',
+    '04',
+    '05',
+    '06',
+    '07',
+    '08',
+    '11',
+    '12',
+    '13',
+    '14',
+    '16',
+    '17',
+    '18'
+];

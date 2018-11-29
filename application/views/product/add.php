@@ -8,32 +8,11 @@
             <div class="box-body">
                 <div class="row clearfix">
                     <div class="col-md-3">
-                        <label for="source" class="control-label">Source</label>
-                        <div class="form-group">
-                            <input type="text" name="source" value="<?php echo $this->input->post('source'); ?>"
-                                   class="form-control" id="source"/>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
                         <label for="tracking_no" class="control-label">Tracking No</label>
                         <div class="form-group">
                             <input type="text" name="tracking_no"
                                    value="<?php echo $this->input->post('tracking_no'); ?>" class="form-control"
                                    id="tracking_no"/>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="model_no" class="control-label">Model No</label>
-                        <div class="form-group">
-                            <input type="text" name="model_no" value="<?php echo $this->input->post('model_no'); ?>"
-                                   class="form-control" id="model_no"/>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <label for="serial_no" class="control-label">Serial No</label>
-                        <div class="form-group">
-                            <input type="text" name="serial_no" value="<?php echo $this->input->post('serial_no'); ?>"
-                                   class="form-control" id="serial_no"/>
                         </div>
                     </div>
 
@@ -121,6 +100,31 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="source1" class="control-label">Source</label>
+                            <div class="form-group">
+                                <input type="text" name="source1" value="<?php echo $this->input->post('source1'); ?>"
+                                       class="form-control source" id="source1" data-index="1" maxlength="2" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="model_no1" class="control-label">Model No</label>
+                            <div class="form-group">
+                                <input type="text" name="model_no1" value="<?php echo $this->input->post('model_no1'); ?>"
+                                       class="form-control" id="model_no1"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="serial_no1" class="control-label">Serial No</label>
+                            <div class="form-group">
+                                <input type="text" name="serial_no1" value="<?php echo $this->input->post('serial_no1'); ?>"
+                                       class="form-control" id="serial_no1"/>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-6">
                             <label for="condition_id" class="control-label">Condition</label>
@@ -228,6 +232,31 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="source2" class="control-label">Source</label>
+                            <div class="form-group">
+                                <input type="text" name="source2" value="<?php echo $this->input->post('source2'); ?>"
+                                       class="form-control source" id="source2" data-index="2" maxlength="2" />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="model_no2" class="control-label">Model No</label>
+                            <div class="form-group">
+                                <input type="text" name="model_no2" value="<?php echo $this->input->post('model_no2'); ?>"
+                                       class="form-control" id="model_no2"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="serial_no2" class="control-label">Serial No</label>
+                            <div class="form-group">
+                                <input type="text" name="serial_no2" value="<?php echo $this->input->post('serial_no2'); ?>"
+                                       class="form-control" id="serial_no2"/>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-6">
                             <label for="condition_id" class="control-label">Condition</label>
@@ -508,6 +537,21 @@
                 $('#condition_warranties_txt_' + index).show().html(description);
             }
         }).trigger('change');
+
+        $('.source').keyup(function(e) {
+            var source = $(this).val().trim();
+            var index = $(this).data('index');
+            var arrSources = ['<?=implode("','", SOURCES_TO_APPLY_REFURBISHED_CONDITION)?>'];
+            if($.inArray(source, arrSources) != -1) {
+                $('#condition_id'+index)
+                    .find('option:last').prop('selected', true).end()
+                    .change();
+            } else {
+                $('#condition_id'+index)
+                    .find('option:first').prop('selected', true).end()
+                    .change();
+            }
+        });
 
     });
 </script>
