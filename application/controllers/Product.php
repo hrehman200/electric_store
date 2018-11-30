@@ -54,12 +54,12 @@ class Product extends Auth_Controller
     /*
      * Adding a new product
      */
-    function add($product_id = null) {
+    function add($old_product_id = null) {
         $this->load->library('form_validation');
 
-        $editing = $product_id > 0;
+        $editing = $old_product_id > 0;
         if($editing) {
-            $data['product'] = $this->Product_model->get_product($product_id);
+            $data['product'] = $this->Product_model->get_product($old_product_id);
         }
 
         if (isset($_POST) && count($_POST) > 0) {
@@ -117,12 +117,20 @@ class Product extends Auth_Controller
                 'updated' => $this->input->post('updated'),
             );
 
-            $product_id = $this->Product_model->add_product($params);
-            if($product_id > 0) {
-               $this->Product_model->add_options($product_id, $this->input->post('option_id1'));
-               $this->Product_model->add_options($product_id, $this->input->post('option_id2'));
-               redirect('product/index');
+            if($editing) {
+                $this->Product_model->update_product($old_product_id, $params);
+                $this->Product_model->delete_options($old_product_id);
+                $this->Product_model->add_options($old_product_id, $this->input->post('option_id1'));
+                $this->Product_model->add_options($old_product_id, $this->input->post('option_id2'));
+            } else {
+                $product_id = $this->Product_model->add_product($params);
+                if ($product_id > 0) {
+                    $this->Product_model->add_options($product_id, $this->input->post('option_id1'));
+                    $this->Product_model->add_options($product_id, $this->input->post('option_id2'));
+                }
             }
+
+            redirect('product/index');
         } else {
             $this->load->model('Category_model');
             $data['all_categories'] = $this->Category_model->get_categories_dropdown_html();
@@ -135,9 +143,6 @@ class Product extends Auth_Controller
 
             $this->load->model('Condition_model');
             $data['all_conditions'] = $this->Condition_model->get_all_conditions();
-
-            $this->load->model('Option_model');
-            $data['all_options'] = $this->Option_model->get_all_options();
 
             $data['_view'] = 'product/add';
             $data['editing'] = $editing;

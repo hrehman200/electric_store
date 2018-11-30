@@ -4,7 +4,7 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Product Add</h3>
             </div>
-            <?php echo form_open('product/add/'.($editing)?$product['id']:''); ?>
+            <?php echo form_open('product/add/'.($editing?$product['id']:'')); ?>
             <div class="box-body">
                 <div class="row clearfix">
                     <div class="col-md-3">

@@ -19,7 +19,16 @@ class Product_model extends CI_Model
      * Get product by id
      */
     function get_product($product_id) {
-        $sql = sprintf('SELECT p.id, p.tracking_no, p.category_id1
+        $sql = sprintf('SELECT p.id, p.tracking_no, p.category_id1,
+            p.source1, p.model_no1, p.serial_no1, p.source2, p.model_no2, p.serial_no2,
+            p.brand_id1, p.color_id1, p.brand_id2, p.color_id2,
+            p.cubic_feet1, p.cubic_feet2,
+            p.condition_id1, p.condition_id2,
+            p.warranty_date1, p.warranty_date2,
+            p.width1, p.width2, p.height1, p.height2, p.depth1, p.depth2,
+            p.feature1, p.feature2, p.feature3,
+            p.price, p.comparable_price,
+            p.description
             FROM products p
             INNER JOIN categories c1 ON p.category_id1 = c1.id
             LEFT JOIN categories c2 ON p.category_id2 = c2.id
@@ -80,6 +89,13 @@ class Product_model extends CI_Model
                 'option_id' => $option_id
             ]);
         }
+    }
+
+    /**
+     * @param $product_id
+     */
+    function delete_options($product_id) {
+        $this->db->delete('product_options', ['product_id' => $product_id]);
     }
 
     /**
