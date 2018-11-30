@@ -106,3 +106,6 @@ const SOURCES_TO_APPLY_REFURBISHED_CONDITION = [
     '17',
     '18'
 ];
+
+// User Roles
+define('WARRANTY_INFO', 'Warranty Info');

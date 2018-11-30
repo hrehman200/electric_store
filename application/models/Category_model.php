@@ -18,6 +18,23 @@ class Category_model extends CI_Model
         return $this->db->get_where('categories', array('id' => $id))->row_array();
     }
 
+
+    /**
+     * Return a category-id array with parents as first item and child as second item
+     *
+     * @param $category_id
+     * @param $arr
+     * @return mixed
+     */
+    function get_category_id_tree($category_id, &$arr) {
+        $row = $this->db->query(sprintf('SELECT parent_id FROM categories WHERE id = %d', $category_id))->row_array();
+        if($row['parent_id']) {
+            array_unshift($arr, $row['parent_id']);
+            $this->get_category_id_tree($row['parent_id'], $arr);
+        }
+        return $arr;
+    }
+
     /*
      * Get all categories
      */

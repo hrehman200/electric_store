@@ -18,8 +18,24 @@ class Product_model extends CI_Model
     /*
      * Get product by id
      */
-    function get_product($id) {
-        return $this->db->get_where('products', array('id' => $id))->row_array();
+    function get_product($product_id) {
+        $sql = sprintf('SELECT p.id, p.tracking_no, p.category_id1
+            FROM products p
+            INNER JOIN categories c1 ON p.category_id1 = c1.id
+            LEFT JOIN categories c2 ON p.category_id2 = c2.id
+            WHERE p.id = %d', $product_id);
+
+        $row = $this->db->query($sql)->row_array();
+
+        $category_id1_arr = [$row['category_id1']];
+        $category_id2_arr = [$row['category_id2']];
+
+        $row['category_id1_arr'] = $this->Category_model->get_category_id_tree($row['category_id1'], $category_id1_arr);
+        $row['category_id2_arr'] = $this->Category_model->get_category_id_tree($row['category_id2'], $category_id2_arr);
+
+        $row['option_id1_arr'] = $this->get_product_option_ids($product_id);
+
+        return $row;
     }
 
     /*
@@ -55,10 +71,10 @@ class Product_model extends CI_Model
 
     /**
      * @param $product_id
-     * @param $params
+     * @param $options_ids
      */
-    function add_options($product_id, $params) {
-        foreach($params['option_id1'] as $option_id) {
+    function add_options($product_id, $options_ids) {
+        foreach($options_ids as $option_id) {
             $this->db->insert('product_options', [
                 'product_id' => $product_id,
                 'option_id' => $option_id
@@ -67,15 +83,21 @@ class Product_model extends CI_Model
     }
 
     /**
+     * @param $category_id
      * @param $product_id
      * @return mixed
      */
-    function get_product_options($product_id) {
-        $sql = sprintf('SELECT o.name FROM product_options po
+    function get_product_option_ids($product_id, $category_id = null) {
+        $sql = sprintf('SELECT o.id FROM product_options po
           INNER JOIN options o ON po.option_id = o.id
           WHERE po.product_id = %d', $product_id);
 
-        return $this->db->query($sql)->result_array();
+        if($category_id != null) {
+            $sql .= sprintf(' AND o.category_id = %d', $category_id);
+        }
+
+        $arr = $this->db->query($sql)->result_array();
+        return array_map(function($item) { return $item['id']; }, $arr);
     }
 
     /**
@@ -183,5 +205,21 @@ class Product_model extends CI_Model
     private function _str_replace_first($from, $to, $content) {
         $from = '/' . preg_quote($from, '/') . '/';
         return preg_replace($from, $to, $content, 1);
+    }
+
+    /**
+     * @param $permission_group
+     * @param $product_id
+     * @return bool
+     */
+    public function is_action_needed_for_product($permission_group, $product_id) {
+        if($permission_group == WARRANTY_INFO) {
+            $sql = sprintf('SELECT id FROM products
+              WHERE condition_id1 IS NULL AND id = %d', $product_id);
+
+            return count($this->db->query($sql)->result_array()) > 0;
+        }
+
+        return false;
     }
 }

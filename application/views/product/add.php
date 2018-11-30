@@ -11,7 +11,7 @@
                         <label for="tracking_no" class="control-label">Tracking No</label>
                         <div class="form-group">
                             <input type="text" name="tracking_no"
-                                   value="<?php echo $this->input->post('tracking_no'); ?>" class="form-control"
+                                   value="<?php echo ($editing ? $product['tracking_no'] :  $this->input->post('tracking_no')); ?>" class="form-control"
                                    id="tracking_no"/>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                         <div class="col-md-3" style="padding-left:0;">
                             <label for="category_id" class="control-label">Category</label>
                             <div class="form-group">
-                                <select name="category_id1[]" class="form-control selCategory">
+                                <select name="category_id1[]" class="form-control selCategory" data-index="0">
                                     <?php
                                     echo $all_categories;
                                     ?>
@@ -30,7 +30,7 @@
                         <div class="col-md-3 hidden" style="padding-left:0;">
                             <label for="category_id" class="control-label">Subcategory</label>
                             <div class="form-group">
-                                <select name="category_id1[]" class="form-control selCategory">
+                                <select name="category_id1[]" class="form-control selCategory" data-index="1">
                                     <?php
                                     ?>
                                 </select>
@@ -39,7 +39,7 @@
                         <div class="col-md-3 hidden" style="padding-left:0;">
                             <label for="category_id" class="control-label">Subcategory</label>
                             <div class="form-group">
-                                <select name="category_id1[]" class="form-control selCategory">
+                                <select name="category_id1[]" class="form-control selCategory" data-index="2">
                                     <?php
                                     ?>
                                 </select>
@@ -48,7 +48,7 @@
                         <div class="col-md-3 hidden" style="padding-left:0;">
                             <label for="category_id" class="control-label">Subcategory</label>
                             <div class="form-group">
-                                <select name="category_id1[]" class="form-control selCategory">
+                                <select name="category_id1[]" class="form-control selCategory" data-index="3">
                                     <?php
                                     ?>
                                 </select>
@@ -75,7 +75,7 @@
                             <div class="col-md-3 hidden" style="padding-left:0;">
                                 <label for="category_id" class="control-label">Subcategory</label>
                                 <div class="form-group">
-                                    <select name="category_id1[]" class="form-control selCategory">
+                                    <select name="category_id1[]" class="form-control selCategory" data-index="4">
                                         <?php
                                         ?>
                                     </select>
@@ -84,7 +84,7 @@
                             <div class="col-md-3 hidden" style="padding-left:0;">
                                 <label for="category_id" class="control-label">Subcategory</label>
                                 <div class="form-group">
-                                    <select name="category_id1[]" class="form-control selCategory">
+                                    <select name="category_id1[]" class="form-control selCategory" data-index="5">
                                         <?php
                                         ?>
                                     </select>
@@ -215,7 +215,7 @@
                         <div class="col-md-3 hidden">
                             <label for="category_id" class="control-label">Subcategory</label>
                             <div class="form-group">
-                                <select name="category_id2[]" class="form-control selCategory">
+                                <select name="category_id2[]" class="form-control selCategory" data-index="6">
                                     <?php
                                     ?>
                                 </select>
@@ -465,6 +465,25 @@
                         for (var i in result) {
                             $(optionsDiv).append('<label><input type="checkbox" name="option_id'+index+'[]" value="' + result[i].id + '">' + result[i].name + '</label><br/>');
                         }
+                        <?php
+                        if($editing) {
+                        ?>
+                            var arrOptionIds1 = $.parseJSON('<?=json_encode($product['option_id1_arr'])?>');
+                            var arrOptionIds2 = $.parseJSON('<?=json_encode($product['option_id2_arr'])?>');
+                            console.log(arrOptionIds1);
+                            if(index == 1) {
+                                for(var i in arrOptionIds1) {
+                                    console.log($(optionsDiv).find('input[value="'+arrOptionIds1[i]+'"]'));
+                                    $(optionsDiv).find('input[value="'+arrOptionIds1[i]+'"]').prop('checked', true);
+                                }
+                            } else {
+                                for(var i in arrOptionIds2) {
+                                    $(optionsDiv).find('input[value="'+arrOptionIds2[i]+'"]').prop('checked', true);
+                                }
+                            }
+                        <?php
+                        }
+                        ?>
                     }
                 }
             });
@@ -483,6 +502,15 @@
                         for (var i in result) {
                             $(selCategory).append('<option value="' + result[i].id + '">' + result[i].name + '</option>')
                         }
+                        <?php
+                        if($editing) {
+                        ?>
+                            var arrCategoryIds1 = $.parseJSON('<?=json_encode($product['category_id1_arr'])?>');
+                            var index = $(selCategory).data('index');
+                            $(selCategory).val(arrCategoryIds1[index]);
+                        <?php
+                        }
+                        ?>
                         $(selCategory).trigger('change');
                     } else {
                         $(nextDiv).addClass('hidden').nextAll('div').addClass('hidden');
@@ -524,6 +552,13 @@
             }
         });
 
+        <?php
+        if($editing) {
+            ?>
+            $('.selCategory:first').val(<?=$product['category_id1_arr'][0]?>);
+            <?php
+        }
+        ?>
         $('.selCategory:first').trigger('change');
 
         $('#condition_id1, #condition_id2').on('change', function (e) {
