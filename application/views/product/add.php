@@ -494,17 +494,9 @@
                         <?php
                         if($editing) {
                         ?>
-                            var arrOptionIds1 = $.parseJSON('<?=json_encode($product['option_id1_arr'])?>');
-                            var arrOptionIds2 = $.parseJSON('<?=json_encode($product['option_id2_arr'])?>');
-                            if(index == 1) {
-                                for(var i in arrOptionIds1) {
-                                    console.log($(optionsDiv).find('input[value="'+arrOptionIds1[i]+'"]'));
-                                    $(optionsDiv).find('input[value="'+arrOptionIds1[i]+'"]').prop('checked', true);
-                                }
-                            } else {
-                                for(var i in arrOptionIds2) {
-                                    $(optionsDiv).find('input[value="'+arrOptionIds2[i]+'"]').prop('checked', true);
-                                }
+                            var arrOptionIds = $.parseJSON('<?=json_encode($product['option_id_arr'])?>');
+                            for(var i in arrOptionIds) {
+                                $(optionsDiv).find('input[value="'+arrOptionIds[i]+'"]').prop('checked', true);
                             }
                         <?php
                         }
@@ -531,8 +523,18 @@
                         if($editing) {
                         ?>
                             var arrCategoryIds1 = $.parseJSON('<?=json_encode($product['category_id1_arr'])?>');
+                            var arrCategoryIds2 = $.parseJSON('<?=json_encode($product['category_id2_arr'])?>');
                             var index = $(selCategory).data('index');
-                            $(selCategory).val(arrCategoryIds1[index]);
+
+                            if($('.selCategory:first').val() == <?=WASHER_DRYER_SET?>) {
+                                if(index < 6) {
+                                    $(selCategory).val(arrCategoryIds1[index - 2]);
+                                } else {
+                                    $(selCategory).val(arrCategoryIds2[index - 4]);
+                                }
+                            } else {
+                                $(selCategory).val(arrCategoryIds1[index]);
+                            }
                         <?php
                         }
                         ?>

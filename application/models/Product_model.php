@@ -19,7 +19,7 @@ class Product_model extends CI_Model
      * Get product by id
      */
     function get_product($product_id) {
-        $sql = sprintf('SELECT p.id, p.tracking_no, p.category_id1,
+        $sql = sprintf('SELECT p.id, p.tracking_no, p.category_id1, p.category_id2,
             p.source1, p.model_no1, p.serial_no1, p.source2, p.model_no2, p.serial_no2,
             p.brand_id1, p.color_id1, p.brand_id2, p.color_id2,
             p.cubic_feet1, p.cubic_feet2,
@@ -30,8 +30,6 @@ class Product_model extends CI_Model
             p.price, p.comparable_price,
             p.description
             FROM products p
-            INNER JOIN categories c1 ON p.category_id1 = c1.id
-            LEFT JOIN categories c2 ON p.category_id2 = c2.id
             WHERE p.id = %d', $product_id);
 
         $row = $this->db->query($sql)->row_array();
@@ -42,7 +40,7 @@ class Product_model extends CI_Model
         $row['category_id1_arr'] = $this->Category_model->get_category_id_tree($row['category_id1'], $category_id1_arr);
         $row['category_id2_arr'] = $this->Category_model->get_category_id_tree($row['category_id2'], $category_id2_arr);
 
-        $row['option_id1_arr'] = $this->get_product_option_ids($product_id);
+        $row['option_id_arr'] = $this->get_product_option_ids($product_id);
 
         return $row;
     }
