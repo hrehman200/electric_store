@@ -133,7 +133,7 @@
                                     <?php
                                     foreach ($all_conditions as $condition) {
                                         if($editing) {
-                                            $selected = ($condition['id'] == $product['condition_id1') ? ' selected="selected"' : "";
+                                            $selected = ($condition['id'] == $product['condition_id1']) ? ' selected="selected"' : "";
                                         } else {
                                             $selected = ($condition['id'] == $this->input->post('condition_id1')) ? ' selected="selected"' : "";
                                         }
@@ -184,7 +184,7 @@
                                     <?php
                                     foreach ($all_brands as $brand) {
                                         if($editing) {
-                                            $selected = ($brand['id'] == $product['brand_id1') ? ' selected="selected"' : "";
+                                            $selected = ($brand['id'] == $product['brand_id1']) ? ' selected="selected"' : "";
                                         } else {
                                             $selected = ($brand['id'] == $this->input->post('brand_id1')) ? ' selected="selected"' : "";
                                         }
