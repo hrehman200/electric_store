@@ -87,6 +87,8 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define('WASHER', 10);
 define('DRYER', 13);
 define('WASHER_DRYER_SET', 34);
+define('WD_SET_WASHER', 35);
+define('WD_SET_DRYER', 38);
 define('MISCELLANIOUS', 33);
 
 const SOURCES_TO_APPLY_REFURBISHED_CONDITION = [

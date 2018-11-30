@@ -566,11 +566,11 @@
             if($('.selCategory:first').val() == <?=WASHER_DRYER_SET?> && $(this)[0] == $('.selCategory:first')[0]) {
                 selCategory = $('.selCategory:eq(4)');
                 nextDiv = $(selCategory).parent().parent().next('div');
-                getCategories(<?=WASHER?>, selCategory, nextDiv, optionsDiv);
+                getCategories(<?=WD_SET_WASHER?>, selCategory, nextDiv, optionsDiv);
 
                 selCategory = $('.selCategory:eq(6)');
                 nextDiv = $(selCategory).parent().parent().next('div');
-                getCategories(<?=DRYER?>, selCategory, nextDiv, optionsDiv);
+                getCategories(<?=WD_SET_DRYER?>, selCategory, nextDiv, optionsDiv);
 
             } else {
                 getCategories(categoryId, selCategory, nextDiv, optionsDiv);
