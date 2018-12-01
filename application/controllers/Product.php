@@ -94,8 +94,8 @@ class Product extends Auth_Controller
                 'color_id2' => $this->input->post('color_id2'),
                 'condition_id1' => $this->input->post('condition_id1'),
                 'condition_id2' => $this->input->post('condition_id2'),
-                'warranty_date1' => $this->input->post('condition_date_1'),
-                'warranty_date2' => $this->input->post('condition_date_2'),
+                'warranty_date1' => $this->input->post('warranty_date1'),
+                'warranty_date2' => $this->input->post('warranty_date2'),
                 'cubic_feet1' => $this->input->post('cubic_feet1'),
                 'cubic_feet2' => $this->input->post('cubic_feet2'),
                 'feature1' => $this->input->post('feature1'),
@@ -116,6 +116,8 @@ class Product extends Auth_Controller
                 'created' => $this->input->post('created'),
                 'updated' => $this->input->post('updated'),
             );
+
+            $params = $this->Product_model->sanitize_input($this->session->userdata('role'), $params);
 
             if($editing) {
                 $this->Product_model->update_product($old_product_id, $params);

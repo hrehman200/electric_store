@@ -7,6 +7,10 @@
 
 class Product_model extends CI_Model
 {
+    const ALLOWED_FIELDS = [
+        WARRANTY_INFO => ['condition_id1', 'warranty_date1', 'condition_id2', 'warranty_date2']
+    ];
+
     function __construct() {
         parent::__construct();
         $this->load->model('Color_model');
@@ -235,5 +239,32 @@ class Product_model extends CI_Model
         }
 
         return false;
+    }
+
+    /**
+     * @param $permission_group
+     * @param $field_name
+     * @return bool
+     */
+    public function get_disabled($permission_group, $field_name) {
+        $arr_allowed_fields = self::ALLOWED_FIELDS[$permission_group];
+        return in_array($field_name, $arr_allowed_fields) ? false : 'disabled="disabled"';
+    }
+
+    /**
+     * @param $permission_group
+     * @param $params
+     * @return mixed
+     */
+    public function sanitize_input($permission_group, $params) {
+        $arr_allowed_fields = self::ALLOWED_FIELDS[$permission_group];
+
+        foreach($params as $key => $value) {
+            if(!in_array($key, $arr_allowed_fields)) {
+                unset($params[$key]);
+            }
+        }
+
+        return $params;
     }
 }

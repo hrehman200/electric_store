@@ -12,7 +12,7 @@
                         <div class="form-group">
                             <input type="text" name="tracking_no"
                                    value="<?php echo ($editing ? $product['tracking_no'] :  $this->input->post('tracking_no')); ?>" class="form-control"
-                                   id="tracking_no"/>
+                                   id="tracking_no" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'tracking_no')?> />
                         </div>
                     </div>
 
@@ -20,7 +20,7 @@
                         <div class="col-md-3" style="padding-left:0;">
                             <label for="category_id" class="control-label">Category</label>
                             <div class="form-group">
-                                <select name="category_id1[]" class="form-control selCategory" data-index="0">
+                                <select name="category_id1[]" class="form-control selCategory" data-index="0" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'category_id1')?> >
                                     <?php
                                     echo $all_categories;
                                     ?>
@@ -30,7 +30,7 @@
                         <div class="col-md-3 hidden" style="padding-left:0;">
                             <label for="category_id" class="control-label">Subcategory</label>
                             <div class="form-group">
-                                <select name="category_id1[]" class="form-control selCategory" data-index="1">
+                                <select name="category_id1[]" class="form-control selCategory" data-index="1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'category_id1')?> >
                                     <?php
                                     ?>
                                 </select>
@@ -39,7 +39,7 @@
                         <div class="col-md-3 hidden" style="padding-left:0;">
                             <label for="category_id" class="control-label">Subcategory</label>
                             <div class="form-group">
-                                <select name="category_id1[]" class="form-control selCategory" data-index="2">
+                                <select name="category_id1[]" class="form-control selCategory" data-index="2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'category_id1')?> >
                                     <?php
                                     ?>
                                 </select>
@@ -48,7 +48,7 @@
                         <div class="col-md-3 hidden" style="padding-left:0;">
                             <label for="category_id" class="control-label">Subcategory</label>
                             <div class="form-group">
-                                <select name="category_id1[]" class="form-control selCategory" data-index="3">
+                                <select name="category_id1[]" class="form-control selCategory" data-index="3" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'category_id1')?> >
                                     <?php
                                     ?>
                                 </select>
@@ -62,7 +62,7 @@
                         <label for="title" class="control-label">Title</label>
                         <div class="form-group ">
                             <input type="text" name="title" value="<?php echo ($editing ? $product['title'] :  $this->input->post('title')); ?>"
-                                   class="form-control" id="title"/>
+                                   class="form-control" id="title" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'title')?> />
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                             <div class="col-md-3 hidden" style="padding-left:0;">
                                 <label for="category_id" class="control-label">Subcategory</label>
                                 <div class="form-group">
-                                    <select name="category_id1[]" class="form-control selCategory" data-index="4">
+                                    <select name="category_id1[]" class="form-control selCategory" data-index="4" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'category_id1')?> >
                                         <?php
                                         ?>
                                     </select>
@@ -84,7 +84,7 @@
                             <div class="col-md-3 hidden" style="padding-left:0;">
                                 <label for="category_id" class="control-label">Subcategory</label>
                                 <div class="form-group">
-                                    <select name="category_id1[]" class="form-control selCategory" data-index="5">
+                                    <select name="category_id1[]" class="form-control selCategory" data-index="5" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'category_id1')?> >
                                         <?php
                                         ?>
                                     </select>
@@ -106,30 +106,31 @@
                             <label for="source1" class="control-label">Source</label>
                             <div class="form-group">
                                 <input type="text" name="source1" value="<?php echo ($editing ? $product['source1'] :  $this->input->post('source1')); ?>"
-                                       class="form-control source" id="source1" data-index="1" maxlength="2" />
+                                       class="form-control source" id="source1" data-index="1" maxlength="2"
+                                       <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'source1')?> />
                             </div>
                         </div>
                         <div class="col-md-3">
                             <label for="model_no1" class="control-label">Model No</label>
                             <div class="form-group">
                                 <input type="text" name="model_no1" value="<?php echo ($editing ? $product['model_no1'] :  $this->input->post('model_no1')); ?>"
-                                       class="form-control" id="model_no1"/>
+                                       class="form-control" id="model_no1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_no1')?> />
                             </div>
                         </div>
                         <div class="col-md-3">
                             <label for="serial_no1" class="control-label">Serial No</label>
                             <div class="form-group">
                                 <input type="text" name="serial_no1" value="<?php echo ($editing ? $product['serial_no1'] :  $this->input->post('serial_no1')); ?>"
-                                       class="form-control" id="serial_no1"/>
+                                       class="form-control" id="serial_no1"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'serial_no1')?> />
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="condition_id" class="control-label">Condition</label>
+                            <label for="condition_id1" class="control-label">Condition</label>
                             <div class="form-group">
-                                <select name="condition_id1" id="condition_id1" class="form-control" data-index="1">
+                                <select name="condition_id1" id="condition_id1" class="form-control" data-index="1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'condition_id1')?> >
                                     <?php
                                     foreach ($all_conditions as $condition) {
                                         if($editing) {
@@ -148,8 +149,8 @@
                             <div class="form-group">
                                 <span name="condition_warranties_txt_1" id="condition_warranties_txt_1"
                                       style="display: none;"></span>
-                                <input type="date" name="condition_date_1" id="condition_date_1" value="<?php echo ($editing ? $product['warranty_date1'] :  $this->input->post('condition_date_1')); ?>"
-                                       style="display: inline-flex;">
+                                <input type="date" name="warranty_date1" id="warranty_date1" value="<?php echo ($editing ? $product['warranty_date1'] :  $this->input->post('warranty_date1')); ?>"
+                                       style="display: inline-flex;"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'warranty_date1')?> >
                             </div>
                         </div>
                     </div>
@@ -158,21 +159,21 @@
                             <label for="height" class="control-label">Height</label>
                             <div class="form-group">
                                 <input type="text" name="height1" value="<?php echo ($editing ? $product['height1'] :  $this->input->post('height1')); ?>"
-                                       class="form-control" id="height1"/>
+                                       class="form-control" id="height1"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'height1')?> />
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="width" class="control-label">Width</label>
                             <div class="form-group">
                                 <input type="text" name="width1" value="<?php echo ($editing ? $product['width1'] :  $this->input->post('width1')); ?>"
-                                       class="form-control" id="width1"/>
+                                       class="form-control" id="width1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'width1')?> />
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="depth" class="control-label">Depth</label>
                             <div class="form-group">
                                 <input type="text" name="depth1" value="<?php echo ($editing ? $product['depth1'] :  $this->input->post('depth1')); ?>"
-                                       class="form-control" id="depth1"/>
+                                       class="form-control" id="depth1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'depth1')?> />
                             </div>
                         </div>
                     </div>
@@ -180,7 +181,7 @@
                         <div class="col-md-4">
                             <label for="brand_id1" class="control-label">Brand</label>
                             <div class="form-group">
-                                <select name="brand_id1" class="form-control">
+                                <select name="brand_id1" class="form-control" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'brand_id1')?> >
                                     <?php
                                     foreach ($all_brands as $brand) {
                                         if($editing) {
@@ -197,7 +198,7 @@
                         <div class="col-md-4">
                             <label for="color_id1" class="control-label">Color</label>
                             <div class="form-group">
-                                <select name="color_id1" class="form-control">
+                                <select name="color_id1" class="form-control" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'color_id1')?> >
                                     <?php
                                     foreach ($all_colors as $color) {
                                         if($editing) {
@@ -215,7 +216,7 @@
                             <label for="cubic_feet1" class="control-label">Cubic Feet</label>
                             <div class="form-group">
                                 <input type="text" name="cubic_feet1" value="<?php echo ($editing ? $product['cubic_feet1'] :  $this->input->post('cubic_feet1')); ?>"
-                                       class="form-control" id="cubic_feet1"/>
+                                       class="form-control" id="cubic_feet1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'cubic_feet1')?> />
                             </div>
                         </div>
                     </div>
@@ -228,7 +229,7 @@
                         <div class="col-md-3 hidden">
                             <label for="category_id" class="control-label">Subcategory</label>
                             <div class="form-group">
-                                <select name="category_id2[]" class="form-control selCategory" data-index="6">
+                                <select name="category_id2[]" class="form-control selCategory" data-index="6" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'category_id2')?> >
                                     <?php
                                     ?>
                                 </select>
@@ -251,21 +252,21 @@
                             <label for="source2" class="control-label">Source</label>
                             <div class="form-group">
                                 <input type="text" name="source2" value="<?php echo ($editing ? $product['source2'] :  $this->input->post('source2')); ?>"
-                                       class="form-control source" id="source2" data-index="2" maxlength="2" />
+                                       class="form-control source" id="source2" data-index="2" maxlength="2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'source2')?>  />
                             </div>
                         </div>
                         <div class="col-md-3">
                             <label for="model_no2" class="control-label">Model No</label>
                             <div class="form-group">
                                 <input type="text" name="model_no2" value="<?php echo ($editing ? $product['model_no2'] :  $this->input->post('model_no2')); ?>"
-                                       class="form-control" id="model_no2"/>
+                                       class="form-control" id="model_no2"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_no2')?> />
                             </div>
                         </div>
                         <div class="col-md-3">
                             <label for="serial_no2" class="control-label">Serial No</label>
                             <div class="form-group">
                                 <input type="text" name="serial_no2" value="<?php echo ($editing ? $product['serial_no2'] :  $this->input->post('serial_no2')); ?>"
-                                       class="form-control" id="serial_no2"/>
+                                       class="form-control" id="serial_no2"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'serial_no2')?> />
                             </div>
                         </div>
                     </div>
@@ -274,7 +275,7 @@
                         <div class="col-md-6">
                             <label for="condition_id" class="control-label">Condition</label>
                             <div class="form-group">
-                                <select name="condition_id2" id="condition_id2" class="form-control" data-index="2">
+                                <select name="condition_id2" id="condition_id2" class="form-control" data-index="2"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'condition_id2')?> >
                                     <?php
                                     foreach ($all_conditions as $condition) {
                                         if($editing) {
@@ -293,8 +294,8 @@
                             <div class="form-group">
                                 <span name="condition_warranties_txt_2" id="condition_warranties_txt_2"
                                       style="display: none;"></span>
-                                <input type="date" name="condition_date_2" id="condition_date_2" value="<?php echo ($editing ? $product['warranty_date2'] :  $this->input->post('condition_date_2')); ?>"
-                                       style="display: inline-flex;">
+                                <input type="date" name="warranty_date2" id="warranty_date2" value="<?php echo ($editing ? $product['warranty_date2'] :  $this->input->post('warranty_date2')); ?>"
+                                       style="display: inline-flex;"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'warranty_date2')?> >
                             </div>
                         </div>
                     </div>
@@ -303,21 +304,21 @@
                             <label for="height" class="control-label">Height</label>
                             <div class="form-group">
                                 <input type="text" name="height2" value="<?php echo ($editing ? $product['height2'] :  $this->input->post('height2')); ?>"
-                                       class="form-control" id="height2"/>
+                                       class="form-control" id="height2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'height2')?> />
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="width" class="control-label">Width</label>
                             <div class="form-group">
                                 <input type="text" name="width2" value="<?php echo ($editing ? $product['width2'] :  $this->input->post('width2')); ?>"
-                                       class="form-control" id="width2"/>
+                                       class="form-control" id="width2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'width2')?> />
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="depth" class="control-label">Depth</label>
                             <div class="form-group">
                                 <input type="text" name="depth2" value="<?php echo ($editing ? $product['depth2'] :  $this->input->post('depth2')); ?>"
-                                       class="form-control" id="depth2"/>
+                                       class="form-control" id="depth2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'depth2')?> />
                             </div>
                         </div>
                     </div>
@@ -325,7 +326,7 @@
                         <div class="col-md-4">
                             <label for="brand_id2" class="control-label">Brand</label>
                             <div class="form-group">
-                                <select name="brand_id2" class="form-control">
+                                <select name="brand_id2" class="form-control"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'brand_id2')?> >
                                     <?php
                                     foreach ($all_brands as $brand) {
                                         if($editing) {
@@ -342,7 +343,7 @@
                         <div class="col-md-4">
                             <label for="color_id1" class="control-label">Color</label>
                             <div class="form-group">
-                                <select name="color_id2" class="form-control">
+                                <select name="color_id2" class="form-control" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'color_id2')?> >
                                     <?php
                                     foreach ($all_colors as $color) {
                                         if($editing) {
@@ -360,7 +361,7 @@
                             <label for="cubic_feet1" class="control-label">Cubic Feet</label>
                             <div class="form-group">
                                 <input type="text" name="cubic_feet2" value="<?php echo ($editing ? $product['cubic_feet2'] :  $this->input->post('cubic_feet2')); ?>"
-                                       class="form-control" id="cubic_feet2"/>
+                                       class="form-control" id="cubic_feet2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'cubic_feet2')?> />
                             </div>
                         </div>
                     </div>
@@ -371,21 +372,21 @@
                         <label for="feature1" class="control-label">Feature1</label>
                         <div class="form-group">
                             <input type="text" name="feature1" value="<?php echo ($editing ? $product['feature1'] :  $this->input->post('feature1')); ?>"
-                                   class="form-control" id="feature1"/>
+                                   class="form-control" id="feature1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'feature1')?> />
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label for="feature2" class="control-label">Feature2</label>
                         <div class="form-group">
                             <input type="text" name="feature2" value="<?php echo ($editing ? $product['feature2'] :  $this->input->post('feature2')); ?>"
-                                   class="form-control" id="feature2"/>
+                                   class="form-control" id="feature2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'feature2')?> />
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label for="feature3" class="control-label">Feature3</label>
                         <div class="form-group">
                             <input type="text" name="feature3" value="<?php echo ($editing ? $product['feature3'] :  $this->input->post('feature3')); ?>"
-                                   class="form-control" id="feature3"/>
+                                   class="form-control" id="feature3" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'feature3')?> />
                         </div>
                     </div>
                 </div>
@@ -394,7 +395,7 @@
                         <label for="price" class="control-label">Price</label>
                         <div class="form-group">
                             <input type="text" name="price" value="<?php echo ($editing ? $product['price'] :  $this->input->post('price')); ?>"
-                                   class="form-control" id="price"/>
+                                   class="form-control" id="price" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'price')?> />
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -402,32 +403,34 @@
                         <div class="form-group">
                             <input type="text" name="comparable_price"
                                    value="<?php echo ($editing ? $product['comparable_price'] :  $this->input->post('comparable_price')); ?>" class="form-control"
-                                   id="comparable_price"/>
+                                   id="comparable_price" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'comparable_price')?> />
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label for="description" class="control-label">Description</label>
                         <div class="form-group">
                             <textarea name="description" class="form-control"
                                       id="description"><?php echo ($editing ? $product['description'] :  $this->input->post('description')); ?></textarea>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                </div>
+                <div class="row">
+                    <!--<div class="col-md-6">
                         <label for="tags" class="control-label">Tags</label>
                         <div class="form-group">
                             <textarea name="tags" class="form-control"
-                                      id="tags"><?php echo $this->input->post('tags'); ?></textarea>
+                                      id="tags"><?php /*echo $this->input->post('tags'); */?></textarea>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <label for="accessories" class="control-label">Accessories</label>
                         <div class="form-group">
                             <textarea name="accessories" class="form-control"
-                                      id="accessories"><?php echo $this->input->post('accessories'); ?></textarea>
+                                      id="accessories"><?php /*echo $this->input->post('accessories'); */?></textarea>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <div class="box-footer">
@@ -592,10 +595,10 @@
             var index = $(this).data('index');
             var description = $(this).find('option:selected').data('description');
             if ($(this).val() == 3) {
-                $('#condition_date_' + index).show();
+                $('#warranty_date' + index).show();
                 $('#condition_warranties_txt_' + index).hide();
             } else {
-                $('#condition_date_' + index).hide();
+                $('#warranty_date' + index).hide();
                 $('#condition_warranties_txt_' + index).show().html(description);
             }
         }).trigger('change');
