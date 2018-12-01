@@ -50,7 +50,7 @@ class User extends Auth_Controller
             $this->form_validation->set_rules('password', 'password', 'required|min_length[6]|max_length[50]');
 
             $params = array(
-                'password' => $this->input->post('password'),
+                'password' => sha1($this->input->post('password')),
                 'email' => $this->input->post('email'),
                 'permission_group' => $this->input->post('permissionID'),
                 'name' => $this->input->post('name'),

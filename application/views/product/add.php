@@ -4,7 +4,7 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Product Add</h3>
             </div>
-            <?php echo form_open('product/add/'.($editing?$product['id']:'')); ?>
+            <?php echo form_open_multipart('product/add/'.($editing?$product['id']:'')); ?>
             <div class="box-body">
                 <div class="row clearfix">
                     <div class="col-md-3">
@@ -408,13 +408,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <label for="description" class="control-label">Description</label>
-                        <div class="form-group">
-                            <textarea name="description" class="form-control"
-                                      id="description"><?php echo ($editing ? $product['description'] :  $this->input->post('description')); ?></textarea>
-                        </div>
-                    </div>
+                    c
                 </div>
                 <div class="row">
                     <!--<div class="col-md-6">
@@ -432,6 +426,76 @@
                         </div>
                     </div>-->
                 </div>
+
+                <h3 align="center">Pictures</h3>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="profile_pic" class="control-label">Profile Picture</label>
+                        <div class="form-group">
+                            <input type="file" accept="image/*" name="profile_pic"
+                                   class="form-control" id="profile_pic" data-index="1"  />
+                            <div class="preview-1"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="price" class="control-label">Open Picture</label>
+                        <div class="form-group">
+                            <input type="file" name="price"
+                                   class="form-control" id="price"  />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="price" class="control-label">Display Picture</label>
+                        <div class="form-group">
+                            <input type="file" name="price"
+                                   class="form-control" id="price"  />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="price" class="control-label">Measurements and Tracking #</label>
+                        <div class="form-group">
+                            <input type="file" name="price"
+                                   class="form-control" id="price"  />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="price" class="control-label">Power Source</label>
+                        <div class="form-group">
+                            <input type="file" name="price"
+                                   class="form-control" id="price"  />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="price" class="control-label">Damage</label>
+                        <div class="form-group">
+                            <input type="file" name="price"
+                                   class="form-control" id="price"  />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="price" class="control-label">Missing pieces</label>
+                        <div class="form-group">
+                            <input type="file" name="price"
+                                   class="form-control" id="price"  />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="price" class="control-label">Descriptive photos</label>
+                        <div class="form-group">
+                            <input type="file" name="price"
+                                   class="form-control" id="price"  />
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="price" class="control-label"> Model and Serial Number</label>
+                        <div class="form-group">
+                            <input type="file" name="price"
+                                   class="form-control" id="price"  />
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="box-footer">
                 <button type="submit" class="btn btn-success">
@@ -616,6 +680,27 @@
                     .find('option:first').prop('selected', true).end()
                     .change();
             }
+        });
+
+        var imagesPreview = function(input, div) {
+            $(div).html('');
+            if (input.files) {
+                var filesAmount = input.files.length;
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        $($.parseHTML('<img width="250">'))
+                            .attr('src', event.target.result)
+                            .appendTo(div);
+                    };
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        };
+
+        $('input[type="file"]').on('change', function(e){
+            var index = $(this).data('index');
+            imagesPreview(this, '.preview-' + index);
         });
 
     });

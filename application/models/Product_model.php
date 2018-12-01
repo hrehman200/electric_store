@@ -8,7 +8,9 @@
 class Product_model extends CI_Model
 {
     const ALLOWED_FIELDS = [
-        WARRANTY_INFO => ['condition_id1', 'warranty_date1', 'condition_id2', 'warranty_date2']
+        WARRANTY_INFO => ['condition_id1', 'warranty_date1', 'condition_id2', 'warranty_date2'],
+        QC_MANAGER => ['*'],
+        QC => ['*'],
     ];
 
     function __construct() {
@@ -248,6 +250,9 @@ class Product_model extends CI_Model
      */
     public function get_disabled($permission_group, $field_name) {
         $arr_allowed_fields = self::ALLOWED_FIELDS[$permission_group];
+        if($arr_allowed_fields[0] = '*') {
+            return false;
+        }
         return in_array($field_name, $arr_allowed_fields) ? false : 'disabled="disabled"';
     }
 
@@ -258,6 +263,10 @@ class Product_model extends CI_Model
      */
     public function sanitize_input($permission_group, $params) {
         $arr_allowed_fields = self::ALLOWED_FIELDS[$permission_group];
+
+        if($arr_allowed_fields[0] = '*') {
+            return $params;
+        }
 
         foreach($params as $key => $value) {
             if(!in_array($key, $arr_allowed_fields)) {

@@ -13,6 +13,7 @@ class Product extends Auth_Controller
         parent::__construct();
         $this->load->model('Product_model');
         $this->load->model('Category_model');
+        $this->load->model('Product_picture_model');
     }
 
     /*
@@ -124,6 +125,10 @@ class Product extends Auth_Controller
                 $this->Product_model->delete_options($old_product_id);
                 $this->Product_model->add_options($old_product_id, $this->input->post('option_id1'));
                 $this->Product_model->add_options($old_product_id, $this->input->post('option_id2'));
+
+                $arr_pics = $this->_upload_pics($_FILES);
+                $this->Product_picture_model->save_pictures($old_product_id, $arr_pics);
+
             } else {
                 $product_id = $this->Product_model->add_product($params);
                 if ($product_id > 0) {
@@ -166,4 +171,45 @@ class Product extends Auth_Controller
             show_error('The product you are trying to delete does not exist.');
     }
 
+    /**
+     * @param $params
+     * @return array
+     */
+    private function _upload_pics($params) {
+        $arr_pic_names = [];
+        foreach($params as $key=>$value) {
+            if(strpos($key, '_pic') !== false) {
+                $image_name = $this->_do_upload($key);
+                if($image_name != false) {
+                    $arr_pic_names[Product_picture_model::PICTURE_TYPES[$key]][] = $image_name;
+                } else {
+                    show_error('Some error occurred while uploading picture');
+                }
+            }
+        }
+        return $arr_pic_names;
+    }
+
+    /**
+     * @param $param_name
+     * @return bool|string
+     */
+    private function _do_upload($param_name) {
+        $upload_path = './uploads/';
+        $config = array(
+            'upload_path' => $upload_path,
+            'allowed_types' => "gif|jpg|png|jpeg",
+            'overwrite' => TRUE,
+        );
+        $this->load->library('upload', $config);
+        if (!$this->upload->do_upload($param_name)) {
+            $data['imageError'] = $this->upload->display_errors();
+            return false;
+
+        } else {
+            $imageDetailArray = $this->upload->data();
+            $image = uniqid('pic_').time().'.png';//$imageDetailArray['file_name'];
+            return $image;
+        }
+    }
 }

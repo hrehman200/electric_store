@@ -111,3 +111,5 @@ const SOURCES_TO_APPLY_REFURBISHED_CONDITION = [
 
 // User Roles
 define('WARRANTY_INFO', 'Warranty Info');
+define('QC_MANAGER', 'QC Manager');
+define('QC', 'QC');
