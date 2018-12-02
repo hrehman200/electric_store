@@ -434,64 +434,72 @@
                         <label for="profile_pic" class="control-label">Profile Picture</label>
                         <div class="form-group">
                             <input type="file" accept="image/*" name="profile_pic"
-                                   class="form-control" id="profile_pic" data-index="1"  />
-                            <div class="preview-1"></div>
+                                   class="form-control" id="profile_pic" />
+                            <div class="preview"></div>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="price" class="control-label">Open Picture</label>
+                        <label for="open_pic" class="control-label">Open Picture</label>
                         <div class="form-group">
-                            <input type="file" name="price"
-                                   class="form-control" id="price"  />
+                            <input type="file" name="open_pic[]" accept="image/*" multiple="multiple"
+                                   class="form-control" id="open_pic[]"  />
+                            <div class="preview"></div>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="price" class="control-label">Display Picture</label>
+                        <label for="display_pic" class="control-label">Display Picture</label>
                         <div class="form-group">
-                            <input type="file" name="price"
-                                   class="form-control" id="price"  />
+                            <input type="file" name="display_pic[]" multiple
+                                   class="form-control" id="display_pic[]"  />
+                            <div class="preview"></div>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="price" class="control-label">Measurements and Tracking #</label>
+                        <label for="measurement_tracking_pic" class="control-label">Measurements and Tracking #</label>
                         <div class="form-group">
-                            <input type="file" name="price"
-                                   class="form-control" id="price"  />
+                            <input type="file" name="measurement_tracking_pic" accept="image/*"
+                                   class="form-control" id="measurement_tracking_pic"  />
+                            <div class="preview"></div>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="price" class="control-label">Power Source</label>
+                        <label for="power_src_pic" class="control-label">Power Source</label>
                         <div class="form-group">
-                            <input type="file" name="price"
-                                   class="form-control" id="price"  />
+                            <input type="file" name="power_src_pic" accept="image/*"
+                                   class="form-control" id="power_src_pic"  />
+                            <div class="preview"></div>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="price" class="control-label">Damage</label>
+                        <label for="damage_pic" class="control-label">Damage</label>
                         <div class="form-group">
-                            <input type="file" name="price"
-                                   class="form-control" id="price"  />
+                            <input type="file" name="damage_pic" accept="image/*"
+                                   class="form-control" id="damage_pic"  />
+                            <div class="preview"></div>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="price" class="control-label">Missing pieces</label>
+                        <label for="missing_pieces_pic" class="control-label">Missing pieces</label>
                         <div class="form-group">
-                            <input type="file" name="price"
-                                   class="form-control" id="price"  />
+                            <input type="file" name="missing_pieces_pic" accept="image/*"
+                                   class="form-control" id="missing_pieces_pic"  />
+                            <div class="preview"></div>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="price" class="control-label">Descriptive photos</label>
+                        <label for="descriptive_pic" class="control-label">Descriptive photos</label>
                         <div class="form-group">
-                            <input type="file" name="price"
-                                   class="form-control" id="price"  />
+                            <input type="file" name="descriptive_pic" accept="image/*"
+                                   class="form-control" id="descriptive_pic"  />
+                            <div class="preview"></div>
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <label for="price" class="control-label"> Model and Serial Number</label>
+                        <label for="model_serial_no_pic" class="control-label"> Model and Serial Number</label>
                         <div class="form-group">
-                            <input type="file" name="price"
-                                   class="form-control" id="price"  />
+                            <input type="file" name="model_serial_no_pic" accept="image/*"
+                                   class="form-control" id="model_serial_no_pic"  />
+                            <div class="preview"></div>
                         </div>
                     </div>
                 </div>
@@ -698,9 +706,9 @@
             }
         };
 
-        $('input[type="file"]').on('change', function(e){
-            var index = $(this).data('index');
-            imagesPreview(this, '.preview-' + index);
+        $('input[type="file"]').on('change', function(e) {
+            var div = $(this).next('.preview');
+            imagesPreview(this, div);
         });
 
     });

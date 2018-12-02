@@ -179,11 +179,22 @@ class Product extends Auth_Controller
         $arr_pic_names = [];
         foreach($params as $key=>$value) {
             if(strpos($key, '_pic') !== false) {
-                $image_name = $this->_do_upload($key);
-                if($image_name != false) {
-                    $arr_pic_names[Product_picture_model::PICTURE_TYPES[$key]][] = $image_name;
-                } else {
-                    show_error('Some error occurred while uploading picture');
+
+                if(is_array($params[$key]['name']) && strlen($params[$key]['name'][0]) > 0) {
+                    $image_names = $this->_do_multi_upload($key);
+                    if ($image_names != false) {
+                        $arr_pic_names[Product_picture_model::PICTURE_TYPES[$key]] = array_merge([], $image_names);
+                    } else {
+                        show_error('Some error occurred while uploading picture');
+                    }
+
+                } else if(strlen($params[$key]['name']) > 0) {
+                    $image_name = $this->_do_upload($key);
+                    if ($image_name != false) {
+                        $arr_pic_names[Product_picture_model::PICTURE_TYPES[$key]][] = $image_name;
+                    } else {
+                        show_error('Some error occurred while uploading picture');
+                    }
                 }
             }
         }
@@ -200,6 +211,7 @@ class Product extends Auth_Controller
             'upload_path' => $upload_path,
             'allowed_types' => "gif|jpg|png|jpeg",
             'overwrite' => TRUE,
+            'encrypt_name' => TRUE,
         );
         $this->load->library('upload', $config);
         if (!$this->upload->do_upload($param_name)) {
@@ -207,9 +219,38 @@ class Product extends Auth_Controller
             return false;
 
         } else {
-            $imageDetailArray = $this->upload->data();
-            $image = uniqid('pic_').time().'.png';//$imageDetailArray['file_name'];
-            return $image;
+            $file_data = $this->upload->data();
+            return $file_data['file_name'];
         }
+    }
+
+    private function _do_multi_upload($param_name) {
+        $upload_path = './uploads/';
+        $config = array(
+            'upload_path' => $upload_path,
+            'allowed_types' => "gif|jpg|png|jpeg",
+            'overwrite' => TRUE,
+            'encrypt_name' => TRUE,
+        );
+        $this->load->library('upload', $config);
+
+        $filenames = [];
+
+        for($i=0; $i<count($_FILES[$param_name]['name']); $i++) {
+            $_FILES[$param_name.'[]']['name']= $_FILES[$param_name]['name'][$i];
+            $_FILES[$param_name.'[]']['type']= $_FILES[$param_name]['type'][$i];
+            $_FILES[$param_name.'[]']['tmp_name']= $_FILES[$param_name]['tmp_name'][$i];
+            $_FILES[$param_name.'[]']['error']= $_FILES[$param_name]['error'][$i];
+            $_FILES[$param_name.'[]']['size']= $_FILES[$param_name]['size'][$i];
+
+            if ($this->upload->do_upload($param_name.'[]')) {
+                $file_data = $this->upload->data();
+                $filenames[] = $file_data['file_name'];
+            } else {
+                return false;
+            }
+        }
+
+        return $filenames;
     }
 }
