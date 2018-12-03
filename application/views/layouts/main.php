@@ -34,6 +34,10 @@
         <script src="<?php echo site_url('resources/js/moment.js');?>"></script>
         <script src="<?php echo site_url('resources/js/bootstrap-datetimepicker.min.js');?>"></script>
         <script src="<?php echo site_url('resources/js/global.js');?>"></script>
+
+        <link rel="stylesheet" href="<?php echo site_url('resources/css/ekko-lightbox.css');?>">
+        <script src="<?php echo site_url('resources/js/ekko-lightbox.min.js');?>"></script>
+
     </head>
     
     <body class="hold-transition skin-blue sidebar-mini">

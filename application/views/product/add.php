@@ -435,7 +435,9 @@
                         <div class="form-group">
                             <input type="file" accept="image/*" name="profile_pic"
                                    class="form-control" id="profile_pic" />
-                            <div class="preview"></div>
+                            <div class="preview">
+                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'profile_pic');?>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -443,7 +445,9 @@
                         <div class="form-group">
                             <input type="file" name="open_pic[]" accept="image/*" multiple="multiple"
                                    class="form-control" id="open_pic[]"  />
-                            <div class="preview"></div>
+                            <div class="preview">
+                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'open_pic');?>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -451,7 +455,9 @@
                         <div class="form-group">
                             <input type="file" name="display_pic[]" multiple
                                    class="form-control" id="display_pic[]"  />
-                            <div class="preview"></div>
+                            <div class="preview">
+                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'display_pic');?>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -459,7 +465,9 @@
                         <div class="form-group">
                             <input type="file" name="measurement_tracking_pic" accept="image/*"
                                    class="form-control" id="measurement_tracking_pic"  />
-                            <div class="preview"></div>
+                            <div class="preview">
+                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'measurement_tracking_pic');?>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -467,7 +475,9 @@
                         <div class="form-group">
                             <input type="file" name="power_src_pic" accept="image/*"
                                    class="form-control" id="power_src_pic"  />
-                            <div class="preview"></div>
+                            <div class="preview">
+                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'power_src_pic');?>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -475,7 +485,9 @@
                         <div class="form-group">
                             <input type="file" name="damage_pic" accept="image/*"
                                    class="form-control" id="damage_pic"  />
-                            <div class="preview"></div>
+                            <div class="preview">
+                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'damage_pic');?>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -483,7 +495,9 @@
                         <div class="form-group">
                             <input type="file" name="missing_pieces_pic" accept="image/*"
                                    class="form-control" id="missing_pieces_pic"  />
-                            <div class="preview"></div>
+                            <div class="preview">
+                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'missing_pieces_pic');?>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -491,7 +505,9 @@
                         <div class="form-group">
                             <input type="file" name="descriptive_pic" accept="image/*"
                                    class="form-control" id="descriptive_pic"  />
-                            <div class="preview"></div>
+                            <div class="preview">
+                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'descriptive_pic');?>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -499,7 +515,9 @@
                         <div class="form-group">
                             <input type="file" name="model_serial_no_pic" accept="image/*"
                                    class="form-control" id="model_serial_no_pic"  />
-                            <div class="preview"></div>
+                            <div class="preview">
+                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'model_serial_no_pic');?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -527,6 +545,30 @@
         -webkit-box-shadow: 0px 0px 0px 0px #000;
         box-shadow: 0px 0px 0px 0px #000;
         background-color: #eeeeee;
+    }
+
+    .product-pic {
+        position: relative;
+        display: inline-block;
+    }
+
+    .product-pic:hover .edit {
+        display: block;
+    }
+
+    .edit {
+        padding-top: 7px;
+        padding-right: 7px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: none;
+    }
+
+    .edit a {
+        color: #ff0000;
+        background-color: white;
+        padding: 3px;
     }
 </style>
 
@@ -709,6 +751,29 @@
         $('input[type="file"]').on('change', function(e) {
             var div = $(this).next('.preview');
             imagesPreview(this, div);
+        });
+
+        $(document).on('click', '[data-toggle="lightbox"]', function(e) {
+            e.preventDefault();
+            $(this).ekkoLightbox();
+        });
+
+        $('.product-pic .edit').on('click', function (e) {
+            var response = confirm('Are you sure you want to delete this picture?');
+            var id = $(this).data('id');
+            var parent = $(this).parents('.product-pic');
+            if(response) {
+                $.ajax({
+                    url: '<?=base_url()?>ajax/delete_product_picture/'+id,
+                    method: 'POST',
+                    dataType: 'json',
+                    success: function (result) {
+                        if(result.success) {
+                            $(parent).remove();
+                        }
+                    }
+                });
+            }
         });
 
     });

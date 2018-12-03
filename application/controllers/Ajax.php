@@ -8,6 +8,7 @@ class Ajax extends Auth_Controller
         parent::__construct();
         $this->load->model('Option_model');
         $this->load->model('Category_model');
+        $this->load->model('Product_picture_model');
     }
 
     function get_options($category_id) {
@@ -20,4 +21,13 @@ class Ajax extends Auth_Controller
         echo json_encode($categories);
     }
 
+    /**
+     * @param $product_picture_id
+     */
+    function delete_product_picture($product_picture_id) {
+        $product_picture = $this->Product_picture_model->get_product_picture($product_picture_id);
+        unlink('./uploads/'.$product_picture['name']);
+        $this->Product_picture_model->delete_product_picture($product_picture_id);
+        echo json_encode(['success'=>1]);
+    }
 }

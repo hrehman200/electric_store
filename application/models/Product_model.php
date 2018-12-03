@@ -19,6 +19,7 @@ class Product_model extends CI_Model
         $this->load->model('Brand_model');
         $this->load->model('Option_model');
         $this->load->model('Category_model');
+        $this->load->model('Product_picture_model');
     }
 
     /*
@@ -47,6 +48,8 @@ class Product_model extends CI_Model
         $row['category_id2_arr'] = $this->Category_model->get_category_id_tree($row['category_id2'], $category_id2_arr);
 
         $row['option_id_arr'] = $this->get_product_option_ids($product_id);
+
+        $row['pictures'] = $this->Product_picture_model->get_all_product_pictures($product_id);
 
         return $row;
     }

@@ -30,12 +30,46 @@ class Product_picture_model extends CI_Model
         return $this->db->get_where('product_pictures', array('id' => $id))->row_array();
     }
 
-    /*
-     * Get all product_pictures
+    /**
+     * @param $product_id
+     * @param null|int|string $type
+     * @return mixed
      */
-    function get_all_product_pictures() {
+    function get_all_product_pictures($product_id, $type = null) {
+        $this->db->where('product_id', $product_id);
+        if($type != null) {
+            if(!is_int($type)) {
+                $type = self::PICTURE_TYPES[$type];
+            }
+            $this ->db->where('type', $type);
+        }
         $this->db->order_by('id', 'desc');
-        return $this->db->get('product_pictures')->result_array();
+        $pictures = $this->db->get('product_pictures')->result_array();
+
+        $result = [];
+        foreach($pictures as $pic) {
+            $key = array_search ($pic['type'], self::PICTURE_TYPES);
+            $result[$key][] = $pic;
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param $product
+     * @param $type_key_name
+     * @return string
+     */
+    function get_picture_html_from_product_data($product, $type_key_name) {
+        $html = '';
+        foreach($product['pictures'][$type_key_name] as $pic) {
+            $img = base_url().'uploads/'.$pic['name'];
+            $html .= sprintf('<div class="product-pic">
+                <a href="%s" data-toggle="lightbox"><img src="%s" width="250"></a>
+                <div class="edit" data-id="%d"><a href="javascript:;"><i class="fa fa-times fa-lg fa-2x"></i></a></div>
+            </div>', $img, $img, $pic['id']);
+        }
+        return $html;
     }
 
     /*
