@@ -1,3 +1,6 @@
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+
 <div class="row">
     <div class="col-md-12">
         <div class="box box-info">
@@ -408,7 +411,12 @@
                     </div>
                 </div>
                 <div class="row">
-                    c
+                    <div class="col-md-12">
+                        <label for="description" class="control-label">Description</label>
+                        <div class="form-group">
+                            <textarea name="description" class="form-control" style="min-height: 300px;"
+                                      id="description"><?php echo ($editing ? $product['description'] :  $this->input->post('description')); ?></textarea>
+                        </div>
                 </div>
                 <div class="row">
                     <!--<div class="col-md-6">
