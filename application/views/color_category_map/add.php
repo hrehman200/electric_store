@@ -8,12 +8,6 @@
           	<div class="box-body">
           		<div class="row clearfix">
 					<div class="col-md-6">
-						<div class="form-group">
-							<input type="checkbox" name="default" value="1"  id="default" />
-							<label for="default" class="control-label">Default</label>
-						</div>
-					</div>
-					<div class="col-md-6">
 						<label for="category_id" class="control-label">Category</label>
 						<div class="form-group">
 							<select name="category_id" class="form-control">
@@ -23,7 +17,7 @@
 								{
 									$selected = ($category['id'] == $this->input->post('category_id')) ? ' selected="selected"' : "";
 
-									echo '<option value="'.$category['id'].'" '.$selected.'>'.$category['id'].'</option>';
+									echo '<option value="'.$category['id'].'" '.$selected.'>'.$category['name'].'</option>';
 								} 
 								?>
 							</select>
@@ -39,12 +33,18 @@
 								{
 									$selected = ($color['id'] == $this->input->post('color_id')) ? ' selected="selected"' : "";
 
-									echo '<option value="'.$color['id'].'" '.$selected.'>'.$color['id'].'</option>';
+									echo '<option value="'.$color['id'].'" '.$selected.'>'.$color['name'].'</option>';
 								} 
 								?>
 							</select>
 						</div>
 					</div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="checkbox" name="default" value="1"  id="default" />
+                            <label for="default" class="control-label">Default</label>
+                        </div>
+                    </div>
 				</div>
 			</div>
           	<div class="box-footer">

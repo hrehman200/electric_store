@@ -18,10 +18,9 @@
                     <?php foreach($color_category_map as $c){ ?>
                     <tr>
 						<td><?php echo $c['default']; ?></td>
-						<td><?php echo $c['category_id']; ?></td>
-						<td><?php echo $c['color_id']; ?></td>
+						<td><?php echo $c['category']; ?></td>
+						<td><?php echo $c['color']; ?></td>
 						<td>
-                            <a href="<?php echo site_url('color_category_map/edit/'.$c['']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a> 
                             <a href="<?php echo site_url('color_category_map/remove/'.$c['']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a>
                         </td>
                     </tr>

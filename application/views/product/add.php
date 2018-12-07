@@ -202,16 +202,7 @@
                             <label for="color_id1" class="control-label">Color</label>
                             <div class="form-group">
                                 <select name="color_id1" class="form-control" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'color_id1')?> >
-                                    <?php
-                                    foreach ($all_colors as $color) {
-                                        if($editing) {
-                                            $selected = ($color['id'] == $product['color_id1']) ? ' selected="selected"' : "";
-                                        } else {
-                                            $selected = ($color['id'] == $this->input->post('color_id1')) ? ' selected="selected"' : "";
-                                        }
-                                        echo '<option value="' . $color['id'] . '" ' . $selected . '>' . $color['name'] . '</option>';
-                                    }
-                                    ?>
+
                                 </select>
                             </div>
                         </div>
@@ -347,16 +338,7 @@
                             <label for="color_id1" class="control-label">Color</label>
                             <div class="form-group">
                                 <select name="color_id2" class="form-control" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'color_id2')?> >
-                                    <?php
-                                    foreach ($all_colors as $color) {
-                                        if($editing) {
-                                            $selected = ($color['id'] == $product['color_id2']) ? ' selected="selected"' : "";
-                                        } else {
-                                            $selected = ($color['id'] == $this->input->post('color_id2')) ? ' selected="selected"' : "";
-                                        }
-                                        echo '<option value="' . $color['id'] . '" ' . $selected . '>' . $color['name'] . '</option>';
-                                    }
-                                    ?>
+
                                 </select>
                             </div>
                         </div>
@@ -602,6 +584,39 @@
             }
         }
 
+        function isWasherDryerSet() {
+            return ($('.selCategory:first').val() == <?=WASHER_DRYER_SET?>);
+        }
+
+        function getColors() {
+            var selColor1 = $('select[name="color_id1"]');
+            var selColor2 = $('select[name="color_id2"]');
+
+            $.ajax({
+                url: '<?=base_url()?>ajax/get_colors/' + $('.selCategory:first').val(),
+                method: 'GET',
+                dataType: 'json',
+                success: function (result) {
+                    if (result.length > 0) {
+                        $(selColor1).html('');
+                        $(selColor2).html('');
+                        for (var i in result) {
+                            $(selColor1).append('<option value="' + result[i].color_id + '">' + result[i].color + '</option>');
+                            $(selColor2).append('<option value="' + result[i].color_id + '">' + result[i].color + '</option>');
+                        }
+                        <?php
+                        if($editing) {
+                        ?>
+                            $('select[name="color_id1"]').val(<?=$product['color_id1']?>);
+                            $('select[name="color_id2"]').val(<?=$product['color_id2']?>);
+                        <?php
+                        }
+                        ?>
+                    }
+                }
+            });
+        }
+
         function getOptions(categoryId, optionsDiv) {
 
             var index = $(optionsDiv).closest('.checkbox').data('index');
@@ -626,6 +641,7 @@
                         <?php
                         }
                         ?>
+                        getColors();
                     }
                 }
             });
