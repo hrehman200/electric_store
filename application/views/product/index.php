@@ -38,6 +38,10 @@
                                 <a href="<?php echo site_url('product/add/' . $p['id']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a>
                                 <?php } ?>
 
+                                <?php if ($this->permission->has_permission('shopify_csv')) { ?>
+                                    <a href="<?php echo site_url('product/shopify_csv/' . $p['id']); ?>" class="btn btn-info btn-xs"><span class="fa fa-save"></span> CSV</a>
+                                <?php } ?>
+
                                 <?php if ($this->permission->has_permission('delete_product')) { ?>
                                 <a href="<?php echo site_url('product/remove/' . $p['id']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a>
                                 <?php } ?>

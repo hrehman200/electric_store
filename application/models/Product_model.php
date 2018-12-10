@@ -279,4 +279,101 @@ class Product_model extends CI_Model
 
         return $params;
     }
+
+    /**
+     * @param $product_id
+     * @return array
+     */
+    public function get_rows_for_shopify_csv($product_id) {
+        $row = [];
+
+        $product = $this->get_product($product_id);
+
+        $category = $this->Category_model->get_category($product['category_id1_arr'][0])['name'];
+        $sku = $product['source1'].'-'.$product['tracking_no'];
+
+        // url handle
+        $row[0] = sprintf('%s-%s-%s', $category, $product['title'], $sku);
+        // title
+        $row[1] = $product['title'];
+        // body html
+        $row[2] = $product['description'];
+        // vendor
+        $row[3] = 'Neu Appliances';
+        // type
+        $row[4] = '';
+        // tags
+        $row[5] = '';
+        // published
+        $row[6] = 'FALSE';
+        // option 1 name and value
+        $row[7] = 'Title';
+        $row[8] = 'Default Title';
+        $row[9] = $row[10] = $row[11] = $row[12] = $row[13] = '';
+        // variant grams
+        $row[14] = 0;
+        // variant related fields
+        $row[15] = 'shopify';
+        $row[16] = 1;
+        $row[17] = 'deny';
+        $row[18] = 'manual';
+        $row[19] = 'price';
+        $row[20] = 'compare';
+        $row[21] = 'TRUE';
+        $row[22] = 'TRUE';
+        $row[23] = '';
+
+        // image source, each image should be on new line
+        $row[24] = '';
+        $row[25] = '';
+        $row[26] = '';
+
+        // gift card
+        $row[27] = 'FALSE';
+        // seo title
+        $row[28] = '';
+        // seo desc
+        $row[29] = '';
+
+        $row[44] = 'lb';
+
+        $row[46] = '';
+
+        return $row;
+    }
+
+    /**
+     * @param array $product
+     * @return array
+     */
+    private function _get_tags_for_product(array $product) {
+        $tags = [];
+
+        $category_tags = $this->_get_category_tags($product);
+
+
+        return $tags;
+    }
+
+    /**
+     * @param $product
+     * @return array
+     */
+    private function _get_category_tags($product) {
+        $category_id1_arr = $product['category_id1_arr'];
+        $tags = [];
+        $postfix = '';
+        for($i=0; $i<count($category_id1_arr); $i++) {
+            $prefix = $i==0 ? 'Category_' : 'Subcategory_';
+            $category = $this->Category_model->get_category($category_id1_arr[$i])['name'];
+            if($i == 0) {
+                $postfix = '_'.$category;
+                $tags[] = sprintf('%s%s', $prefix, $category);
+            } else {
+                $tags[] = sprintf('%s%s', $prefix, $category, $postfix);
+            }
+        }
+
+        return $tags;
+    }
 }

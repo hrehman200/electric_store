@@ -354,21 +354,21 @@
 
                 <div class="row">
                     <div class="col-md-4">
-                        <label for="feature1" class="control-label">Feature1</label>
+                        <label for="feature1" class="control-label">Main Feature</label>
                         <div class="form-group">
                             <input type="text" name="feature1" value="<?php echo ($editing ? $product['feature1'] :  $this->input->post('feature1')); ?>"
                                    class="form-control" id="feature1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'feature1')?> />
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label for="feature2" class="control-label">Feature2</label>
+                        <label for="feature2" class="control-label">Main Feature</label>
                         <div class="form-group">
                             <input type="text" name="feature2" value="<?php echo ($editing ? $product['feature2'] :  $this->input->post('feature2')); ?>"
                                    class="form-control" id="feature2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'feature2')?> />
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <label for="feature3" class="control-label">Feature3</label>
+                        <label for="feature3" class="control-label">Main Feature</label>
                         <div class="form-group">
                             <input type="text" name="feature3" value="<?php echo ($editing ? $product['feature3'] :  $this->input->post('feature3')); ?>"
                                    class="form-control" id="feature3" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'feature3')?> />
