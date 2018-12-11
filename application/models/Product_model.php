@@ -20,6 +20,8 @@ class Product_model extends CI_Model
         $this->load->model('Option_model');
         $this->load->model('Category_model');
         $this->load->model('Product_picture_model');
+        $this->load->model('Tag_model');
+        $this->load->model('Accessory_model');
     }
 
     /*
@@ -303,7 +305,8 @@ class Product_model extends CI_Model
         // type
         $row[4] = '';
         // tags
-        $row[5] = '';
+        $tags = $this->get_tags_for_product($product);
+        $row[5] = $tags;
         // published
         $row[6] = 'FALSE';
         // option 1 name and value
@@ -343,14 +346,39 @@ class Product_model extends CI_Model
     }
 
     /**
-     * @param array $product
+     * @param $product
      * @return array
      */
-    private function _get_tags_for_product(array $product) {
+    public function get_tags_for_product($product) {
+
         $tags = [];
 
         $category_tags = $this->_get_category_tags($product);
+        $tags = array_merge($tags, $category_tags);
 
+        $conditional_tags = $this->_get_conditional_tags($product);
+        $tags = array_merge($tags, $conditional_tags);
+
+        $color_tags = $this->_get_color_tags($product);
+        $tags = array_merge($tags, $color_tags);
+
+        $brand_tags = $this->_get_brand_tags($product);
+        $tags = array_merge($tags, $brand_tags);
+
+        $condition_tags = $this->_get_condition_tags($product);
+        $tags = array_merge($tags, $condition_tags);
+
+        $option_tags = $this->_get_option_tags($product);
+        $tags = array_merge($tags, $option_tags);
+
+        $accessory_tags = $this->_get_accessories_tags($product);
+        $tags = array_merge($tags, $accessory_tags);
+
+        $current_model_tags = $this->_get_current_model_tags($product);
+        $tags = array_merge($tags, $current_model_tags);
+
+        $cubic_feet_tags = $this->_get_cubic_feet_tags($product);
+        $tags = array_merge($tags, $cubic_feet_tags);
 
         return $tags;
     }
@@ -359,13 +387,14 @@ class Product_model extends CI_Model
      * @param $product
      * @return array
      */
-    private function _get_category_tags($product) {
+    private function _get_category_tags(&$product) {
         $category_id1_arr = $product['category_id1_arr'];
         $tags = [];
         $postfix = '';
         for($i=0; $i<count($category_id1_arr); $i++) {
-            $prefix = $i==0 ? 'Category_' : 'Subcategory_';
+            $prefix = $i==0 ? 'Category_' : 'SubCategory_';
             $category = $this->Category_model->get_category($category_id1_arr[$i])['name'];
+            $category = str_replace(' ', '', $category);
             if($i == 0) {
                 $postfix = '_'.$category;
                 $tags[] = sprintf('%s%s', $prefix, $category);
@@ -375,5 +404,109 @@ class Product_model extends CI_Model
         }
 
         return $tags;
+    }
+
+    /**
+     * @param $product
+     * @return mixed
+     */
+    private function _get_conditional_tags(&$product) {
+        $category_id1_arr = $product['category_id1_arr'];
+
+        $conditional_tags = $this->Tag_model->get_tags_for_category($category_id1_arr[0]);
+        return $conditional_tags;
+    }
+
+    /**
+     * @param $product
+     * @return string
+     */
+    private function _get_color_tags(&$product) {
+        $color = $this->Color_model->get_color($product['color_id1']);
+        return ['Color_'.str_replace(' ', '', $color['name'])];
+    }
+
+    /**
+     * @param $product
+     * @return string
+     */
+    private function _get_brand_tags(&$product) {
+        $brand = $this->Brand_model->get_brand($product['brand_id1']);
+        return ['Brand_'.str_replace(' ', '', $brand['name'])];
+    }
+
+    /**
+     * @param $product
+     * @return string
+     */
+    private function _get_condition_tags(&$product) {
+        $condition = $this->Condition_model->get_condition($product['condition_id1']);
+        return ['Condition_'.$condition['value']];
+    }
+
+    /**
+     * @param $product
+     * @return array
+     */
+    private function _get_option_tags(&$product) {
+        $options = $this->get_options($product['option_id_arr']);
+
+        $formatted_options = array_map(function($item) {
+            return 'Options_'.str_replace(' ', '', $item);
+        }, $options);
+
+        return $formatted_options;
+    }
+
+    /**
+     * Some accessories tags should be applied when certain options are selected,
+     * other accessories tags are applied when certain categories are selected.
+     *
+     * @param $product
+     * @return array
+     */
+    private function _get_accessories_tags(&$product) {
+        $category_id = $product['category_id1_arr'][0];
+        $category_name = $this->Category_model->get_category($category_id);
+
+        $accessory_tags = [];
+
+        switch($category_name) {
+
+            case 'Refrigerator':
+                $accessory_tags = $this->Accessory_model->get_accessories_by_options($product['option_id_arr']);
+                if(count($accessory_tags) == 0) {
+                    $accessory_tags = ['Accessory_None'];
+                }
+                break;
+        }
+
+        return $accessory_tags;
+    }
+
+    /**
+     * @param $product
+     * @return array
+     */
+    private function _get_current_model_tags(&$product) {
+        $category_id = $product['category_id1_arr'][0];
+
+        // TODO: check for washer dryer set
+
+        $postfix = $product['current_model1'] ? 'Yes' : 'No';
+        return ['CurrentModel_'.$postfix];
+    }
+
+    /**
+     * @param $product
+     * @return array
+     */
+    private function _get_cubic_feet_tags(&$product) {
+
+        if($product['cubic_feet1'] > 0) {
+            return ['CubicFeet_'.$product['cubic_feet1']];
+        } else {
+            return ['CubicFeet_None'];
+        }
     }
 }

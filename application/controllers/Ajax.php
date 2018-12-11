@@ -36,4 +36,14 @@ class Ajax extends Auth_Controller
         $colors = $this->Color_category_map_model->get_all_color_category_map($category_id);
         echo json_encode($colors);
     }
+
+    function executeQuery() {
+        $this->db->query('
+        UPDATE options
+        SET name = REPLACE(name, "(Always)", "")
+        WHERE name LIKE "%(Always)%"
+        ');
+
+        echo $this->db->affected_rows();
+    }
 }
