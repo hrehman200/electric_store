@@ -22,6 +22,7 @@ class Product_model extends CI_Model
         $this->load->model('Product_picture_model');
         $this->load->model('Tag_model');
         $this->load->model('Accessory_model');
+        $this->load->model('Condition_model');
     }
 
     /*
@@ -287,6 +288,7 @@ class Product_model extends CI_Model
      * @return array
      */
     public function get_rows_for_shopify_csv($product_id) {
+        $rows = [];
         $row = [];
 
         $product = $this->get_product($product_id);
@@ -299,20 +301,17 @@ class Product_model extends CI_Model
         // title
         $row[1] = $product['title'];
         // body html
-        $row[2] = $product['description'];
+        $row[2] = $this->_get_html_description_for_csv($product);
         // vendor
         $row[3] = 'Neu Appliances';
-        // type
-        $row[4] = '';
         // tags
         $tags = $this->get_tags_for_product($product);
-        $row[5] = $tags;
+        $row[5] = implode(',', $tags);
         // published
         $row[6] = 'FALSE';
         // option 1 name and value
         $row[7] = 'Title';
         $row[8] = 'Default Title';
-        $row[9] = $row[10] = $row[11] = $row[12] = $row[13] = '';
         // variant grams
         $row[14] = 0;
         // variant related fields
@@ -320,29 +319,51 @@ class Product_model extends CI_Model
         $row[16] = 1;
         $row[17] = 'deny';
         $row[18] = 'manual';
-        $row[19] = 'price';
-        $row[20] = 'compare';
+        $row[19] = $product['price'];
+        $row[20] = $product['comparable_price'];
         $row[21] = 'TRUE';
         $row[22] = 'TRUE';
-        $row[23] = '';
-
-        // image source, each image should be on new line
-        $row[24] = '';
-        $row[25] = '';
-        $row[26] = '';
-
         // gift card
         $row[27] = 'FALSE';
-        // seo title
-        $row[28] = '';
-        // seo desc
-        $row[29] = '';
-
         $row[44] = 'lb';
+        $row[46] = '';   // last column
 
-        $row[46] = '';
+        // image source, each image should be on new line
+        $pictures = $this->Product_picture_model->get_public_picture_urls($product_id);
+        if(count($pictures) > 0) {
+            foreach ($pictures as $index => $pic) {
+                $row[24] = $pic['url'];
+                $row[25] = $index + 1;
 
-        return $row;
+                if (count($rows) == 0) {
+                    $this->_clean_array($row);
+                    $rows[] = $row;
+                    $row = [];
+                } else {
+                    $this->_clean_array($row);
+                    $rows[] = $row;
+                }
+            }
+        } else {
+            $this->_clean_array($row);
+            $rows[] = $row;
+        }
+
+        return $rows;
+    }
+
+    /**
+     * @param $array
+     */
+    private function _clean_array(&$array) {
+        end($array);
+        $max = 46; //Get the final key as max!
+        for ($i = 0; $i <= $max; $i++) {
+            if (!isset($array[$i])) {
+                $array[$i] = '';
+            }
+        }
+        ksort($array);
     }
 
     /**
@@ -508,5 +529,12 @@ class Product_model extends CI_Model
         } else {
             return ['CubicFeet_None'];
         }
+    }
+
+    private function _get_html_description_for_csv(&$product) {
+
+        // TODO: we splitted description for certain categories
+
+        return $product['description'];
     }
 }

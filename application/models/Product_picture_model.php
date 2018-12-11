@@ -19,6 +19,8 @@ class Product_picture_model extends CI_Model
         'model_serial_no_pic' => 9
     ];
 
+    const PUBLICLY_VIEWABLE_PIC_TYPES = [1, 2, 3];
+
     function __construct() {
         parent::__construct();
     }
@@ -53,6 +55,21 @@ class Product_picture_model extends CI_Model
         }
 
         return $result;
+    }
+
+    /**
+     * @param $product_id
+     * @return mixed
+     */
+    function get_public_picture_urls($product_id) {
+        $pictures = $this->db->select(sprintf('CONCAT("%suploads/", name) AS url', base_url()), false)
+            ->where('product_id', $product_id)
+            ->where_in('type', self::PUBLICLY_VIEWABLE_PIC_TYPES)
+            ->order_by('type', 'asc')
+            ->get('product_pictures')
+            ->result_array();
+
+        return $pictures;
     }
 
     /**

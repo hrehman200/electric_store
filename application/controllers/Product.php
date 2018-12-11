@@ -112,8 +112,6 @@ class Product extends Auth_Controller
                 'depth2' => $this->input->post('depth2'),
                 'title' => $title,
                 'description' => $this->input->post('description'),
-                'tags' => $this->input->post('tags'),
-                'accessories' => $this->input->post('accessories'),
                 'created' => $this->input->post('created'),
                 'updated' => $this->input->post('updated'),
             );
@@ -173,8 +171,6 @@ class Product extends Auth_Controller
 
     function shopify_csv($id) {
 
-        $tags = $this->Product_model->get_tags_for_product($id);
-
         $csv_header = ['Handle','Title','Body (HTML)','Vendor','Type','Tags','Published','Option1 Name','Option1 Value','Option2 Name','Option2 Value','Option3 Name','Option3 Value','Variant SKU','Variant Grams','Variant Inventory Tracker','Variant Inventory Qty','Variant Inventory Policy','Variant Fulfillment Service','Variant Price','Variant Compare At Price','Variant Requires Shipping','Variant Taxable','Variant Barcode','Image Src','Image Position','Image Alt Text','Gift Card','SEO Title','SEO Description','Google Shopping / Google Product Category','Google Shopping / Gender','Google Shopping / Age Group','Google Shopping / MPN','Google Shopping / AdWords Grouping','Google Shopping / AdWords Labels','Google Shopping / Condition','Google Shopping / Custom Product','Google Shopping / Custom Label 0','Google Shopping / Custom Label 1','Google Shopping / Custom Label 2','Google Shopping / Custom Label 3','Google Shopping / Custom Label 4','Variant Image','Variant Weight Unit','Variant Tax Code','Cost per item'];
         
         // output headers so that the file is downloaded rather than displayed
@@ -184,6 +180,10 @@ class Product extends Auth_Controller
         $output = fopen('php://output', 'w');
         fputcsv($output, $csv_header);
 
+        $rows = $this->Product_model->get_rows_for_shopify_csv($id);
+        foreach($rows as $row) {
+            fputcsv($output, $row);
+        }
     }
 
     /**
