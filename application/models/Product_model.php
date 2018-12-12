@@ -55,6 +55,9 @@ class Product_model extends CI_Model
 
         $row['pictures'] = $this->Product_picture_model->get_all_product_pictures($product_id);
 
+        $category_id = $row['category_id1_arr'][0];
+        $row['category'] = $this->Category_model->get_category($category_id)[0]['name'];
+
         return $row;
     }
 
@@ -437,9 +440,8 @@ class Product_model extends CI_Model
      */
     private function _get_conditional_tags(&$product) {
         $category_id1_arr = $product['category_id1_arr'];
-
-        $conditional_tags = $this->Tag_model->get_tags_for_category($category_id1_arr[0]);
-        return $conditional_tags;
+        $tags = $this->Tag_model->get_tags_for_category($category_id1_arr[0]);
+        return $tags;
     }
 
     /**
@@ -447,8 +449,29 @@ class Product_model extends CI_Model
      * @return string
      */
     private function _get_color_tags(&$product) {
-        $color = $this->Color_model->get_color($product['color_id1']);
-        return ['Color_'.str_replace(' ', '', $color['name'])];
+
+        $tags = [];
+
+        switch($product['category']) {
+            case 'Washer Dryer Set':
+                if($product['color_id1'] == $product['color_id2']) {
+                    $color = $this->Color_model->get_color($product['color_id1']);
+                    $tags[] = ['Washer_Dryer_Color_'.str_replace(' ', '', $color['name'])];
+                    $tags[] = 'Color_WDMatch';
+                } else {
+                    $color = $this->Color_model->get_color($product['color_id1']);
+                    $tags[] = ['Washer_Color_'.str_replace(' ', '', $color['name'])];
+                    $color = $this->Color_model->get_color($product['color_id2']);
+                    $tags[] = ['Dryer_Color_'.str_replace(' ', '', $color['name'])];
+                    $tags[] = 'Color_WDNoMatch';
+                }
+                break;
+            default:
+                $color = $this->Color_model->get_color($product['color_id1']);
+                $tags[] = ['Color_'.str_replace(' ', '', $color['name'])];
+        }
+
+        return $tags;
     }
 
     /**
@@ -457,7 +480,19 @@ class Product_model extends CI_Model
      */
     private function _get_brand_tags(&$product) {
         $brand = $this->Brand_model->get_brand($product['brand_id1']);
-        return ['Brand_'.str_replace(' ', '', $brand['name'])];
+        $tags = ['Brand_'.str_replace(' ', '', $brand['name'])];
+
+        switch($product['category']) {
+            case 'Washer Dryer Set':
+                if($product['brand_id1'] == $product['brand_id2']) {
+                    $tags[] = 'Brand_WDMatch';
+                } else {
+                    $tags[] = 'Brand_WDNoMatch';
+                }
+                break;
+        }
+
+        return $tags;
     }
 
     /**
@@ -466,7 +501,19 @@ class Product_model extends CI_Model
      */
     private function _get_condition_tags(&$product) {
         $condition = $this->Condition_model->get_condition($product['condition_id1']);
-        return ['Condition_'.$condition['value']];
+        $tags = ['Condition_'.$condition['value']];
+
+        switch($product['category']) {
+            case 'Washer Dryer Set':
+                if($product['brand_id1'] == $product['brand_id2']) {
+                    $tags[] = 'Condition_WDMatch';
+                } else {
+                    $tags[] = 'Condition_WDNoMatch';
+                }
+                break;
+        }
+
+        return $tags;
     }
 
     /**
@@ -480,6 +527,32 @@ class Product_model extends CI_Model
             return 'Options_'.str_replace(' ', '', $item);
         }, $options);
 
+        switch($product['category']) {
+            case 'Washing Machine':
+                if($product['cubic_feet1'] >=  3.8) {
+                    $formatted_options[] = 'Options_KingSizeComforterWasher';
+                }
+                break;
+            case 'Dryer':
+                if($product['cubic_feet1'] >=  7) {
+                    $formatted_options[] = 'Options_KingSizeComforterDryer';
+                }
+                break;
+            case 'Washer Dryer Set':
+                // Washer Dryer Sets if Washer has Tag: Options_KingSizeComforterWasher, and dryer has tag: Options_KingSizeComforterDryer Then give tag: Options_KingSizeComforterWDSet
+                if($product['cubic_feet1'] >= 3.8 && $product['cubic_feet2'] >= 7) {
+                    $formatted_options[] = 'Options_KingSizeComforterWDSet';
+                } else {
+                    if($product['cubic_feet1'] >= 3.8) {
+                        $formatted_options[] = 'Options_KingSizeComforterWasher';
+                    }
+                    if($product['cubic_feet2'] >= 7) {
+                        $formatted_options[] = 'Options_KingSizeComforterDryer';
+                    }
+                }
+                break;
+        }
+
         return $formatted_options;
     }
 
@@ -491,12 +564,9 @@ class Product_model extends CI_Model
      * @return array
      */
     private function _get_accessories_tags(&$product) {
-        $category_id = $product['category_id1_arr'][0];
-        $category_name = $this->Category_model->get_category($category_id);
-
         $accessory_tags = [];
 
-        switch($category_name) {
+        switch($product['category']) {
 
             case 'Refrigerator':
                 $accessory_tags = $this->Accessory_model->get_accessories_by_options($product['option_id_arr']);
@@ -550,12 +620,22 @@ class Product_model extends CI_Model
      * @return array
      */
     private function _get_current_model_tags(&$product) {
-        $category_id = $product['category_id1_arr'][0];
+        switch($product['category']) {
+            case 'Washer Dryer Set':
+                if($product['current_model1'] == $product['current_model2']) {
+                    $tags[] = 'CurrentModel_Yes';
+                    $tags[] = 'CurrentModel_WDMatch';
+                } else {
+                    $tags[] = 'CurrentModel_No';
+                    $tags[] = 'CurrentModel_WDNoMatch';
+                }
+                break;
+            default:
+                $postfix = $product['current_model1'] ? 'Yes' : 'No';
+                $tags = ['CurrentModel_'.$postfix];
+        }
 
-        // TODO: check for washer dryer set
-
-        $postfix = $product['current_model1'] ? 'Yes' : 'No';
-        return ['CurrentModel_'.$postfix];
+        return $tags;
     }
 
     /**
