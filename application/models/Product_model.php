@@ -38,7 +38,8 @@ class Product_model extends CI_Model
             p.width1, p.width2, p.height1, p.height2, p.depth1, p.depth2,
             p.feature1, p.feature2, p.feature3,
             p.price, p.comparable_price,
-            p.description
+            p.description,
+            p.title
             FROM products p
             WHERE p.id = %d', $product_id);
 
@@ -225,6 +226,9 @@ class Product_model extends CI_Model
         $title = str_replace('(', '', $title);
         $title = str_replace(')', '', $title);
 
+        // replace double whitespace with single whitespace
+        $title = preg_replace('/\s+/', ' ', $title);
+
         return $title;
     }
 
@@ -297,7 +301,7 @@ class Product_model extends CI_Model
         $sku = $product['source1'].'-'.$product['tracking_no'];
 
         // url handle
-        $row[0] = sprintf('%s-%s-%s', $category, $product['title'], $sku);
+        $row[0] = sprintf('%s-%s-%s', strtolower($category), strtolower(str_replace(' ', '-', $product['title'])), $sku);
         // title
         $row[1] = $product['title'];
         // body html
@@ -420,7 +424,7 @@ class Product_model extends CI_Model
                 $postfix = '_'.$category;
                 $tags[] = sprintf('%s%s', $prefix, $category);
             } else {
-                $tags[] = sprintf('%s%s', $prefix, $category, $postfix);
+                $tags[] = sprintf('%s%s%s', $prefix, $category, $postfix);
             }
         }
 
@@ -499,6 +503,42 @@ class Product_model extends CI_Model
                 if(count($accessory_tags) == 0) {
                     $accessory_tags = ['Accessory_None'];
                 }
+                break;
+
+            case 'Washing Machine':
+                $accessory_tags = $this->Accessory_model->get_accessories_by_category($category_id);
+                break;
+
+            case 'Dryer':
+                $accessory_tags1 = $this->Accessory_model->get_accessories_by_category($product['category_id1_arr']);
+                $accessory_tags2 = $this->Accessory_model->get_accessories_by_options($product['option_id_arr']);
+                $accessory_tags = array_merge($accessory_tags1, $accessory_tags2);
+                break;
+
+            case 'Microwave':
+                $accessory_tags = ['Accessory_None'];
+                break;
+
+            case 'Dishwasher':
+                $accessory_tags = ['Accessories_DishwasherWaterLine'];
+                break;
+
+            case 'Freezer':
+                $accessory_tags = $this->Accessory_model->get_accessories_by_options($product['option_id_arr']);
+                if(count($accessory_tags) == 0) {
+                    $accessory_tags = ['Accessory_None'];
+                }
+                break;
+
+            case 'Cooktop':
+            case 'Walloven':
+                $accessory_tags = $this->Accessory_model->get_accessories_by_category($product['category_id1_arr']);
+                if(count($accessory_tags) == 0) {
+                    $accessory_tags = ['Accessory_None'];
+                }
+                break;
+
+            case 'Washer Dryer Set':
                 break;
         }
 

@@ -56,7 +56,14 @@ class Accessory_model extends CI_Model
      * @return array
      */
     function get_accessories_by_category($category_id) {
-        $rows = $this->db->get_where('accessories', array('category_id' => $category_id))->result_array();
+
+        if(is_array($category_id)) {
+            $this->db->where_in('category_id', $category_id);
+        } else {
+            $this->db->where('category_id', $category_id);
+        }
+
+        $rows = $this->db->get('accessories')->result_array();
         return array_map(function($item) {
             return $item['name'];
         }, $rows);

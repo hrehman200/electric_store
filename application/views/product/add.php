@@ -400,22 +400,6 @@
                                       id="description"><?php echo ($editing ? $product['description'] :  $this->input->post('description')); ?></textarea>
                         </div>
                 </div>
-                <div class="row">
-                    <!--<div class="col-md-6">
-                        <label for="tags" class="control-label">Tags</label>
-                        <div class="form-group">
-                            <textarea name="tags" class="form-control"
-                                      id="tags"><?php /*echo $this->input->post('tags'); */?></textarea>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="accessories" class="control-label">Accessories</label>
-                        <div class="form-group">
-                            <textarea name="accessories" class="form-control"
-                                      id="accessories"><?php /*echo $this->input->post('accessories'); */?></textarea>
-                        </div>
-                    </div>-->
-                </div>
 
                 <h3 align="center">Pictures</h3>
 
@@ -433,8 +417,8 @@
                     <div class="col-md-12">
                         <label for="open_pic" class="control-label">Open Picture</label>
                         <div class="form-group">
-                            <input type="file" name="open_pic[]" accept="image/*" multiple="multiple"
-                                   class="form-control" id="open_pic[]"  />
+                            <input type="file" name="open_pic" accept="image/*"
+                                   class="form-control" id="open_pic"  />
                             <div class="preview">
                                 <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'open_pic');?>
                             </div>

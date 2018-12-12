@@ -132,6 +132,9 @@ class Product extends Auth_Controller
                 if ($product_id > 0) {
                     $this->Product_model->add_options($product_id, $this->input->post('option_id1'));
                     $this->Product_model->add_options($product_id, $this->input->post('option_id2'));
+
+                    $arr_pics = $this->_upload_pics($_FILES);
+                    $this->Product_picture_model->save_pictures($product_id, $arr_pics);
                 }
             }
 
@@ -169,7 +172,14 @@ class Product extends Auth_Controller
             show_error('The product you are trying to delete does not exist.');
     }
 
+    /**
+     * @param $id
+     */
     function shopify_csv($id) {
+
+        if (!$this->permission->has_permission('shopify_csv')) {
+            show_error("You don't have permission");
+        }
 
         $csv_header = ['Handle','Title','Body (HTML)','Vendor','Type','Tags','Published','Option1 Name','Option1 Value','Option2 Name','Option2 Value','Option3 Name','Option3 Value','Variant SKU','Variant Grams','Variant Inventory Tracker','Variant Inventory Qty','Variant Inventory Policy','Variant Fulfillment Service','Variant Price','Variant Compare At Price','Variant Requires Shipping','Variant Taxable','Variant Barcode','Image Src','Image Position','Image Alt Text','Gift Card','SEO Title','SEO Description','Google Shopping / Google Product Category','Google Shopping / Gender','Google Shopping / Age Group','Google Shopping / MPN','Google Shopping / AdWords Grouping','Google Shopping / AdWords Labels','Google Shopping / Condition','Google Shopping / Custom Product','Google Shopping / Custom Label 0','Google Shopping / Custom Label 1','Google Shopping / Custom Label 2','Google Shopping / Custom Label 3','Google Shopping / Custom Label 4','Variant Image','Variant Weight Unit','Variant Tax Code','Cost per item'];
         
