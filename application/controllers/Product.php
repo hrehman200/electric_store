@@ -112,6 +112,8 @@ class Product extends Auth_Controller
                 'depth2' => $this->input->post('depth2'),
                 'title' => $title,
                 'description' => $this->input->post('description'),
+                'current_model1' => $this->input->post('current_model1'),
+                'current_model2' => $this->input->post('current_model2'),
                 'created' => $this->input->post('created'),
                 'updated' => $this->input->post('updated'),
             );

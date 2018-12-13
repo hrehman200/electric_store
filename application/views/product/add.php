@@ -214,6 +214,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="current_model1" class="control-label">
+                                <input type="checkbox" id="current_model1" name="current_model1" value="1" <?=($editing && $product['current_model1']) || $this->input->post('current_model1') ? 'checked': ''?> />  Current Model
+                            </label>
+                        </div>
+                    </div>
                 </fieldset>
 
                 <fieldset class="fieldset-border">
@@ -350,6 +357,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="current_model2" class="control-label">
+                                <input type="checkbox" id="current_model2" name="current_model2" value="1" <?=($editing && $product['current_model2']) || $this->input->post('current_model2') ? 'checked': ''?> />  Current Model
+                            </label>
+                        </div>
+                    </div>
                 </fieldset>
 
                 <div class="row">
@@ -399,6 +413,34 @@
                             <textarea name="description" class="form-control" style="min-height: 300px;"
                                       id="description"><?php echo ($editing ? $product['description'] :  $this->input->post('description')); ?></textarea>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="features" class="control-label">Features</label>
+                        <div class="form-group">
+                            <textarea name="features" class="form-control" style="min-height: 300px;"
+                                      id="features"><?php echo ($editing ? $product['features'] :  $this->input->post('features')); ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="options" class="control-label">Options</label>
+                        <div class="form-group">
+                            <textarea name="options" class="form-control" style="min-height: 300px;"
+                                      id="options"><?php echo ($editing ? $product['options'] :  $this->input->post('options')); ?></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="cycles" class="control-label">Cycles</label>
+                        <div class="form-group">
+                            <textarea name="cycles" class="form-control" style="min-height: 300px;"
+                                      id="cycles"><?php echo ($editing ? $product['cycles'] :  $this->input->post('cycles')); ?></textarea>
+                        </div>
+                    </div>
                 </div>
 
                 <h3 align="center">Pictures</h3>
@@ -673,6 +715,15 @@
         }
 
         $('.selCategory').on('change', function (e) {
+
+            var washerDryers = ['<?=WASHER_DRYER_SET?>', '<?=WASHER?>', '<?=DRYER?>'];
+            if(washerDryers.indexOf($('.selCategory:first').val()) != -1) {
+                $('#description').closest('.row').hide();
+                $('#features, #options, #cycles').closest('.row').show();
+            } else {
+                $('#description').closest('.row').show();
+                $('#features, #options, #cycles').closest('.row').hide();
+            }
 
             if($('.selCategory:first').val() == <?=MISCELLANIOUS?>) {
                 $('.title-row').removeClass('hidden').find('#title').val('');

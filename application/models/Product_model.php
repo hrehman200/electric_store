@@ -39,7 +39,8 @@ class Product_model extends CI_Model
             p.feature1, p.feature2, p.feature3,
             p.price, p.comparable_price,
             p.description,
-            p.title
+            p.title,
+            p.current_model1, p.current_model2
             FROM products p
             WHERE p.id = %d', $product_id);
 
