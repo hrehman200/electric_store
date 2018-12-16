@@ -10,13 +10,22 @@ class Product_picture_model extends CI_Model
     const PICTURE_TYPES = [
         'profile_pic' => 1,
         'open_pic' => 2,
-        'display_pic' => 3,
-        'measurement_tracking_pic' => 4,
-        'power_src_pic' => 5,
-        'damage_pic' => 6,
-        'missing_pieces_pic' => 7,
-        'descriptive_pic' => 8,
-        'model_serial_no_pic' => 9
+
+        'display_pic_1' => 3,
+        'measurement_tracking_pic_1' => 4,
+        'power_src_pic_1' => 5,
+        'damage_pic_1' => 6,
+        'missing_pieces_pic_1' => 7,
+        'descriptive_pic_1' => 8,
+        'model_serial_no_pic_1' => 9,
+
+        'display_pic_2' => 10,
+        'measurement_tracking_pic_2' => 11,
+        'power_src_pic_2' => 12,
+        'damage_pic_2' => 13,
+        'missing_pieces_pic_2' => 14,
+        'descriptive_pic_2' => 15,
+        'model_serial_no_pic_2' => 16,
     ];
 
     const PUBLICLY_VIEWABLE_PIC_TYPES = [1, 2, 3];

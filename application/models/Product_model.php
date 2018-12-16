@@ -38,7 +38,7 @@ class Product_model extends CI_Model
             p.width1, p.width2, p.height1, p.height2, p.depth1, p.depth2,
             p.feature1, p.feature2, p.feature3,
             p.price, p.comparable_price,
-            p.description,
+            p.description, p.features, p.options, p.cycles,
             p.title,
             p.current_model1, p.current_model2
             FROM products p
@@ -652,10 +652,38 @@ class Product_model extends CI_Model
         }
     }
 
+    /**
+     * @param $product
+     * @return string
+     */
     private function _get_html_description_for_csv(&$product) {
 
-        // TODO: we splitted description for certain categories
+        // TODO: may need to append features etc to description
 
-        return $product['description'];
+        switch($product['category']) {
+            case WASHER_DRYER_SET_TXT:
+            case WASHER_TXT:
+            case DRYER_TXT:
+                $description = sprintf('
+                    <h3>Features</h3>
+                    <p>%s</p>
+                    <br/><br/>
+                    <h3>Options</h3> 
+                    <p>%s</p>
+                    <br/><br/>
+                    <h3>Cycles</h3>
+                    <p>%s</p>
+                    <br/><br/>
+                    ',
+                    $product['features'], $product['options'], $product['cycles']
+                );
+                break;
+
+            default:
+                $description = $product['description'];
+
+        }
+
+        return $description;
     }
 }

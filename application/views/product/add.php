@@ -1,5 +1,4 @@
-<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
-<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+<script type="text/javascript" src="<?=base_url()?>resources/js/tinymce/tinymce.min.js" ></script>
 
 <div class="row">
     <div class="col-md-12">
@@ -18,12 +17,37 @@
                                    id="tracking_no" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'tracking_no')?> />
                         </div>
                     </div>
+                </div>
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="profile_pic" class="control-label">Profile Picture</label>
+                        <div class="form-group">
+                            <input type="file" accept="image/*" name="profile_pic"
+                                   class="form-control" id="profile_pic" />
+                            <div class="preview">
+                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'profile_pic');?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="open_pic" class="control-label">Open Picture</label>
+                        <div class="form-group">
+                            <input type="file" name="open_pic" accept="image/*"
+                                   class="form-control" id="open_pic"  />
+                            <div class="preview">
+                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'open_pic');?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-3" style="padding-left:0;">
                             <label for="category_id" class="control-label">Category</label>
                             <div class="form-group">
-                                <select name="category_id1[]" class="form-control selCategory" data-index="0" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'category_id1')?> >
+                                <select name="category_id1[]" <?=$editing?'disabled':''?> class="form-control selCategory" data-index="0" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'category_id1')?> >
                                     <?php
                                     echo $all_categories;
                                     ?>
@@ -221,6 +245,79 @@
                             </label>
                         </div>
                     </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="display_pic_1" class="control-label">Display Picture</label>
+                            <div class="form-group">
+                                <input type="file" name="display_pic_1[]" multiple
+                                       class="form-control" id="display_pic_1[]"  />
+                                <div class="preview">
+                                    <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'display_pic_1');?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="measurement_tracking_pic_1" class="control-label">Measurements and Tracking #</label>
+                            <div class="form-group">
+                                <input type="file" name="measurement_tracking_pic_1" accept="image/*"
+                                       class="form-control" id="measurement_tracking_pic_1"  />
+                                <div class="preview">
+                                    <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'measurement_tracking_pic_1');?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="power_src_pic_1" class="control-label">Power Source</label>
+                            <div class="form-group">
+                                <input type="file" name="power_src_pic_1" accept="image/*"
+                                       class="form-control" id="power_src_pic_1"  />
+                                <div class="preview">
+                                    <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'power_src_pic_1');?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="damage_pic_1" class="control-label">Damage</label>
+                            <div class="form-group">
+                                <input type="file" name="damage_pic_1" accept="image/*"
+                                       class="form-control" id="damage_pic_1"  />
+                                <div class="preview">
+                                    <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'damage_pic_1');?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="missing_pieces_pic_1" class="control-label">Missing pieces</label>
+                            <div class="form-group">
+                                <input type="file" name="missing_pieces_pic_1" accept="image/*"
+                                       class="form-control" id="missing_pieces_pic_1"  />
+                                <div class="preview">
+                                    <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'missing_pieces_pic_1');?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="descriptive_pic_1" class="control-label">Descriptive photos</label>
+                            <div class="form-group">
+                                <input type="file" name="descriptive_pic_1" accept="image/*"
+                                       class="form-control" id="descriptive_pic_1"  />
+                                <div class="preview">
+                                    <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'descriptive_pic_1');?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="model_serial_no_pic_1" class="control-label"> Model and Serial Number</label>
+                            <div class="form-group">
+                                <input type="file" name="model_serial_no_pic_1" accept="image/*"
+                                       class="form-control" id="model_serial_no_pic_1"  />
+                                <div class="preview">
+                                    <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'model_serial_no_pic_1');?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </fieldset>
 
                 <fieldset class="fieldset-border">
@@ -364,6 +461,79 @@
                             </label>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="display_pic_2" class="control-label">Display Picture</label>
+                            <div class="form-group">
+                                <input type="file" name="display_pic_2[]" multiple
+                                       class="form-control" id="display_pic_2[]"  />
+                                <div class="preview">
+                                    <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'display_pic_2');?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="measurement_tracking_pic_2" class="control-label">Measurements and Tracking #</label>
+                            <div class="form-group">
+                                <input type="file" name="measurement_tracking_pic_2" accept="image/*"
+                                       class="form-control" id="measurement_tracking_pic_2"  />
+                                <div class="preview">
+                                    <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'measurement_tracking_pic_2');?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="power_src_pic_2" class="control-label">Power Source</label>
+                            <div class="form-group">
+                                <input type="file" name="power_src_pic_2" accept="image/*"
+                                       class="form-control" id="power_src_pic_2"  />
+                                <div class="preview">
+                                    <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'power_src_pic_2');?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="damage_pic_2" class="control-label">Damage</label>
+                            <div class="form-group">
+                                <input type="file" name="damage_pic_2" accept="image/*"
+                                       class="form-control" id="damage_pic_2"  />
+                                <div class="preview">
+                                    <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'damage_pic_2');?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="missing_pieces_pic_2" class="control-label">Missing pieces</label>
+                            <div class="form-group">
+                                <input type="file" name="missing_pieces_pic_2" accept="image/*"
+                                       class="form-control" id="missing_pieces_pic_2"  />
+                                <div class="preview">
+                                    <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'missing_pieces_pic_2');?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="descriptive_pic_2" class="control-label">Descriptive photos</label>
+                            <div class="form-group">
+                                <input type="file" name="descriptive_pic_2" accept="image/*"
+                                       class="form-control" id="descriptive_pic_2"  />
+                                <div class="preview">
+                                    <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'descriptive_pic_2');?>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="model_serial_no_pic_2" class="control-label"> Model and Serial Number</label>
+                            <div class="form-group">
+                                <input type="file" name="model_serial_no_pic_2" accept="image/*"
+                                       class="form-control" id="model_serial_no_pic_2"  />
+                                <div class="preview">
+                                    <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'model_serial_no_pic_2');?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </fieldset>
 
                 <div class="row">
@@ -419,7 +589,7 @@
                     <div class="col-md-12">
                         <label for="features" class="control-label">Features</label>
                         <div class="form-group">
-                            <textarea name="features" class="form-control" style="min-height: 300px;"
+                            <textarea name="features" class="form-control" style="min-height: 300px; width: 100%;"
                                       id="features"><?php echo ($editing ? $product['features'] :  $this->input->post('features')); ?></textarea>
                         </div>
                     </div>
@@ -439,101 +609,6 @@
                         <div class="form-group">
                             <textarea name="cycles" class="form-control" style="min-height: 300px;"
                                       id="cycles"><?php echo ($editing ? $product['cycles'] :  $this->input->post('cycles')); ?></textarea>
-                        </div>
-                    </div>
-                </div>
-
-                <h3 align="center">Pictures</h3>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <label for="profile_pic" class="control-label">Profile Picture</label>
-                        <div class="form-group">
-                            <input type="file" accept="image/*" name="profile_pic"
-                                   class="form-control" id="profile_pic" />
-                            <div class="preview">
-                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'profile_pic');?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <label for="open_pic" class="control-label">Open Picture</label>
-                        <div class="form-group">
-                            <input type="file" name="open_pic" accept="image/*"
-                                   class="form-control" id="open_pic"  />
-                            <div class="preview">
-                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'open_pic');?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <label for="display_pic" class="control-label">Display Picture</label>
-                        <div class="form-group">
-                            <input type="file" name="display_pic[]" multiple
-                                   class="form-control" id="display_pic[]"  />
-                            <div class="preview">
-                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'display_pic');?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <label for="measurement_tracking_pic" class="control-label">Measurements and Tracking #</label>
-                        <div class="form-group">
-                            <input type="file" name="measurement_tracking_pic" accept="image/*"
-                                   class="form-control" id="measurement_tracking_pic"  />
-                            <div class="preview">
-                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'measurement_tracking_pic');?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <label for="power_src_pic" class="control-label">Power Source</label>
-                        <div class="form-group">
-                            <input type="file" name="power_src_pic" accept="image/*"
-                                   class="form-control" id="power_src_pic"  />
-                            <div class="preview">
-                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'power_src_pic');?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <label for="damage_pic" class="control-label">Damage</label>
-                        <div class="form-group">
-                            <input type="file" name="damage_pic" accept="image/*"
-                                   class="form-control" id="damage_pic"  />
-                            <div class="preview">
-                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'damage_pic');?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <label for="missing_pieces_pic" class="control-label">Missing pieces</label>
-                        <div class="form-group">
-                            <input type="file" name="missing_pieces_pic" accept="image/*"
-                                   class="form-control" id="missing_pieces_pic"  />
-                            <div class="preview">
-                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'missing_pieces_pic');?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <label for="descriptive_pic" class="control-label">Descriptive photos</label>
-                        <div class="form-group">
-                            <input type="file" name="descriptive_pic" accept="image/*"
-                                   class="form-control" id="descriptive_pic"  />
-                            <div class="preview">
-                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'descriptive_pic');?>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <label for="model_serial_no_pic" class="control-label"> Model and Serial Number</label>
-                        <div class="form-group">
-                            <input type="file" name="model_serial_no_pic" accept="image/*"
-                                   class="form-control" id="model_serial_no_pic"  />
-                            <div class="preview">
-                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'model_serial_no_pic');?>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -589,6 +664,17 @@
 </style>
 
 <script type="text/javascript">
+    tinymce.init({
+        selector: 'textarea',
+        height: 500,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor textcolor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table contextmenu paste code help wordcount'
+        ],
+    });
+
     $(function () {
 
         function toggleWasherDryerSet() {

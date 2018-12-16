@@ -91,6 +91,10 @@ define('WD_SET_WASHER', 35);
 define('WD_SET_DRYER', 38);
 define('MISCELLANIOUS', 33);
 
+define('WASHER_DRYER_SET_TXT', 'Washer Dryer Set');
+define('WASHER_TXT', 'Washing Machine');
+define('DRYER_TXT', 'Dryer');
+
 const SOURCES_TO_APPLY_REFURBISHED_CONDITION = [
     '01',
     '02',

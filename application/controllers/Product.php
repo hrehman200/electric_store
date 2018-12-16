@@ -112,6 +112,9 @@ class Product extends Auth_Controller
                 'depth2' => $this->input->post('depth2'),
                 'title' => $title,
                 'description' => $this->input->post('description'),
+                'features' => $this->input->post('features'),
+                'options' => $this->input->post('options'),
+                'cycles' => $this->input->post('cycles'),
                 'current_model1' => $this->input->post('current_model1'),
                 'current_model2' => $this->input->post('current_model2'),
                 'created' => $this->input->post('created'),
@@ -187,7 +190,7 @@ class Product extends Auth_Controller
         
         // output headers so that the file is downloaded rather than displayed
         header('Content-Type: text/csv; charset=utf-8');
-        header('Content-Disposition: attachment; filename=data.csv');
+        header('Content-Disposition: attachment; filename=product_'.$id.'.csv');
 
         $output = fopen('php://output', 'w');
         fputcsv($output, $csv_header);
