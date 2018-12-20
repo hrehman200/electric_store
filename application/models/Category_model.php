@@ -63,8 +63,10 @@ class Category_model extends CI_Model
         $categories = $this->get_categories($parent_id);
 
         $html = '';
+        $count = 0;
         foreach($categories as $c1) {
-            $html .= sprintf('<option value="%d">%s</option>', $c1['id'], $c1['name']);
+            $html .= sprintf('<option value="%d" %s>%s</option>', $c1['id'], $count==0?'selected':'', $c1['name']);
+            $count++;
         }
 
         return $html;

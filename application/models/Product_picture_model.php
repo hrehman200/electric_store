@@ -28,7 +28,7 @@ class Product_picture_model extends CI_Model
         'model_serial_no_pic_2' => 16,
     ];
 
-    const PUBLICLY_VIEWABLE_PIC_TYPES = [1, 2, 3];
+    const PUBLICLY_VIEWABLE_PIC_TYPES = [1, 2, 3, 10];
 
     function __construct() {
         parent::__construct();

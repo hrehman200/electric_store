@@ -230,11 +230,17 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-2 cubic-feet">
                             <label for="cubic_feet1" class="control-label">Cubic Feet</label>
                             <div class="form-group">
                                 <input type="text" name="cubic_feet1" value="<?php echo ($editing ? $product['cubic_feet1'] :  $this->input->post('cubic_feet1')); ?>"
                                        class="form-control" id="cubic_feet1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'cubic_feet1')?> />
+                            </div>
+                        </div>
+                        <div class="col-md-2 cubic-feet">
+                            <label for="current_model2" class="control-label">CubicFeet_None</label>
+                            <div class="form-group">
+                                <input type="checkbox" class="cubic_feet_none" data-index="1" <?=($editing && $product['cubic_feet1']=='') || $this->input->post('cubic_feet1') ? 'checked': ''?> />
                             </div>
                         </div>
                     </div>
@@ -243,6 +249,7 @@
                             <label for="current_model1" class="control-label">
                                 <input type="checkbox" id="current_model1" name="current_model1" value="1" <?=($editing && $product['current_model1']) || $this->input->post('current_model1') ? 'checked': ''?> />  Current Model
                             </label>
+                            <br/><br/>
                         </div>
                     </div>
                     
@@ -446,11 +453,17 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-2 cubic-feet">
                             <label for="cubic_feet1" class="control-label">Cubic Feet</label>
                             <div class="form-group">
                                 <input type="text" name="cubic_feet2" value="<?php echo ($editing ? $product['cubic_feet2'] :  $this->input->post('cubic_feet2')); ?>"
                                        class="form-control" id="cubic_feet2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'cubic_feet2')?> />
+                            </div>
+                        </div>
+                        <div class="col-md-2 cubic-feet">
+                            <label for="current_model2" class="control-label">CubicFeet_None</label>
+                            <div class="form-group">
+                                <input type="checkbox" class="cubic_feet_none" data-index="2" <?=($editing && $product['cubic_feet2']=='') || $this->input->post('cubic_feet2') ? 'checked': ''?> />
                             </div>
                         </div>
                     </div>
@@ -459,6 +472,7 @@
                             <label for="current_model2" class="control-label">
                                 <input type="checkbox" id="current_model2" name="current_model2" value="1" <?=($editing && $product['current_model2']) || $this->input->post('current_model2') ? 'checked': ''?> />  Current Model
                             </label>
+                            <br/><br/>
                         </div>
                     </div>
 
@@ -466,7 +480,7 @@
                         <div class="col-md-12">
                             <label for="display_pic_2" class="control-label">Display Picture</label>
                             <div class="form-group">
-                                <input type="file" name="display_pic_2[]" multiple
+                                <input type="file" name="display_pic_2[]" multiple accept="image/*"
                                        class="form-control" id="display_pic_2[]"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'display_pic_2');?>
@@ -476,7 +490,7 @@
                         <div class="col-md-12">
                             <label for="measurement_tracking_pic_2" class="control-label">Measurements and Tracking #</label>
                             <div class="form-group">
-                                <input type="file" name="measurement_tracking_pic_2" accept="image/*"
+                                <input type="file" name="measurement_tracking_pic_2" multiple  accept="image/*"
                                        class="form-control" id="measurement_tracking_pic_2"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'measurement_tracking_pic_2');?>
@@ -486,7 +500,7 @@
                         <div class="col-md-12">
                             <label for="power_src_pic_2" class="control-label">Power Source</label>
                             <div class="form-group">
-                                <input type="file" name="power_src_pic_2" accept="image/*"
+                                <input type="file" name="power_src_pic_2" multiple  accept="image/*"
                                        class="form-control" id="power_src_pic_2"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'power_src_pic_2');?>
@@ -496,7 +510,7 @@
                         <div class="col-md-12">
                             <label for="damage_pic_2" class="control-label">Damage</label>
                             <div class="form-group">
-                                <input type="file" name="damage_pic_2" accept="image/*"
+                                <input type="file" name="damage_pic_2" multiple  accept="image/*"
                                        class="form-control" id="damage_pic_2"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'damage_pic_2');?>
@@ -506,7 +520,7 @@
                         <div class="col-md-12">
                             <label for="missing_pieces_pic_2" class="control-label">Missing pieces</label>
                             <div class="form-group">
-                                <input type="file" name="missing_pieces_pic_2" accept="image/*"
+                                <input type="file" name="missing_pieces_pic_2" multiple  accept="image/*"
                                        class="form-control" id="missing_pieces_pic_2"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'missing_pieces_pic_2');?>
@@ -516,7 +530,7 @@
                         <div class="col-md-12">
                             <label for="descriptive_pic_2" class="control-label">Descriptive photos</label>
                             <div class="form-group">
-                                <input type="file" name="descriptive_pic_2" accept="image/*"
+                                <input type="file" name="descriptive_pic_2" multiple  accept="image/*"
                                        class="form-control" id="descriptive_pic_2"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'descriptive_pic_2');?>
@@ -526,7 +540,7 @@
                         <div class="col-md-12">
                             <label for="model_serial_no_pic_2" class="control-label"> Model and Serial Number</label>
                             <div class="form-group">
-                                <input type="file" name="model_serial_no_pic_2" accept="image/*"
+                                <input type="file" name="model_serial_no_pic_2" multiple accept="image/*"
                                        class="form-control" id="model_serial_no_pic_2"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'model_serial_no_pic_2');?>
@@ -580,7 +594,7 @@
                     <div class="col-md-12">
                         <label for="description" class="control-label">Description</label>
                         <div class="form-group">
-                            <textarea name="description" class="form-control" style="min-height: 300px;"
+                            <textarea name="description" class="form-control"
                                       id="description"><?php echo ($editing ? $product['description'] :  $this->input->post('description')); ?></textarea>
                         </div>
                     </div>
@@ -589,7 +603,7 @@
                     <div class="col-md-12">
                         <label for="features" class="control-label">Features</label>
                         <div class="form-group">
-                            <textarea name="features" class="form-control" style="min-height: 300px; width: 100%;"
+                            <textarea name="features" class="form-control"
                                       id="features"><?php echo ($editing ? $product['features'] :  $this->input->post('features')); ?></textarea>
                         </div>
                     </div>
@@ -598,7 +612,7 @@
                     <div class="col-md-12">
                         <label for="options" class="control-label">Options</label>
                         <div class="form-group">
-                            <textarea name="options" class="form-control" style="min-height: 300px;"
+                            <textarea name="options" class="form-control"
                                       id="options"><?php echo ($editing ? $product['options'] :  $this->input->post('options')); ?></textarea>
                         </div>
                     </div>
@@ -607,7 +621,7 @@
                     <div class="col-md-12">
                         <label for="cycles" class="control-label">Cycles</label>
                         <div class="form-group">
-                            <textarea name="cycles" class="form-control" style="min-height: 300px;"
+                            <textarea name="cycles" class="form-control"
                                       id="cycles"><?php echo ($editing ? $product['cycles'] :  $this->input->post('cycles')); ?></textarea>
                         </div>
                     </div>
@@ -666,7 +680,7 @@
 <script type="text/javascript">
     tinymce.init({
         selector: 'textarea',
-        height: 500,
+        height: 300,
         menubar: false,
         plugins: [
             'advlist autolink lists link image charmap print preview anchor textcolor',
@@ -814,7 +828,13 @@
             if($('.selCategory:first').val() == <?=MISCELLANIOUS?>) {
                 $('.title-row').removeClass('hidden').find('#title').val('');
             } else {
-                $('.title-row').addClass('hidden').find('#title').val('');
+                $('.title-row').addClass('hidden');
+            }
+
+            if($('.selCategory:first').val() == <?=COOKTOP?>) {
+                $('.cubic-feet').hide();
+            } else {
+                $('.cubic-feet').show();
             }
 
             var parentDiv = $(this).parent().parent();
@@ -918,6 +938,15 @@
                         }
                     }
                 });
+            }
+        });
+
+        $('.cubic_feet_none').on('change', function(e) {
+            var index = $(this).data('index');
+            if($(this).is(':checked')) {
+                $('#cubic_feet'+index).val('');
+            } else {
+                $('#cubic_feet'+index).val('0');
             }
         });
 

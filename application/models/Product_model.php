@@ -57,7 +57,7 @@ class Product_model extends CI_Model
         $row['pictures'] = $this->Product_picture_model->get_all_product_pictures($product_id);
 
         $category_id = $row['category_id1_arr'][0];
-        $row['category'] = $this->Category_model->get_category($category_id)[0]['name'];
+        $row['category'] = $this->Category_model->get_category($category_id)['name'];
 
         return $row;
     }
@@ -302,6 +302,7 @@ class Product_model extends CI_Model
         $product = $this->get_product($product_id);
 
         $category = $this->Category_model->get_category($product['category_id1_arr'][0])['name'];
+        $category = str_replace(' ', '-', $category);
         $sku = $product['source1'].'-'.$product['tracking_no'];
 
         // url handle
@@ -409,6 +410,8 @@ class Product_model extends CI_Model
         $cubic_feet_tags = $this->_get_cubic_feet_tags($product);
         $tags = array_merge($tags, $cubic_feet_tags);
 
+        $tags = array_unique($tags);
+
         return $tags;
     }
 
@@ -469,7 +472,7 @@ class Product_model extends CI_Model
                 break;
             default:
                 $color = $this->Color_model->get_color($product['color_id1']);
-                $tags[] = ['Color_'.str_replace(' ', '', $color['name'])];
+                $tags[] = 'Color_'.str_replace(' ', '', $color['name']);
         }
 
         return $tags;
@@ -577,7 +580,7 @@ class Product_model extends CI_Model
                 break;
 
             case 'Washing Machine':
-                $accessory_tags = $this->Accessory_model->get_accessories_by_category($category_id);
+                $accessory_tags = $this->Accessory_model->get_accessories_by_category($product['category_id1_arr'][0]);
                 break;
 
             case 'Dryer':
@@ -658,13 +661,18 @@ class Product_model extends CI_Model
      */
     private function _get_html_description_for_csv(&$product) {
 
-        // TODO: may need to append features etc to description
+        $description = sprintf('<h3>Main Features</h3>
+            <ul>
+            <li>%s</li>
+            <li>%s</li>
+            <li>%s</li>
+        </ul>', $product['feature1'], $product['feature2'], $product['feature3']);
 
         switch($product['category']) {
             case WASHER_DRYER_SET_TXT:
             case WASHER_TXT:
             case DRYER_TXT:
-                $description = sprintf('
+                $description .= sprintf('
                     <h3>Features</h3>
                     <p>%s</p>
                     <br/><br/>
@@ -680,7 +688,7 @@ class Product_model extends CI_Model
                 break;
 
             default:
-                $description = $product['description'];
+                $description .= $product['description'];
 
         }
 

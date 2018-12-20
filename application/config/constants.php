@@ -90,6 +90,7 @@ define('WASHER_DRYER_SET', 34);
 define('WD_SET_WASHER', 35);
 define('WD_SET_DRYER', 38);
 define('MISCELLANIOUS', 33);
+define('COOKTOP', 27);
 
 define('WASHER_DRYER_SET_TXT', 'Washer Dryer Set');
 define('WASHER_TXT', 'Washing Machine');
