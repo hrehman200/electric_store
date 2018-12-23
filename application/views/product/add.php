@@ -44,6 +44,19 @@
 
                 <div class="row">
                     <div class="col-md-12">
+                        <label for="display_pic_1" class="control-label">Display Picture</label>
+                        <div class="form-group">
+                            <input type="file" name="display_pic_1[]" multiple
+                                   class="form-control" id="display_pic_1[]"  />
+                            <div class="preview">
+                                <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'display_pic_1');?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
                         <div class="col-md-3" style="padding-left:0;">
                             <label for="category_id" class="control-label">Category</label>
                             <div class="form-group">
@@ -255,16 +268,6 @@
                     
                     <div class="row">
                         <div class="col-md-12">
-                            <label for="display_pic_1" class="control-label">Display Picture</label>
-                            <div class="form-group">
-                                <input type="file" name="display_pic_1[]" multiple
-                                       class="form-control" id="display_pic_1[]"  />
-                                <div class="preview">
-                                    <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'display_pic_1');?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
                             <label for="measurement_tracking_pic_1" class="control-label">Measurements and Tracking #</label>
                             <div class="form-group">
                                 <input type="file" name="measurement_tracking_pic_1" accept="image/*"
@@ -286,6 +289,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="damage_pic_1" class="control-label">Damage</label>
+                            <label class="control-label lbl-no-image"><input class="no-image-checkbox" type="checkbox"> None </label>
                             <div class="form-group">
                                 <input type="file" name="damage_pic_1" accept="image/*"
                                        class="form-control" id="damage_pic_1"  />
@@ -296,6 +300,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="missing_pieces_pic_1" class="control-label">Missing pieces</label>
+                            <label class="control-label lbl-no-image"><input class="no-image-checkbox" type="checkbox"> None </label>
                             <div class="form-group">
                                 <input type="file" name="missing_pieces_pic_1" accept="image/*"
                                        class="form-control" id="missing_pieces_pic_1"  />
@@ -322,6 +327,33 @@
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'model_serial_no_pic_1');?>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="features" class="control-label">Features</label>
+                            <div class="form-group">
+                            <textarea name="features" class="form-control"
+                                      id="features"><?php echo ($editing ? $product['features'] :  $this->input->post('features')); ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="options" class="control-label">Options</label>
+                            <div class="form-group">
+                            <textarea name="options" class="form-control"
+                                      id="options"><?php echo ($editing ? $product['options'] :  $this->input->post('options')); ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="cycles" class="control-label">Cycles</label>
+                            <div class="form-group">
+                            <textarea name="cycles" class="form-control"
+                                      id="cycles"><?php echo ($editing ? $product['cycles'] :  $this->input->post('cycles')); ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -478,16 +510,6 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <label for="display_pic_2" class="control-label">Display Picture</label>
-                            <div class="form-group">
-                                <input type="file" name="display_pic_2[]" multiple accept="image/*"
-                                       class="form-control" id="display_pic_2[]"  />
-                                <div class="preview">
-                                    <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'display_pic_2');?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
                             <label for="measurement_tracking_pic_2" class="control-label">Measurements and Tracking #</label>
                             <div class="form-group">
                                 <input type="file" name="measurement_tracking_pic_2" multiple  accept="image/*"
@@ -509,6 +531,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="damage_pic_2" class="control-label">Damage</label>
+                            <label class="control-label lbl-no-image"><input class="no-image-checkbox" type="checkbox"> None </label>
                             <div class="form-group">
                                 <input type="file" name="damage_pic_2" multiple  accept="image/*"
                                        class="form-control" id="damage_pic_2"  />
@@ -519,6 +542,7 @@
                         </div>
                         <div class="col-md-12">
                             <label for="missing_pieces_pic_2" class="control-label">Missing pieces</label>
+                            <label class="control-label lbl-no-image"><input class="no-image-checkbox" type="checkbox"> None </label>
                             <div class="form-group">
                                 <input type="file" name="missing_pieces_pic_2" multiple  accept="image/*"
                                        class="form-control" id="missing_pieces_pic_2"  />
@@ -545,6 +569,33 @@
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'model_serial_no_pic_2');?>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="features2" class="control-label">Features</label>
+                            <div class="form-group">
+                            <textarea name="features2" class="form-control"
+                                      id="features2"><?php echo ($editing ? $product['features2'] :  $this->input->post('features2')); ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="options2" class="control-label">Options</label>
+                            <div class="form-group">
+                            <textarea name="options2" class="form-control"
+                                      id="options2"><?php echo ($editing ? $product['options2'] :  $this->input->post('options2')); ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="cycles2" class="control-label">Cycles</label>
+                            <div class="form-group">
+                            <textarea name="cycles2" class="form-control"
+                                      id="cycles2"><?php echo ($editing ? $product['cycles2'] :  $this->input->post('cycles2')); ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -599,33 +650,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label for="features" class="control-label">Features</label>
-                        <div class="form-group">
-                            <textarea name="features" class="form-control"
-                                      id="features"><?php echo ($editing ? $product['features'] :  $this->input->post('features')); ?></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label for="options" class="control-label">Options</label>
-                        <div class="form-group">
-                            <textarea name="options" class="form-control"
-                                      id="options"><?php echo ($editing ? $product['options'] :  $this->input->post('options')); ?></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label for="cycles" class="control-label">Cycles</label>
-                        <div class="form-group">
-                            <textarea name="cycles" class="form-control"
-                                      id="cycles"><?php echo ($editing ? $product['cycles'] :  $this->input->post('cycles')); ?></textarea>
-                        </div>
-                    </div>
-                </div>
 
             </div>
             <div class="box-footer">
@@ -674,6 +698,10 @@
         color: #ff0000;
         background-color: white;
         padding: 3px;
+    }
+
+    .lbl-no-image {
+        margin-left: 50px;
     }
 </style>
 
@@ -837,6 +865,19 @@
                 $('.cubic-feet').show();
             }
 
+            // power source photo is only for dryer and stoves (washer dryer sets - dryer, and single dryer, stove)
+            if($('.selCategory:first').val() == <?=STOVE?> || $('.selCategory:first').val() == <?=DRYER?>) {
+                $('#power_src_pic_1').closest('.col-md-12').show();
+            } else {
+                $('#power_src_pic_1').closest('.col-md-12').hide();
+            }
+
+            if($('.selCategory:first').val() == <?=WASHER_DRYER_SET?>) {
+                $('#power_src_pic_2').closest('.col-md-12').show();
+            } else {
+                $('#power_src_pic_2').closest('.col-md-12').hide();
+            }
+
             var parentDiv = $(this).parent().parent();
             var categoryId = $(this).val();
             var nextDiv = $(parentDiv).next('div');
@@ -947,6 +988,17 @@
                 $('#cubic_feet'+index).val('');
             } else {
                 $('#cubic_feet'+index).val('0');
+            }
+        });
+
+        $('.no-image-checkbox').on('change', function(e) {
+            if($(this).is(':checked')) {
+                $(this).closest('.col-md-12')
+                    .find('input[type="file"]').prop('disabled', true).end()
+                    .find('.preview').html('');
+            } else {
+                $(this).closest('.col-md-12')
+                    .find('input[type="file"]').prop('disabled', false).end();
             }
         });
 
