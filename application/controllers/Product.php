@@ -167,12 +167,17 @@ class Product extends Auth_Controller
      * Deleting product
      */
     function remove($id) {
+
+        if (!$this->permission->has_permission('delete_picture')) {
+            show_error("You don't have permission");
+        }
+
         $product = $this->Product_model->get_product($id);
 
         // check if the product exists before trying to delete it
         if (isset($product['id'])) {
             $this->Product_model->delete_product($id);
-            redirect('product/index');
+            echo json_encode(['success'=> 1]);
         } else
             show_error('The product you are trying to delete does not exist.');
     }

@@ -123,6 +123,20 @@ class Product_picture_model extends CI_Model
 
     /**
      * @param $product_id
+     * @return mixed
+     */
+    function delete_product_pictures($product_id) {
+        $pictures = $this->get_all_product_pictures($product_id);
+        foreach($pictures as $type => $pics) {
+            foreach($pics as $pic_row) {
+                unlink('uploads/' . $pic_row['name']);
+            }
+        }
+        return $this->db->delete('product_pictures', array('product_id' => $product_id));
+    }
+
+    /**
+     * @param $product_id
      * @param $arr_pics
      */
     function save_pictures($product_id, $arr_pics) {

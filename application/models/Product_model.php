@@ -90,6 +90,8 @@ class Product_model extends CI_Model
      * function to delete product
      */
     function delete_product($id) {
+        $this->delete_options($id);
+        $this->Product_picture_model->delete_product_pictures($id);
         return $this->db->delete('products', array('id' => $id));
     }
 

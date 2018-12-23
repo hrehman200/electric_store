@@ -43,7 +43,7 @@
                                 <?php } ?>
 
                                 <?php if ($this->permission->has_permission('delete_product')) { ?>
-                                <a href="<?php echo site_url('product/remove/' . $p['id']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a>
+                                <a href="javascript:;" data-id="<?=$p['id']?>" class="btn btn-danger btn-xs btn-delete-product"><span class="fa fa-trash"></span> Delete</a>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -54,4 +54,26 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+$(function() {
+    $('.btn-delete-product').on('click', function (e) {
+        var response = confirm('Are you sure you want to delete this product?');
+        var id = $(this).data('id');
+        var parent = $(this).parents('tr');
+        if(response) {
+            $.ajax({
+                url: '<?=base_url()?>product/remove/'+id,
+                method: 'POST',
+                dataType: 'json',
+                success: function (result) {
+                    if(result.success) {
+                        $(parent).remove();
+                    }
+                }
+            });
+        }
+    });
+});
+</script>
 
