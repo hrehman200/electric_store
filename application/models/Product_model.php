@@ -673,21 +673,48 @@ class Product_model extends CI_Model
         </ul>', $product['feature1'], $product['feature2'], $product['feature3']);
 
         switch($product['category']) {
-            case WASHER_DRYER_SET_TXT:
             case WASHER_TXT:
             case DRYER_TXT:
                 $description .= sprintf('
-                    <h3>Features</h3>
+                        <h3>%s Features</h3>
+                        <p>%s</p>
+                        <br/><br/>
+                        <h3>%s Options</h3> 
+                        <p>%s</p>
+                        <br/><br/>
+                        <h3>%s Cycles</h3>
+                        <p>%s</p>
+                        <br/><br/>
+                        ',
+                    $product['category'] == WASHER_TXT ? 'Washer' : $product['category'], $product['features'],
+                    $product['category'] == WASHER_TXT ? 'Washer' : $product['category'], $product['options'],
+                    $product['category'] == WASHER_TXT ? 'Washer' : $product['category'], $product['cycles']
+                );
+                break;
+
+            case WASHER_DRYER_SET_TXT:
+                $description .= sprintf('
+                    <h3>Washing Machine Features</h3>
                     <p>%s</p>
                     <br/><br/>
-                    <h3>Options</h3> 
+                    <h3>Washing Machine Options</h3> 
                     <p>%s</p>
                     <br/><br/>
-                    <h3>Cycles</h3>
+                    <h3>Washing Machine Cycles</h3>
+                    <p>%s</p>
+                    <br/><br/>
+                    <h3>Dryer Features</h3>
+                    <p>%s</p>
+                    <br/><br/>
+                    <h3>Dryer Options</h3> 
+                    <p>%s</p>
+                    <br/><br/>
+                    <h3>Dryer Cycles</h3>
                     <p>%s</p>
                     <br/><br/>
                     ',
-                    $product['features'], $product['options'], $product['cycles']
+                    $product['features'], $product['options'], $product['cycles'],
+                    $product['features2'], $product['options2'], $product['cycles2']
                 );
                 break;
 
