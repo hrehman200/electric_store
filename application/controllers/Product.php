@@ -171,7 +171,7 @@ class Product extends Auth_Controller
      */
     function remove($id) {
 
-        if (!$this->permission->has_permission('delete_picture')) {
+        if (!$this->permission->has_permission('delete_product')) {
             show_error("You don't have permission");
         }
 

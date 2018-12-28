@@ -38,7 +38,9 @@ class Product_model extends CI_Model
             p.width1, p.width2, p.height1, p.height2, p.depth1, p.depth2,
             p.feature1, p.feature2, p.feature3,
             p.price, p.comparable_price,
-            p.description, p.features, p.options, p.cycles,
+            p.description, 
+            p.features, p.options, p.cycles,
+            p.features2, p.options2, p.cycles2,
             p.title,
             p.current_model1, p.current_model2
             FROM products p
