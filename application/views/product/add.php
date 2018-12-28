@@ -152,6 +152,7 @@
                         </div>
                         <div class="col-md-3">
                             <label for="model_no1" class="control-label">Model No</label>
+                            <label class="control-label lbl-no-image"><input class="no-value-checkbox" type="checkbox"> None </label>
                             <div class="form-group">
                                 <input type="text" name="model_no1" value="<?php echo ($editing ? $product['model_no1'] :  $this->input->post('model_no1')); ?>"
                                        class="form-control" id="model_no1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_no1')?> />
@@ -159,6 +160,7 @@
                         </div>
                         <div class="col-md-3">
                             <label for="serial_no1" class="control-label">Serial No</label>
+                            <label class="control-label lbl-no-image"><input class="no-value-checkbox" type="checkbox"> None </label>
                             <div class="form-group">
                                 <input type="text" name="serial_no1" value="<?php echo ($editing ? $product['serial_no1'] :  $this->input->post('serial_no1')); ?>"
                                        class="form-control" id="serial_no1"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'serial_no1')?> />
@@ -394,6 +396,7 @@
                         </div>
                         <div class="col-md-3">
                             <label for="model_no2" class="control-label">Model No</label>
+                            <label class="control-label lbl-no-image"><input class="no-value-checkbox" type="checkbox"> None </label>
                             <div class="form-group">
                                 <input type="text" name="model_no2" value="<?php echo ($editing ? $product['model_no2'] :  $this->input->post('model_no2')); ?>"
                                        class="form-control" id="model_no2"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_no2')?> />
@@ -401,6 +404,7 @@
                         </div>
                         <div class="col-md-3">
                             <label for="serial_no2" class="control-label">Serial No</label>
+                            <label class="control-label lbl-no-image"><input class="no-value-checkbox" type="checkbox"> None </label>
                             <div class="form-group">
                                 <input type="text" name="serial_no2" value="<?php echo ($editing ? $product['serial_no2'] :  $this->input->post('serial_no2')); ?>"
                                        class="form-control" id="serial_no2"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'serial_no2')?> />
@@ -1000,6 +1004,10 @@
                 $(this).closest('.col-md-12')
                     .find('input[type="file"]').prop('disabled', false).end();
             }
+        });
+
+        $('.no-value-checkbox').on('change', function(e) {
+            $(this).parent().parent().find('input[type="text"]').prop('disabled', $(this).is(':checked'));
         });
 
         $(".numeric").keydown(function (event) {
