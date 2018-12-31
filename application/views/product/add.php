@@ -1,4 +1,4 @@
-<script type="text/javascript" src="<?=base_url()?>resources/js/tinymce/tinymce.min.js" ></script>
+<!--<script type="text/javascript" src="<?/*=base_url()*/?>resources/js/tinymce/tinymce.min.js" ></script>-->
 <script type="text/javascript" src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <div class="row">
@@ -14,7 +14,7 @@
                         <label for="tracking_no" class="control-label">Tracking No</label>
                         <div class="form-group">
                             <input type="text" name="tracking_no"
-                                   value="<?php echo ($editing ? $product['tracking_no'] :  $this->input->post('tracking_no')); ?>" class="form-control"
+                                   value="<?php echo ($editing ? $product['tracking_no'] :  $this->input->post('tracking_no')); ?>" class="form-control numeric"
                                    id="tracking_no" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'tracking_no')?> />
                         </div>
                     </div>
@@ -147,7 +147,7 @@
                             <label for="source1" class="control-label">Source</label>
                             <div class="form-group">
                                 <input type="text" name="source1" value="<?php echo ($editing ? $product['source1'] :  $this->input->post('source1')); ?>"
-                                       class="form-control source" id="source1" data-index="1" maxlength="2"
+                                       class="form-control source numeric" id="source1" data-index="1" maxlength="2"
                                        <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'source1')?> />
                             </div>
                         </div>
@@ -396,7 +396,7 @@
                             <label for="source2" class="control-label">Source</label>
                             <div class="form-group">
                                 <input type="text" name="source2" value="<?php echo ($editing ? $product['source2'] :  $this->input->post('source2')); ?>"
-                                       class="form-control source" id="source2" data-index="2" maxlength="2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'source2')?>  />
+                                       class="form-control source numeric" id="source2" data-index="2" maxlength="2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'source2')?>  />
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -719,7 +719,7 @@
 </style>
 
 <script type="text/javascript">
-    tinymce.init({
+    /*tinymce.init({
         selector: 'textarea',
         height: 300,
         menubar: false,
@@ -727,8 +727,8 @@
             'advlist autolink lists link image charmap print preview anchor textcolor',
             'searchreplace visualblocks code fullscreen',
             'insertdatetime media table contextmenu paste code help wordcount'
-        ],*/
-    });
+        ],
+    });*/
 
     $(function () {
 
@@ -1049,7 +1049,7 @@
             }
         });
 
-        $('#features, #options, #cycles, #features2, #options2, #cycles2').on('keyup', function(e) {
+        $('#description, #features, #options, #cycles, #features2, #options2, #cycles2').on('keyup', function(e) {
             $(this).css('text-transform', 'capitalize');
         });
 
