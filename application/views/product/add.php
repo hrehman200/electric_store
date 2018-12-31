@@ -1,4 +1,5 @@
 <script type="text/javascript" src="<?=base_url()?>resources/js/tinymce/tinymce.min.js" ></script>
+<script type="text/javascript" src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <div class="row">
     <div class="col-md-12">
@@ -152,7 +153,7 @@
                         </div>
                         <div class="col-md-3">
                             <label for="model_no1" class="control-label">Model No</label>
-                            <label class="control-label lbl-no-image"><input class="no-value-checkbox" type="checkbox"> None </label>
+                            <label class="control-label lbl-no-image"><input class="no-value-checkbox" type="checkbox" value="1"> None </label>
                             <div class="form-group">
                                 <input type="text" name="model_no1" value="<?php echo ($editing ? $product['model_no1'] :  $this->input->post('model_no1')); ?>"
                                        class="form-control" id="model_no1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_no1')?> />
@@ -160,7 +161,7 @@
                         </div>
                         <div class="col-md-3">
                             <label for="serial_no1" class="control-label">Serial No</label>
-                            <label class="control-label lbl-no-image"><input class="no-value-checkbox" type="checkbox"> None </label>
+                            <label class="control-label lbl-no-image"><input class="no-value-checkbox" type="checkbox" value="1"> None </label>
                             <div class="form-group">
                                 <input type="text" name="serial_no1" value="<?php echo ($editing ? $product['serial_no1'] :  $this->input->post('serial_no1')); ?>"
                                        class="form-control" id="serial_no1"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'serial_no1')?> />
@@ -633,15 +634,15 @@
                         <label for="price" class="control-label">Price</label>
                         <div class="form-group">
                             <input type="text" name="price" value="<?php echo ($editing ? $product['price'] :  $this->input->post('price')); ?>"
-                                   class="form-control numeric" id="price" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'price')?> />
+                                   class="form-control numeric price" id="price" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'price')?> />
                         </div>
                     </div>
                     <div class="col-md-4">
                         <label for="comparable_price" class="control-label">Comparable Price</label>
                         <div class="form-group">
                             <input type="text" name="comparable_price"
-                                   value="<?php echo ($editing ? $product['comparable_price'] :  $this->input->post('comparable_price')); ?>" class="form-control"
-                                   id="comparable_price numeric" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'comparable_price')?> />
+                                   value="<?php echo ($editing ? $product['comparable_price'] :  $this->input->post('comparable_price')); ?>" class="form-control numeric price"
+                                   id="comparable_price" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'comparable_price')?> />
                         </div>
                     </div>
                 </div>
@@ -714,11 +715,11 @@
         selector: 'textarea',
         height: 300,
         menubar: false,
-        plugins: [
+        /*plugins: [
             'advlist autolink lists link image charmap print preview anchor textcolor',
             'searchreplace visualblocks code fullscreen',
             'insertdatetime media table contextmenu paste code help wordcount'
-        ],
+        ],*/
     });
 
     $(function () {
@@ -1007,7 +1008,9 @@
         });
 
         $('.no-value-checkbox').on('change', function(e) {
-            $(this).parent().parent().find('input[type="text"]').prop('disabled', $(this).is(':checked'));
+            $(this).parent().parent().find('input[type="text"]')
+                .prop('disabled', $(this).is(':checked'))
+                .val('');
         });
 
         $(".numeric").keydown(function (event) {
@@ -1026,6 +1029,17 @@
             if($(this).val().indexOf('.') !== -1 && event.keyCode == 190) {
                 event.preventDefault();
             }
+        });
+
+        $("form").submit(function(e) {
+            if($('#comparable_price').val() <= $('#price').val()) {
+                e.preventDefault();
+                swal("Error!", 'Comparable Price should always be greater than Price', 'error');
+            }
+        });
+
+        $('#features, #options, #cycles, #features2, #options2, #cycles2').on('keyup', function(e) {
+            $(this).css('text-transform', 'capitalize');
         });
 
     });
