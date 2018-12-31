@@ -414,6 +414,9 @@ class Product_model extends CI_Model
         $cubic_feet_tags = $this->_get_cubic_feet_tags($product);
         $tags = array_merge($tags, $cubic_feet_tags);
 
+        $model_serial_no_tags = $this->_get_model_serial_no_tags($product);
+        $tags = array_merge($tags, $model_serial_no_tags);
+
         $tags = array_unique($tags);
 
         return $tags;
@@ -724,5 +727,38 @@ class Product_model extends CI_Model
         }
 
         return $description;
+    }
+
+    /**
+     * @param $product
+     * @return array
+     */
+    private function _get_model_serial_no_tags(&$product) {
+        $tags = [];
+        switch($product['category']) {
+            case WASHER_DRYER_SET_TXT:
+                if($product['model_no1'] == '') {
+                    $tags[] = 'Washer_ModelNumber_None';
+                }
+                if($product['serial_no1'] == '') {
+                    $tags[] = 'Washer_SerialNumber_None';
+                }
+                if($product['model_no2'] == '') {
+                    $tags[] = 'Dryer_ModelNumber_None';
+                }
+                if($product['serial_no2'] == '') {
+                    $tags[] = 'Dryer_SerialNumber_None';
+                }
+                break;
+
+            default:
+                if($product['model_no1'] == '') {
+                    $tags[] = 'ModelNumber_None';
+                }
+                if($product['serial_no1'] == '') {
+                    $tags[] = 'SerialNumber_None';
+                }
+        }
+        return $tags;
     }
 }
