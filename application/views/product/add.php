@@ -308,7 +308,7 @@
                             <label for="damage_pic_1" class="control-label">Damage (Multiple)</label>
                             <label class="control-label lbl-no-image"><input class="no-image-checkbox" type="checkbox"> None </label>
                             <div class="form-group">
-                                <input type="file" name="damage_pic_1" accept="image/*"
+                                <input type="file" name="damage_pic_1" accept="image/*" multiple
                                        class="form-control" id="damage_pic_1"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'damage_pic_1');?>
@@ -319,7 +319,7 @@
                             <label for="missing_pieces_pic_1" class="control-label">Missing pieces (Multiple)</label>
                             <label class="control-label lbl-no-image"><input class="no-image-checkbox" type="checkbox"> None </label>
                             <div class="form-group">
-                                <input type="file" name="missing_pieces_pic_1" accept="image/*"
+                                <input type="file" name="missing_pieces_pic_1" accept="image/*" multiple
                                        class="form-control" id="missing_pieces_pic_1"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'missing_pieces_pic_1');?>
@@ -329,7 +329,7 @@
                         <div class="col-md-12">
                             <label for="descriptive_pic_1" class="control-label">Descriptive photos (Multiple)</label>
                             <div class="form-group">
-                                <input type="file" name="descriptive_pic_1" accept="image/*"
+                                <input type="file" name="descriptive_pic_1" accept="image/*" multiple
                                        class="form-control" id="descriptive_pic_1"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'descriptive_pic_1');?>
