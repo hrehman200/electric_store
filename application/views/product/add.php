@@ -277,8 +277,8 @@
                         <div class="col-md-12">
                             <label for="measurement_tracking_pic_1" class="control-label">Measurements and Tracking #(1)</label>
                             <div class="form-group">
-                                <input type="file" name="measurement_tracking_pic_1" accept="image/*"
-                                       class="form-control" id="measurement_tracking_pic_1"  />
+                                <input type="file" accept="image/*" name="measurement_tracking_pic_1"
+                                       class="form-control" id="measurement_tracking_pic_1"/>
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'measurement_tracking_pic_1');?>
                                 </div>
@@ -297,7 +297,7 @@
                         <div class="col-md-12">
                             <label for="power_src_pic_1" class="control-label">Power Source (Multiple)</label>
                             <div class="form-group">
-                                <input type="file" name="power_src_pic_1" accept="image/*"
+                                <input type="file" name="power_src_pic_1[]" accept="image/*" multiple
                                        class="form-control" id="power_src_pic_1"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'power_src_pic_1');?>
@@ -308,7 +308,7 @@
                             <label for="damage_pic_1" class="control-label">Damage (Multiple)</label>
                             <label class="control-label lbl-no-image"><input class="no-image-checkbox" type="checkbox"> None </label>
                             <div class="form-group">
-                                <input type="file" name="damage_pic_1" accept="image/*" multiple
+                                <input type="file" name="damage_pic_1[]" accept="image/*" multiple
                                        class="form-control" id="damage_pic_1"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'damage_pic_1');?>
@@ -319,7 +319,7 @@
                             <label for="missing_pieces_pic_1" class="control-label">Missing pieces (Multiple)</label>
                             <label class="control-label lbl-no-image"><input class="no-image-checkbox" type="checkbox"> None </label>
                             <div class="form-group">
-                                <input type="file" name="missing_pieces_pic_1" accept="image/*" multiple
+                                <input type="file" name="missing_pieces_pic_1[]" accept="image/*" multiple
                                        class="form-control" id="missing_pieces_pic_1"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'missing_pieces_pic_1');?>
@@ -329,7 +329,7 @@
                         <div class="col-md-12">
                             <label for="descriptive_pic_1" class="control-label">Descriptive photos (Multiple)</label>
                             <div class="form-group">
-                                <input type="file" name="descriptive_pic_1" accept="image/*" multiple
+                                <input type="file" name="descriptive_pic_1[]" accept="image/*" multiple
                                        class="form-control" id="descriptive_pic_1"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'descriptive_pic_1');?>
@@ -525,7 +525,7 @@
                         <div class="col-md-12">
                             <label for="measurement_tracking_pic_2" class="control-label">Measurements and Tracking #(1)</label>
                             <div class="form-group">
-                                <input type="file" name="measurement_tracking_pic_2" multiple  accept="image/*"
+                                <input type="file" name="measurement_tracking_pic_2"  accept="image/*"
                                        class="form-control" id="measurement_tracking_pic_2"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'measurement_tracking_pic_2');?>
@@ -535,7 +535,7 @@
                         <div class="col-md-12">
                             <label for="model_serial_no_pic_2" class="control-label"> Model and Serial Number(1)</label>
                             <div class="form-group">
-                                <input type="file" name="model_serial_no_pic_2" multiple accept="image/*"
+                                <input type="file" name="model_serial_no_pic_2" accept="image/*"
                                        class="form-control" id="model_serial_no_pic_2"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'model_serial_no_pic_2');?>
@@ -545,7 +545,7 @@
                         <div class="col-md-12">
                             <label for="power_src_pic_2" class="control-label">Power Source (Multiple)</label>
                             <div class="form-group">
-                                <input type="file" name="power_src_pic_2" multiple  accept="image/*"
+                                <input type="file" name="power_src_pic_2[]" multiple  accept="image/*"
                                        class="form-control" id="power_src_pic_2"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'power_src_pic_2');?>
@@ -556,7 +556,7 @@
                             <label for="damage_pic_2" class="control-label">Damage (Multiple)</label>
                             <label class="control-label lbl-no-image"><input class="no-image-checkbox" type="checkbox"> None </label>
                             <div class="form-group">
-                                <input type="file" name="damage_pic_2" multiple  accept="image/*"
+                                <input type="file" name="damage_pic_2[]" multiple  accept="image/*"
                                        class="form-control" id="damage_pic_2"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'damage_pic_2');?>
@@ -567,7 +567,7 @@
                             <label for="missing_pieces_pic_2" class="control-label">Missing pieces (Multiple)</label>
                             <label class="control-label lbl-no-image"><input class="no-image-checkbox" type="checkbox"> None </label>
                             <div class="form-group">
-                                <input type="file" name="missing_pieces_pic_2" multiple  accept="image/*"
+                                <input type="file" name="missing_pieces_pic_2[]" multiple  accept="image/*"
                                        class="form-control" id="missing_pieces_pic_2"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'missing_pieces_pic_2');?>
@@ -577,7 +577,7 @@
                         <div class="col-md-12">
                             <label for="descriptive_pic_2" class="control-label">Descriptive photos (Multiple)</label>
                             <div class="form-group">
-                                <input type="file" name="descriptive_pic_2" multiple  accept="image/*"
+                                <input type="file" name="descriptive_pic_2[]" multiple  accept="image/*"
                                        class="form-control" id="descriptive_pic_2"  />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'descriptive_pic_2');?>
