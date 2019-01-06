@@ -25,7 +25,9 @@
                         <label for="profile_pic" class="control-label">Profile Picture(1)</label>
                         <div class="form-group">
                             <input type="file" accept="image/*" name="profile_pic"
-                                   class="form-control" id="profile_pic" />
+                                   class="form-control" id="profile_pic"
+                                <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'profile_pic')?>
+                            />
                             <div class="preview">
                                 <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'profile_pic');?>
                             </div>
@@ -35,7 +37,9 @@
                         <label for="open_pic" class="control-label">Open Picture(1)</label>
                         <div class="form-group">
                             <input type="file" name="open_pic" accept="image/*"
-                                   class="form-control" id="open_pic"  />
+                                   class="form-control" id="open_pic"
+                                <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'open_pic')?>
+                            />
                             <div class="preview">
                                 <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'open_pic');?>
                             </div>
@@ -48,7 +52,9 @@
                         <label for="display_pic_1" class="control-label">Display Pictures (Multiple)</label>
                         <div class="form-group">
                             <input type="file" name="display_pic_1[]" multiple
-                                   class="form-control" id="display_pic_1[]"  />
+                                   class="form-control" id="display_pic_1[]"
+                                <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'display_pic_1')?>
+                            />
                             <div class="preview">
                                 <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'display_pic_1');?>
                             </div>
@@ -154,7 +160,9 @@
                         <div class="col-md-3">
                             <label for="model_no1" class="control-label">Model No</label>
                             <label class="control-label lbl-no-image">
-                                <input class="no-value-checkbox" type="checkbox" value="1" <?=$product['model_no1']==''?'checked':''?> > None
+                                <input class="no-value-checkbox" type="checkbox" value="1" <?=$product['model_no1']==''?'checked':''?>
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_no1')?>
+                                > None
                             </label>
                             <div class="form-group">
                                 <input type="text" name="model_no1" value="<?php echo ($editing ? $product['model_no1'] :  $this->input->post('model_no1')); ?>"
@@ -164,7 +172,9 @@
                         <div class="col-md-3">
                             <label for="serial_no1" class="control-label">Serial No</label>
                             <label class="control-label lbl-no-image">
-                                <input class="no-value-checkbox" type="checkbox" value="1" <?=$product['serial_no1']==''?'checked':''?> > None
+                                <input class="no-value-checkbox" type="checkbox" value="1" <?=$product['serial_no1']==''?'checked':''?>
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'serial_no1')?>
+                                > None
                             </label>
                             <div class="form-group">
                                 <input type="text" name="serial_no1" value="<?php echo ($editing ? $product['serial_no1'] :  $this->input->post('serial_no1')); ?>"
@@ -260,14 +270,18 @@
                         <div class="col-md-2 cubic-feet">
                             <label for="current_model2" class="control-label">CubicFeet_None</label>
                             <div class="form-group">
-                                <input type="checkbox" class="cubic_feet_none" data-index="1" <?=($editing && $product['cubic_feet1']=='') || $this->input->post('cubic_feet1') ? 'checked': ''?> />
+                                <input type="checkbox" class="cubic_feet_none" data-index="1" <?=($editing && $product['cubic_feet1']=='') || $this->input->post('cubic_feet1') ? 'checked': ''?>
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'cubic_feet1')?>
+                                />
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <label for="current_model1" class="control-label">
-                                <input type="checkbox" id="current_model1" name="current_model1" value="1" <?=($editing && $product['current_model1']) || $this->input->post('current_model1') ? 'checked': ''?> />  Current Model
+                                <input type="checkbox" id="current_model1" name="current_model1" value="1" <?=($editing && $product['current_model1']) || $this->input->post('current_model1') ? 'checked': ''?>
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'current_model1')?>
+                                />  Current Model
                             </label>
                             <br/><br/>
                         </div>
@@ -278,7 +292,9 @@
                             <label for="measurement_tracking_pic_1" class="control-label">Measurements and Tracking #(1)</label>
                             <div class="form-group">
                                 <input type="file" accept="image/*" name="measurement_tracking_pic_1"
-                                       class="form-control" id="measurement_tracking_pic_1"/>
+                                       class="form-control" id="measurement_tracking_pic_1"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'measurement_tracking_pic_1')?>
+                                />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'measurement_tracking_pic_1');?>
                                 </div>
@@ -288,7 +304,9 @@
                             <label for="model_serial_no_pic_1" class="control-label"> Model and Serial Number(1)</label>
                             <div class="form-group">
                                 <input type="file" name="model_serial_no_pic_1" accept="image/*"
-                                       class="form-control" id="model_serial_no_pic_1"  />
+                                       class="form-control" id="model_serial_no_pic_1"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_serial_no_pic_1')?>
+                                />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'model_serial_no_pic_1');?>
                                 </div>
@@ -298,7 +316,9 @@
                             <label for="power_src_pic_1" class="control-label">Power Source (Multiple)</label>
                             <div class="form-group">
                                 <input type="file" name="power_src_pic_1[]" accept="image/*" multiple
-                                       class="form-control" id="power_src_pic_1"  />
+                                       class="form-control" id="power_src_pic_1"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'power_src_pic_1')?>
+                                />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'power_src_pic_1');?>
                                 </div>
@@ -306,10 +326,16 @@
                         </div>
                         <div class="col-md-12">
                             <label for="damage_pic_1" class="control-label">Damage (Multiple)</label>
-                            <label class="control-label lbl-no-image"><input class="no-image-checkbox" type="checkbox"> None </label>
+                            <label class="control-label lbl-no-image">
+                                <input class="no-image-checkbox" type="checkbox"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'damage_pic_1')?>
+                                > None
+                            </label>
                             <div class="form-group">
                                 <input type="file" name="damage_pic_1[]" accept="image/*" multiple
-                                       class="form-control" id="damage_pic_1"  />
+                                       class="form-control" id="damage_pic_1"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'damage_pic_1')?>
+                                />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'damage_pic_1');?>
                                 </div>
@@ -317,10 +343,16 @@
                         </div>
                         <div class="col-md-12">
                             <label for="missing_pieces_pic_1" class="control-label">Missing pieces (Multiple)</label>
-                            <label class="control-label lbl-no-image"><input class="no-image-checkbox" type="checkbox"> None </label>
+                            <label class="control-label lbl-no-image">
+                                <input class="no-image-checkbox" type="checkbox"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'missing_pieces_pic_1')?>
+                                > None
+                            </label>
                             <div class="form-group">
                                 <input type="file" name="missing_pieces_pic_1[]" accept="image/*" multiple
-                                       class="form-control" id="missing_pieces_pic_1"  />
+                                       class="form-control" id="missing_pieces_pic_1"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'missing_pieces_pic_1')?>
+                                />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'missing_pieces_pic_1');?>
                                 </div>
@@ -330,7 +362,9 @@
                             <label for="descriptive_pic_1" class="control-label">Descriptive photos (Multiple)</label>
                             <div class="form-group">
                                 <input type="file" name="descriptive_pic_1[]" accept="image/*" multiple
-                                       class="form-control" id="descriptive_pic_1"  />
+                                       class="form-control" id="descriptive_pic_1"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'descriptive_pic_1')?>
+                                />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'descriptive_pic_1');?>
                                 </div>
@@ -342,7 +376,9 @@
                             <label for="features" class="control-label">Features</label>
                             <div class="form-group">
                             <textarea name="features" class="form-control"
-                                      id="features"><?php echo ($editing ? $product['features'] :  $this->input->post('features')); ?></textarea>
+                                id="features"
+                                <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'features')?>
+                            ><?php echo ($editing ? $product['features'] :  $this->input->post('features')); ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -351,7 +387,9 @@
                             <label for="options" class="control-label">Options</label>
                             <div class="form-group">
                             <textarea name="options" class="form-control"
-                                      id="options"><?php echo ($editing ? $product['options'] :  $this->input->post('options')); ?></textarea>
+                                id="options"
+                                <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'options')?>
+                            ><?php echo ($editing ? $product['options'] :  $this->input->post('options')); ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -360,7 +398,9 @@
                             <label for="cycles" class="control-label">Cycles</label>
                             <div class="form-group">
                             <textarea name="cycles" class="form-control"
-                                      id="cycles"><?php echo ($editing ? $product['cycles'] :  $this->input->post('cycles')); ?></textarea>
+                                id="cycles"
+                                <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'cycles')?>
+                            ><?php echo ($editing ? $product['cycles'] :  $this->input->post('cycles')); ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -402,7 +442,9 @@
                         <div class="col-md-3">
                             <label for="model_no2" class="control-label">Model No</label>
                             <label class="control-label lbl-no-image">
-                                <input class="no-value-checkbox" type="checkbox" <?=$product['model_no2']==''?'checked':''?> > None
+                                <input class="no-value-checkbox" type="checkbox" <?=$product['model_no2']==''?'checked':''?>
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_no2')?>
+                                > None
                             </label>
                             <div class="form-group">
                                 <input type="text" name="model_no2" value="<?php echo ($editing ? $product['model_no2'] :  $this->input->post('model_no2')); ?>"
@@ -412,7 +454,9 @@
                         <div class="col-md-3">
                             <label for="serial_no2" class="control-label">Serial No</label>
                             <label class="control-label lbl-no-image">
-                                <input class="no-value-checkbox" type="checkbox" <?=$product['serial_no2']==''?'checked':''?> > None
+                                <input class="no-value-checkbox" type="checkbox" <?=$product['serial_no2']==''?'checked':''?>
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'serial_no2')?>
+                                > None
                             </label>
                             <div class="form-group">
                                 <input type="text" name="serial_no2" value="<?php echo ($editing ? $product['serial_no2'] :  $this->input->post('serial_no2')); ?>"
@@ -508,14 +552,18 @@
                         <div class="col-md-2 cubic-feet">
                             <label for="current_model2" class="control-label">CubicFeet_None</label>
                             <div class="form-group">
-                                <input type="checkbox" class="cubic_feet_none" data-index="2" <?=($editing && $product['cubic_feet2']=='') || $this->input->post('cubic_feet2') ? 'checked': ''?> />
+                                <input type="checkbox" class="cubic_feet_none" data-index="2" <?=($editing && $product['cubic_feet2']=='') || $this->input->post('cubic_feet2') ? 'checked': ''?>
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'cubic_feet2')?>
+                                />
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <label for="current_model2" class="control-label">
-                                <input type="checkbox" id="current_model2" name="current_model2" value="1" <?=($editing && $product['current_model2']) || $this->input->post('current_model2') ? 'checked': ''?> />  Current Model
+                                <input type="checkbox" id="current_model2" name="current_model2" value="1" <?=($editing && $product['current_model2']) || $this->input->post('current_model2') ? 'checked': ''?>
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'current_model2')?>
+                                />  Current Model
                             </label>
                             <br/><br/>
                         </div>
@@ -526,7 +574,9 @@
                             <label for="measurement_tracking_pic_2" class="control-label">Measurements and Tracking #(1)</label>
                             <div class="form-group">
                                 <input type="file" name="measurement_tracking_pic_2"  accept="image/*"
-                                       class="form-control" id="measurement_tracking_pic_2"  />
+                                       class="form-control" id="measurement_tracking_pic_2"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'measurement_tracking_pic_2')?>
+                                />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'measurement_tracking_pic_2');?>
                                 </div>
@@ -536,7 +586,9 @@
                             <label for="model_serial_no_pic_2" class="control-label"> Model and Serial Number(1)</label>
                             <div class="form-group">
                                 <input type="file" name="model_serial_no_pic_2" accept="image/*"
-                                       class="form-control" id="model_serial_no_pic_2"  />
+                                       class="form-control" id="model_serial_no_pic_2"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_serial_no_pic_2')?>
+                                />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'model_serial_no_pic_2');?>
                                 </div>
@@ -546,7 +598,9 @@
                             <label for="power_src_pic_2" class="control-label">Power Source (Multiple)</label>
                             <div class="form-group">
                                 <input type="file" name="power_src_pic_2[]" multiple  accept="image/*"
-                                       class="form-control" id="power_src_pic_2"  />
+                                       class="form-control" id="power_src_pic_2"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'power_src_pic_2')?>
+                                />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'power_src_pic_2');?>
                                 </div>
@@ -554,10 +608,16 @@
                         </div>
                         <div class="col-md-12">
                             <label for="damage_pic_2" class="control-label">Damage (Multiple)</label>
-                            <label class="control-label lbl-no-image"><input class="no-image-checkbox" type="checkbox"> None </label>
+                            <label class="control-label lbl-no-image">
+                                <input class="no-image-checkbox" type="checkbox"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'damage_pic_2')?>
+                                > None
+                            </label>
                             <div class="form-group">
                                 <input type="file" name="damage_pic_2[]" multiple  accept="image/*"
-                                       class="form-control" id="damage_pic_2"  />
+                                       class="form-control" id="damage_pic_2"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'damage_pic_2')?>
+                                />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'damage_pic_2');?>
                                 </div>
@@ -565,10 +625,16 @@
                         </div>
                         <div class="col-md-12">
                             <label for="missing_pieces_pic_2" class="control-label">Missing pieces (Multiple)</label>
-                            <label class="control-label lbl-no-image"><input class="no-image-checkbox" type="checkbox"> None </label>
+                            <label class="control-label lbl-no-image">
+                                <input class="no-image-checkbox" type="checkbox"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'missing_pieces_pic_2')?>
+                                > None
+                            </label>
                             <div class="form-group">
                                 <input type="file" name="missing_pieces_pic_2[]" multiple  accept="image/*"
-                                       class="form-control" id="missing_pieces_pic_2"  />
+                                       class="form-control" id="missing_pieces_pic_2"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'missing_pieces_pic_2')?>
+                                />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'missing_pieces_pic_2');?>
                                 </div>
@@ -578,7 +644,9 @@
                             <label for="descriptive_pic_2" class="control-label">Descriptive photos (Multiple)</label>
                             <div class="form-group">
                                 <input type="file" name="descriptive_pic_2[]" multiple  accept="image/*"
-                                       class="form-control" id="descriptive_pic_2"  />
+                                       class="form-control" id="descriptive_pic_2"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'descriptive_pic_2')?>
+                                />
                                 <div class="preview">
                                     <?=$this->Product_picture_model->get_picture_html_from_product_data($product, 'descriptive_pic_2');?>
                                 </div>
@@ -590,7 +658,9 @@
                             <label for="features2" class="control-label">Features</label>
                             <div class="form-group">
                             <textarea name="features2" class="form-control"
-                                      id="features2"><?php echo ($editing ? $product['features2'] :  $this->input->post('features2')); ?></textarea>
+                                      id="features2"
+                                <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'features2')?>
+                            ><?php echo ($editing ? $product['features2'] :  $this->input->post('features2')); ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -599,7 +669,8 @@
                             <label for="options2" class="control-label">Options</label>
                             <div class="form-group">
                             <textarea name="options2" class="form-control"
-                                      id="options2"><?php echo ($editing ? $product['options2'] :  $this->input->post('options2')); ?></textarea>
+                                      id="options2"
+                                <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'options2')?>><?php echo ($editing ? $product['options2'] :  $this->input->post('options2')); ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -608,7 +679,8 @@
                             <label for="cycles2" class="control-label">Cycles</label>
                             <div class="form-group">
                             <textarea name="cycles2" class="form-control"
-                                      id="cycles2"><?php echo ($editing ? $product['cycles2'] :  $this->input->post('cycles2')); ?></textarea>
+                                      id="cycles2"
+                                <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'cycles2')?>><?php echo ($editing ? $product['cycles2'] :  $this->input->post('cycles2')); ?></textarea>
                             </div>
                         </div>
                     </div>
@@ -796,7 +868,7 @@
                     if (result.length > 0) {
                         $(optionsDiv).html('');
                         for (var i in result) {
-                            $(optionsDiv).append('<label><input type="checkbox" name="option_id'+index+'[]" value="' + result[i].id + '">' + result[i].name + '</label><br/>');
+                            $(optionsDiv).append('<label><input type="checkbox" name="option_id'+index+'[]" value="' + result[i].id + '" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'option_id1')?> >' + result[i].name + '</label><br/>');
                         }
                         <?php
                         if($editing) {
@@ -994,6 +1066,10 @@
                 });
             }
         });
+
+        <?php if(!$this->permission->has_permission('.product-pic .edit')) { ?>
+            $('.product-pic .edit').hide();
+        <?php }?>
 
         $('.cubic_feet_none').on('change', function(e) {
             var index = $(this).data('index');
