@@ -10,7 +10,15 @@ class Product_model extends CI_Model
     const ALLOWED_FIELDS = [
         WARRANTY_INFO => ['condition_id1', 'warranty_date1', 'condition_id2', 'warranty_date2'],
         QC_MANAGER => ['*'],
-        QC => ['*'],
+        QC => [
+            'tracking_no', 'profile_pic', 'open_pic', 'display_pic_1', 'category_id1', 'category_id2', 'title',
+            'source1', 'model_no1', 'serial_no1',
+            'source2', 'model_no2', 'serial_no2',
+            'height1', 'width1', 'depth1', 'brand_id1', 'color_id1',
+            'height2', 'width2', 'depth2', 'brand_id2', 'color_id2',
+            'measurement_tracking_pic_1', 'model_serial_no_pic_1', 'power_src_pic_1', 'damage_pic_1', 'missing_pieces_pic_1', 'descriptive_pic_1',
+            'measurement_tracking_pic_2', 'model_serial_no_pic_2', 'power_src_pic_2', 'damage_pic_2', 'missing_pieces_pic_2', 'descriptive_pic_2',
+        ],
     ];
 
     function __construct() {
@@ -268,7 +276,7 @@ class Product_model extends CI_Model
      */
     public function get_disabled($permission_group, $field_name) {
         $arr_allowed_fields = self::ALLOWED_FIELDS[$permission_group];
-        if($arr_allowed_fields[0] = '*') {
+        if($arr_allowed_fields[0] == '*') {
             return false;
         }
         return in_array($field_name, $arr_allowed_fields) ? false : 'disabled="disabled"';
@@ -282,7 +290,7 @@ class Product_model extends CI_Model
     public function sanitize_input($permission_group, $params) {
         $arr_allowed_fields = self::ALLOWED_FIELDS[$permission_group];
 
-        if($arr_allowed_fields[0] = '*') {
+        if($arr_allowed_fields[0] == '*') {
             return $params;
         }
 

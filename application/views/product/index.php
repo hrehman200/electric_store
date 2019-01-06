@@ -10,7 +10,8 @@
                 </div>
             </div>
             <div class="box-body">
-                <table class="table table-striped">
+                <table class="table table-striped" id="tblProducts">
+                    <thead>
                     <tr>
                         <th>Tracking No</th>
                         <th>Model No</th>
@@ -19,41 +20,18 @@
                         <th></th>
                         <th>Actions</th>
                     </tr>
-                    <?php foreach ($products as $p) { ?>
-                        <tr>
-                            <td><?php echo $p['tracking_no']; ?></td>
-                            <td><?php echo $p['model_no1']; ?></td>
-                            <td><?php echo $p['serial_no1']; ?></td>
-                            <td><?php echo $p['title']; ?></td>
-                            <td>
-                                <span class="fa fa-2x <?=$p['action_needed']?'fa-times text-danger':'fa-check text-success'?>"></span>
-                            </td>
-                            <td>
-                                <?php if ($this->permission->has_permission('sticker')) { ?>
-                                <a href="<?php echo site_url('product/sticker/' . $p['id']); ?>" class="btn btn-warning btn-xs" target="_blank"><span class="fa fa-certificate"></span> Sticker</a>
-                                <?php } ?>
-
-                                <?php if ($this->permission->has_permission('edit_product') ||
-                                    $this->permission->has_permission('update_warranty')) { ?>
-                                <a href="<?php echo site_url('product/add/' . $p['id']); ?>" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a>
-                                <?php } ?>
-
-                                <?php if ($this->permission->has_permission('shopify_csv')) { ?>
-                                    <a href="<?php echo site_url('product/shopify_csv/' . $p['id']); ?>" class="btn btn-info btn-xs"><span class="fa fa-save"></span> CSV</a>
-                                <?php } ?>
-
-                                <?php if ($this->permission->has_permission('delete_product')) { ?>
-                                <a href="javascript:;" data-id="<?=$p['id']?>" class="btn btn-danger btn-xs btn-delete-product"><span class="fa fa-trash"></span> Delete</a>
-                                <?php } ?>
-                            </td>
-                        </tr>
-                    <?php } ?>
+                    </thead>
+                    <tbody>
+                    </tbody>
                 </table>
 
             </div>
         </div>
     </div>
 </div>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
 <script type="text/javascript">
 $(function() {
@@ -73,6 +51,19 @@ $(function() {
                 }
             });
         }
+    });
+
+    $('#tblProducts').DataTable({
+        ordering: false,
+        ajax: '<?=base_url()?>ajax/get_products',
+        columns: [
+            { data: 'tracking_no'},
+            { data: 'model_no1'},
+            { data: 'serial_no1'},
+            { data: 'title'},
+            { data: 'action_needed'},
+            { data: 'buttons'}
+        ]
     });
 });
 </script>
