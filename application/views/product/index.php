@@ -35,7 +35,7 @@
 
 <script type="text/javascript">
 $(function() {
-    $('.btn-delete-product').on('click', function (e) {
+    $('#tblProducts').on('click', '.btn-delete-product', function (e) {
         var response = confirm('Are you sure you want to delete this product?');
         var id = $(this).data('id');
         var parent = $(this).parents('tr');
@@ -55,6 +55,7 @@ $(function() {
 
     $('#tblProducts').DataTable({
         ordering: false,
+        searching: false,
         ajax: '<?=base_url()?>ajax/get_products',
         columns: [
             { data: 'tracking_no'},

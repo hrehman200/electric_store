@@ -119,3 +119,7 @@ const SOURCES_TO_APPLY_REFURBISHED_CONDITION = [
 define('WARRANTY_INFO', 'Warranty Info');
 define('QC_MANAGER', 'QC Manager');
 define('QC', 'QC');
+define('STORE_EMPLOYEE', 'Store Employee');
+define('SERVICE', 'Service');
+define('ACCOUNTING', 'Accounting');
+define('MASTER_ACCOUNT', 'Master Account');

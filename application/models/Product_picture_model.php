@@ -98,6 +98,20 @@ class Product_picture_model extends CI_Model
         return $html;
     }
 
+    /**
+     * @param $product
+     * @param $type_key_name
+     * @return string
+     */
+    function get_pictures_for_hover($product, $type_key_name) {
+        $html = '';
+        foreach($product['pictures'][$type_key_name] as $pic) {
+            $img = base_url().'uploads/'.$pic['name'];
+            $html .= sprintf('<a href="%s" data-toggle="lightbox" data-lightbox="%s"><i class="fa fa-picture-o"></i></a>', $img, $type_key_name);
+        }
+        return $html;
+    }
+
     /*
      * function to add new product_picture
      */

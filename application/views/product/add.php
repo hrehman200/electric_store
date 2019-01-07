@@ -12,6 +12,7 @@
                 <div class="row clearfix">
                     <div class="col-md-3">
                         <label for="tracking_no" class="control-label">Tracking No</label>
+                        <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_1')?></label>
                         <div class="form-group">
                             <input type="text" name="tracking_no"
                                    value="<?php echo ($editing ? $product['tracking_no'] :  $this->input->post('tracking_no')); ?>" class="form-control numeric"
@@ -164,9 +165,11 @@
                                     <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_no1')?>
                                 > None
                             </label>
+                            <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'model_serial_no_pic_1')?></label>
                             <div class="form-group">
                                 <input type="text" name="model_no1" value="<?php echo ($editing ? $product['model_no1'] :  $this->input->post('model_no1')); ?>"
-                                       class="form-control" id="model_no1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_no1')?> />
+                                       class="form-control" id="model_no1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_no1')?>
+                                />
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -176,6 +179,7 @@
                                     <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'serial_no1')?>
                                 > None
                             </label>
+                            <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'model_serial_no_pic_1')?></label>
                             <div class="form-group">
                                 <input type="text" name="serial_no1" value="<?php echo ($editing ? $product['serial_no1'] :  $this->input->post('serial_no1')); ?>"
                                        class="form-control" id="serial_no1"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'serial_no1')?> />
@@ -214,6 +218,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label for="height" class="control-label">Height</label>
+                            <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_1')?></label>
                             <div class="form-group">
                                 <input type="text" name="height1" value="<?php echo ($editing ? $product['height1'] :  $this->input->post('height1')); ?>"
                                        class="form-control" id="height1"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'height1')?> />
@@ -221,6 +226,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="width" class="control-label">Width</label>
+                            <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_1')?></label>
                             <div class="form-group">
                                 <input type="text" name="width1" value="<?php echo ($editing ? $product['width1'] :  $this->input->post('width1')); ?>"
                                        class="form-control" id="width1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'width1')?> />
@@ -228,6 +234,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="depth" class="control-label">Depth</label>
+                            <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_1')?></label>
                             <div class="form-group">
                                 <input type="text" name="depth1" value="<?php echo ($editing ? $product['depth1'] :  $this->input->post('depth1')); ?>"
                                        class="form-control" id="depth1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'depth1')?> />
@@ -496,6 +503,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label for="height" class="control-label">Height</label>
+                            <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_2')?></label>
                             <div class="form-group">
                                 <input type="text" name="height2" value="<?php echo ($editing ? $product['height2'] :  $this->input->post('height2')); ?>"
                                        class="form-control" id="height2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'height2')?> />
@@ -503,6 +511,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="width" class="control-label">Width</label>
+                            <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_2')?></label>
                             <div class="form-group">
                                 <input type="text" name="width2" value="<?php echo ($editing ? $product['width2'] :  $this->input->post('width2')); ?>"
                                        class="form-control" id="width2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'width2')?> />
@@ -510,6 +519,7 @@
                         </div>
                         <div class="col-md-4">
                             <label for="depth" class="control-label">Depth</label>
+                            <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_2')?></label>
                             <div class="form-group">
                                 <input type="text" name="depth2" value="<?php echo ($editing ? $product['depth2'] :  $this->input->post('depth2')); ?>"
                                        class="form-control" id="depth2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'depth2')?> />
@@ -738,9 +748,12 @@
 
             </div>
             <div class="box-footer">
-                <button type="submit" class="btn btn-success">
-                    <i class="fa fa-check"></i> Save
-                </button>
+                <a href="<?=base_url('product')?>" class="btn btn-primary">< Back to Products</a>
+                <?php if ($this->permission->has_permission('edit_product')) { ?>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-check"></i> Save
+                    </button>
+                <?php } ?>
             </div>
             <?php echo form_close(); ?>
         </div>
@@ -1119,7 +1132,7 @@
         });
 
         $("form").submit(function(e) {
-            if($('#comparable_price').val() <= $('#price').val()) {
+            if($('#comparable_price:not(:disabled)').val() <= $('#price:not(:disabled)').val()) {
                 e.preventDefault();
                 swal("Error!", 'Comparable Price should always be greater than Price', 'error');
             }

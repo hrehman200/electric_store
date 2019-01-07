@@ -10,6 +10,9 @@ class Product_model extends CI_Model
     const ALLOWED_FIELDS = [
         WARRANTY_INFO => ['condition_id1', 'warranty_date1', 'condition_id2', 'warranty_date2'],
         QC_MANAGER => ['*'],
+        SERVICE => [],
+        ACCOUNTING => [],
+        MASTER_ACCOUNT => ['*'],
         QC => [
             'tracking_no', 'profile_pic', 'open_pic', 'display_pic_1', 'category_id1', 'category_id2', 'title',
             'source1', 'model_no1', 'serial_no1',
@@ -19,6 +22,20 @@ class Product_model extends CI_Model
             'measurement_tracking_pic_1', 'model_serial_no_pic_1', 'power_src_pic_1', 'damage_pic_1', 'missing_pieces_pic_1', 'descriptive_pic_1',
             'measurement_tracking_pic_2', 'model_serial_no_pic_2', 'power_src_pic_2', 'damage_pic_2', 'missing_pieces_pic_2', 'descriptive_pic_2',
         ],
+        STORE_EMPLOYEE => [
+            'tracking_no', 'title',
+            'option_id1', 'option_id2',
+            'source1', 'model_no1', 'serial_no1',
+            'source2', 'model_no2', 'serial_no2',
+            'height1', 'width1', 'depth1',
+            'height2', 'width2', 'depth2',
+            'cubic_feet1', 'cubic_feet2',
+            'current_model1', 'current_model2',
+            'feature1', 'feature2', 'feature3',
+            'price', 'comparable_price',
+            'description',
+            'features', 'options', 'cycles', 'features2', 'options2', 'cycles2',
+        ]
     ];
 
     function __construct() {

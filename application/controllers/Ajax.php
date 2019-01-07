@@ -47,15 +47,20 @@ class Ajax extends Auth_Controller
             $arr['serial_no1'] = $p['serial_no1'];
             $arr['title'] = $p['title'];
 
-            $action_needed = $this->Product_model->is_action_needed_for_product($this->session->userdata('role'), $p['id']);
-            $arr['action_needed'] = sprintf('<span class="fa fa-2x %s"></span>', $action_needed?'fa-times text-danger':'fa-check text-success');
+            // only warranty user can see the tick/cross sign based on whether warranty is set or not
+            if($this->session->userdata('role') == WARRANTY_INFO) {
+                $action_needed = $this->Product_model->is_action_needed_for_product($this->session->userdata('role'), $p['id']);
+                $arr['action_needed'] = sprintf('<span class="fa fa-2x %s"></span>', $action_needed ? 'fa-times text-danger' : 'fa-check text-success');
+            } else {
+                $arr['action_needed'] = '';
+            }
 
             $buttons = '';
             if ($this->permission->has_permission('sticker')) {
                 $buttons .= '<a href="'.site_url('product/sticker/' . $p['id']).'" class="btn btn-warning btn-xs" target="_blank"><span class="fa fa-certificate"></span> Sticker</a>';
             }
 
-            if ($this->permission->has_permission('edit_product') || $this->permission->has_permission('update_warranty')) {
+            if ($this->permission->has_permission('view_product') || $this->permission->has_permission('edit_product') || $this->permission->has_permission('update_warranty')) {
                 $buttons .= '<a href="'.site_url('product/add/' . $p['id']).'" class="btn btn-info btn-xs"><span class="fa fa-pencil"></span> Edit</a>';
             }
 
@@ -64,7 +69,7 @@ class Ajax extends Auth_Controller
             }
 
             if ($this->permission->has_permission('delete_product')) {
-                $buttons .= '<a href="javascript:;" data-id="'.p['id'].'" class="btn btn-danger btn-xs btn-delete-product"><span class="fa fa-trash"></span> Delete</a>';
+                $buttons .= '<a href="javascript:;" data-id="'.$p['id'].'" class="btn btn-danger btn-xs btn-delete-product"><span class="fa fa-trash"></span> Delete</a>';
             }
 
             $arr['buttons'] = $buttons;

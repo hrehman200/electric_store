@@ -81,11 +81,17 @@
                                 <span>Products</span>
                             </a>
                         </li>
+                        <?php
+                        if($this->permission->has_permission('view_users')) {
+                        ?>
 						<li class="<?=$this->uri->segment(1)=='user'?'active':''?>">
                             <a href="<?php echo site_url('user/index');?>">
                                 <span>Users</span>
                             </a>
                         </li>
+                        <?php
+                        }
+                        ?>
                     </ul>
                 </section>
                 <!-- /.sidebar -->
