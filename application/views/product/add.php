@@ -52,7 +52,7 @@
                     <div class="col-md-12">
                         <label for="display_pic_1" class="control-label">Display Pictures (Multiple)</label>
                         <div class="form-group">
-                            <input type="file" name="display_pic_1[]" multiple
+                            <input type="file" name="display_pic_1[]" multiple accept="image/*"
                                    class="form-control" id="display_pic_1[]"
                                 <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'display_pic_1')?>
                             />
@@ -1080,7 +1080,7 @@
             }
         });
 
-        <?php if(!$this->permission->has_permission('.product-pic .edit')) { ?>
+        <?php if(!$this->permission->has_permission('edit_photo')) { ?>
             $('.product-pic .edit').hide();
         <?php }?>
 
