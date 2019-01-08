@@ -1,5 +1,8 @@
-<!--<script type="text/javascript" src="<?/*=base_url()*/?>resources/js/tinymce/tinymce.min.js" ></script>-->
-<script type="text/javascript" src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" href="<?=base_url()?>resources/css/sweetalert2.min.css">
+<script type="text/javascript" src="<?=base_url()?>resources/js/sweetalert2.min.js"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <div class="row">
     <div class="col-md-12">
@@ -51,6 +54,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label for="display_pic_1" class="control-label">Display Pictures (Multiple)</label>
+                        <a class="btn btn-xs btnSort" data-picture-html="<?=html_escape($this->Product_picture_model->get_pictures_for_sort($product, 'display_pic_1'))?>">Sort</a>
                         <div class="form-group">
                             <input type="file" name="display_pic_1[]" multiple accept="image/*"
                                    class="form-control" id="display_pic_1[]"
@@ -741,7 +745,9 @@
                         <label for="description" class="control-label">Description</label>
                         <div class="form-group">
                             <textarea name="description" class="form-control"
-                                      id="description"><?php echo ($editing ? $product['description'] :  $this->input->post('description')); ?></textarea>
+                                      id="description"
+                                <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'description')?>
+                            ><?php echo ($editing ? $product['description'] :  $this->input->post('description')); ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -800,6 +806,15 @@
 
     .lbl-no-image {
         margin-left: 50px;
+    }
+
+    .sortable {
+        padding-left: 0;
+    }
+
+    .sortable li {
+        list-style: none;
+        margin: 5px 0;
     }
 </style>
 
@@ -1037,7 +1052,9 @@
         });
 
         var imagesPreview = function(input, div) {
-            $(div).html('');
+            if($(input).attr('multiple') == undefined) {
+                $(div).html('');
+            }
             if (input.files) {
                 var filesAmount = input.files.length;
                 for (i = 0; i < filesAmount; i++) {
@@ -1134,12 +1151,36 @@
         $("form").submit(function(e) {
             if($('#comparable_price:not(:disabled)').val() <= $('#price:not(:disabled)').val()) {
                 e.preventDefault();
-                swal("Error!", 'Comparable Price should always be greater than Price', 'error');
+                Swal({
+                    type: 'error',
+                    title: "Error!",
+                    text: 'Comparable Price should always be greater than Price',
+                });
             }
         });
 
         $('#description, #features, #options, #cycles, #features2, #options2, #cycles2').on('keyup', function(e) {
             $(this).css('text-transform', 'capitalize');
+        });
+
+        $('.btnSort').click(function(e) {
+            var ul = $(this).data('picture-html');
+            var ulId = $(ul).attr('id');
+            Swal({
+                title: '<strong>Drag pictures to sort</strong>',
+                html: ul,
+                showCloseButton: true,
+                showCancelButton: true,
+                focusConfirm: false,
+                confirmButtonText: 'Save Sort-Order',
+            }).then((result) => {
+                if (result.value) {
+
+                }
+            });
+
+            $('.sortable').sortable();
+            $('.sortable').disableSelection();
         });
 
     });

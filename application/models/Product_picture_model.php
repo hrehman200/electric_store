@@ -112,6 +112,21 @@ class Product_picture_model extends CI_Model
         return $html;
     }
 
+    /**
+     * @param $product
+     * @param $type_key_name
+     * @return string
+     */
+    function get_pictures_for_sort($product, $type_key_name) {
+        $html = sprintf('<ul class="sortable" id="ul_%s">', time());
+        foreach($product['pictures'][$type_key_name] as $pic) {
+            $img = base_url().'uploads/'.$pic['name'];
+            $html .= sprintf('<li class="ui-state-default"><img src="%s" width="200" /></li>', $img);
+        }
+        $html .= '</ul>';
+        return $html;
+    }
+
     /*
      * function to add new product_picture
      */
