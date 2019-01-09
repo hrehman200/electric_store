@@ -1186,7 +1186,7 @@
                     $.each(li, function(i, val) {
                          pictures.push({
                              id: $(val).data('pic-id'),
-                             sort_order: i
+                             sort_order: i+1
                          });
                     });
 

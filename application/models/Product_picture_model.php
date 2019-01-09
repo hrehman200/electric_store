@@ -170,11 +170,14 @@ class Product_picture_model extends CI_Model
      */
     function save_pictures($product_id, $arr_pics) {
         foreach($arr_pics as $type => $file_names) {
+            $count = 0;
             foreach($file_names as $name) {
+                $count++;
                 $this->db->insert('product_pictures', [
                     'product_id' => $product_id,
                     'type' => $type,
                     'name' => $name,
+                    'sort_order' => ($type == self::PICTURE_TYPES['display_pic_1']) ? $count : 0
                 ]);
             }
         }
