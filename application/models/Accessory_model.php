@@ -74,12 +74,14 @@ class Accessory_model extends CI_Model
      * @return array
      */
     function get_accessories_by_options(array $option_ids) {
-        $rows = $this->db->where_in('option_id', $option_ids)
-            ->group_by('name')
-            ->get('accessories')->result_array();
+        if(count($option_ids) > 0) {
+            $rows = $this->db->where_in('option_id', $option_ids)
+                ->group_by('name')
+                ->get('accessories')->result_array();
 
-        return array_map(function($item) {
-            return $item['name'];
-        }, $rows);
+            return array_map(function ($item) {
+                return $item['name'];
+            }, $rows);
+        }
     }
 }

@@ -54,7 +54,7 @@ class Product_picture_model extends CI_Model
             }
             $this ->db->where('type', $type);
         }
-        $this->db->order_by('id', 'desc');
+        $this->db->order_by('sort_order', 'asc');
         $pictures = $this->db->get('product_pictures')->result_array();
 
         $result = [];
@@ -74,7 +74,7 @@ class Product_picture_model extends CI_Model
         $pictures = $this->db->select(sprintf('CONCAT("%suploads/", name) AS url', base_url()), false)
             ->where('product_id', $product_id)
             ->where_in('type', self::PUBLICLY_VIEWABLE_PIC_TYPES)
-            ->order_by('type', 'asc')
+            ->order_by('sort_order', 'asc')
             ->get('product_pictures')
             ->result_array();
 
@@ -121,7 +121,7 @@ class Product_picture_model extends CI_Model
         $html = sprintf('<ul class="sortable" id="ul_%s">', time());
         foreach($product['pictures'][$type_key_name] as $pic) {
             $img = base_url().'uploads/'.$pic['name'];
-            $html .= sprintf('<li class="ui-state-default"><img src="%s" width="200" /></li>', $img);
+            $html .= sprintf('<li class="ui-state-default" data-pic-id="%d"><img src="%s" width="300" /></li>', $pic['id'], $img);
         }
         $html .= '</ul>';
         return $html;

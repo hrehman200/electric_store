@@ -54,7 +54,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label for="display_pic_1" class="control-label">Display Pictures (Multiple)</label>
-                        <a class="btn btn-xs btnSort" data-picture-html="<?=html_escape($this->Product_picture_model->get_pictures_for_sort($product, 'display_pic_1'))?>">Sort</a>
+                        <a class="btn btnSort" data-picture-key="display_pic_1" data-picture-html="<?=html_escape($this->Product_picture_model->get_pictures_for_sort($product, 'display_pic_1'))?>">
+                            <i class="fa fa-sort"></i> Sort
+                        </a>
                         <div class="form-group">
                             <input type="file" name="display_pic_1[]" multiple accept="image/*"
                                    class="form-control" id="display_pic_1[]"
@@ -1164,11 +1166,14 @@
         });
 
         $('.btnSort').click(function(e) {
+            var btnSort = $(this);
             var ul = $(this).data('picture-html');
             var ulId = $(ul).attr('id');
+            var picKey = $(this).data('picture-key');
             Swal({
                 title: '<strong>Drag pictures to sort</strong>',
                 html: ul,
+                width: 400,
                 showCloseButton: true,
                 showCancelButton: true,
                 focusConfirm: false,
@@ -1176,6 +1181,33 @@
             }).then((result) => {
                 if (result.value) {
 
+                    var li = $('#'+ulId).find('li');
+                    var pictures = [];
+                    $.each(li, function(i, val) {
+                         pictures.push({
+                             id: $(val).data('pic-id'),
+                             sort_order: i
+                         });
+                    });
+
+                    $.ajax({
+                        url: '<?=base_url()?>ajax/update_picture_sort_order',
+                        method: 'POST',
+                        data: {
+                            pictures: pictures,
+                            product_id: '<?=$product['id']?>',
+                            pic_key: picKey,
+                        },
+                        dataType: 'json',
+                        success: function (result) {
+                            btnSort.data('picture-html', result.data.pictures_sort_html);
+                            btnSort.parent().find('.preview').html(result.data.pictures_html);
+                            <?php if(!$this->permission->has_permission('edit_photo')) { ?>
+                                $('.product-pic .edit').hide();
+                            <?php }?>
+                            Swal('Sort order saved successfully.');
+                        }
+                    });
                 }
             });
 

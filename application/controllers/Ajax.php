@@ -38,6 +38,22 @@ class Ajax extends Auth_Controller
         echo json_encode($colors);
     }
 
+    function update_picture_sort_order() {
+        $pics = $_POST['pictures'];
+        foreach ($pics as $pic) {
+            $this->Product_picture_model->update_product_picture($pic['id'], ['sort_order' => $pic['sort_order']]);
+        }
+
+        $product = $this->Product_model->get_product($_POST['product_id']);
+        $pictures_html = $this->Product_picture_model->get_picture_html_from_product_data($product, $_POST['pic_key']);
+        $pictures_sort_html = $this->Product_picture_model->get_pictures_for_sort($product, $_POST['pic_key']);
+
+        echo json_encode(['success' => 1, 'data'=>[
+            'pictures_html' => $pictures_html,
+            'pictures_sort_html' => $pictures_sort_html,
+        ]]);
+    }
+
     function get_products() {
         $products = $this->Product_model->get_all_products();
         $response = [];
