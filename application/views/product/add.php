@@ -1081,7 +1081,7 @@
             $(this).ekkoLightbox();
         });
 
-        $('.product-pic .edit').on('click', function (e) {
+        $('.preview').on('click', '.product-pic .edit', function (e) {
             var response = confirm('Are you sure you want to delete this picture?');
             var id = $(this).data('id');
             var parent = $(this).parents('.product-pic');
