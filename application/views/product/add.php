@@ -4,6 +4,9 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+<link rel="stylesheet" type="text/css" href="<?=base_url()?>resources/js/tooltipster/css/tooltipster.bundle.min.css" />
+<script type="text/javascript" src="<?=base_url()?>resources/js/tooltipster/js/tooltipster.bundle.min.js"></script>
+
 <div class="row">
     <div class="col-md-12">
         <div class="box box-info">
@@ -15,11 +18,19 @@
                 <div class="row clearfix">
                     <div class="col-md-3">
                         <label for="tracking_no" class="control-label">Tracking No</label>
-                        <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_1')?></label>
                         <div class="form-group">
                             <input type="text" name="tracking_no"
-                                   value="<?php echo ($editing ? $product['tracking_no'] :  $this->input->post('tracking_no')); ?>" class="form-control numeric"
-                                   id="tracking_no" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'tracking_no')?> />
+                                   value="<?php echo ($editing ? $product['tracking_no'] :  $this->input->post('tracking_no')); ?>"
+                                   class="form-control numeric pic-tooltip"
+                                   id="tracking_no"
+                                   <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'tracking_no')?>
+                                   data-tooltip-content="#tracking_tooltip_content"
+                            />
+                        </div>
+                        <div style="display: none;">
+                            <span id="tracking_tooltip_content">
+                                <?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_1')?>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -171,11 +182,17 @@
                                     <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_no1')?>
                                 > None
                             </label>
-                            <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'model_serial_no_pic_1')?></label>
                             <div class="form-group">
                                 <input type="text" name="model_no1" value="<?php echo ($editing ? $product['model_no1'] :  $this->input->post('model_no1')); ?>"
-                                       class="form-control" id="model_no1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_no1')?>
+                                       class="form-control pic-tooltip" id="model_no1"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_no1')?>
+                                        data-tooltip-content="#model_no1_tooltip_content"
                                 />
+                            </div>
+                            <div style="display: none;">
+                                <span id="model_no1_tooltip_content">
+                                    <?=$this->Product_picture_model->get_pictures_for_hover($product, 'model_serial_no_pic_1')?>
+                                </span>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -185,10 +202,17 @@
                                     <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'serial_no1')?>
                                 > None
                             </label>
-                            <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'model_serial_no_pic_1')?></label>
                             <div class="form-group">
                                 <input type="text" name="serial_no1" value="<?php echo ($editing ? $product['serial_no1'] :  $this->input->post('serial_no1')); ?>"
-                                       class="form-control" id="serial_no1"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'serial_no1')?> />
+                                       class="form-control pic-tooltip" id="serial_no1"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'serial_no1')?>
+                                       data-tooltip-content="#serial_no1_tooltip_content"
+                                />
+                            </div>
+                            <div style="display: none;">
+                                <span id="serial_no1_tooltip_content">
+                                    <?=$this->Product_picture_model->get_pictures_for_hover($product, 'model_serial_no_pic_1')?>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -224,26 +248,47 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label for="height" class="control-label">Height</label>
-                            <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_1')?></label>
                             <div class="form-group">
                                 <input type="text" name="height1" value="<?php echo ($editing ? $product['height1'] :  $this->input->post('height1')); ?>"
-                                       class="form-control" id="height1"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'height1')?> />
+                                       class="form-control pic-tooltip" id="height1"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'height1')?>
+                                        data-tooltip-content="#height1_tooltip_content"
+                                />
+                            </div>
+                            <div style="display: none;">
+                                <span id="height1_tooltip_content">
+                                    <?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_1')?>
+                                </span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="width" class="control-label">Width</label>
-                            <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_1')?></label>
                             <div class="form-group">
                                 <input type="text" name="width1" value="<?php echo ($editing ? $product['width1'] :  $this->input->post('width1')); ?>"
-                                       class="form-control" id="width1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'width1')?> />
+                                       class="form-control pic-tooltip" id="width1"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'width1')?>
+                                        data-tooltip-content="#width1_tooltip_content"
+                                />
+                            </div>
+                            <div style="display: none;">
+                                <span id="width1_tooltip_content">
+                                    <?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_1')?>
+                                </span>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <label for="depth" class="control-label">Depth</label>
-                            <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_1')?></label>
                             <div class="form-group">
                                 <input type="text" name="depth1" value="<?php echo ($editing ? $product['depth1'] :  $this->input->post('depth1')); ?>"
-                                       class="form-control" id="depth1" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'depth1')?> />
+                                       class="form-control pic-tooltip" id="depth1"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'depth1')?>
+                                        data-tooltip-content="#depth1_tooltip_content"
+                                />
+                            </div>
+                            <div style="display: none;">
+                                <span id="depth1_tooltip_content">
+                                    <?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_1')?>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -461,7 +506,15 @@
                             </label>
                             <div class="form-group">
                                 <input type="text" name="model_no2" value="<?php echo ($editing ? $product['model_no2'] :  $this->input->post('model_no2')); ?>"
-                                       class="form-control" id="model_no2"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_no2')?> />
+                                       class="form-control pic-tooltip" id="model_no2"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'model_no2')?>
+                                        data-tooltip-content="#model_no2_tooltip_content"
+                                />
+                            </div>
+                            <div style="display: none;">
+                                <span id="model_no2_tooltip_content">
+                                    <?=$this->Product_picture_model->get_pictures_for_hover($product, 'model_serial_no_pic_2')?>
+                                </span>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -473,7 +526,15 @@
                             </label>
                             <div class="form-group">
                                 <input type="text" name="serial_no2" value="<?php echo ($editing ? $product['serial_no2'] :  $this->input->post('serial_no2')); ?>"
-                                       class="form-control" id="serial_no2"  <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'serial_no2')?> />
+                                       class="form-control pic-tooltip" id="serial_no2"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'serial_no2')?>
+                                        data-tooltip-content="#serial_no2_tooltip_content"
+                                />
+                            </div>
+                            <div style="display: none;">
+                                <span id="serial_no2_tooltip_content">
+                                    <?=$this->Product_picture_model->get_pictures_for_hover($product, 'model_serial_no_pic_2')?>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -509,10 +570,17 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label for="height" class="control-label">Height</label>
-                            <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_2')?></label>
                             <div class="form-group">
                                 <input type="text" name="height2" value="<?php echo ($editing ? $product['height2'] :  $this->input->post('height2')); ?>"
-                                       class="form-control" id="height2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'height2')?> />
+                                       class="form-control pic-tooltip" id="height2"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'height2')?>
+                                        data-tooltip-content="#height2_tooltip_content"
+                                />
+                            </div>
+                            <div style="display: none;">
+                                <span id="height2_tooltip_content">
+                                    <?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_2')?>
+                                </span>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -520,7 +588,15 @@
                             <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_2')?></label>
                             <div class="form-group">
                                 <input type="text" name="width2" value="<?php echo ($editing ? $product['width2'] :  $this->input->post('width2')); ?>"
-                                       class="form-control" id="width2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'width2')?> />
+                                       class="form-control pic-tooltip" id="width2"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'width2')?>
+                                       data-tooltip-content="#width2_tooltip_content"
+                                />
+                            </div>
+                            <div style="display: none;">
+                                <span id="width2_tooltip_content">
+                                    <?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_2')?>
+                                </span>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -528,7 +604,15 @@
                             <label class="pull-right"><?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_2')?></label>
                             <div class="form-group">
                                 <input type="text" name="depth2" value="<?php echo ($editing ? $product['depth2'] :  $this->input->post('depth2')); ?>"
-                                       class="form-control" id="depth2" <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'depth2')?> />
+                                       class="form-control pic-tooltip" id="depth2"
+                                    <?=$this->Product_model->get_disabled($this->session->userdata('role'), 'depth2')?>
+                                       data-tooltip-content="#depth2_tooltip_content"
+                                />
+                            </div>
+                            <div style="display: none;">
+                                <span id="depth2_tooltip_content">
+                                    <?=$this->Product_picture_model->get_pictures_for_hover($product, 'measurement_tracking_pic_2')?>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -833,6 +917,16 @@
     });*/
 
     $(function () {
+
+        $('.pic-tooltip').tooltipster({
+            trigger: 'click',
+            side: ['right', 'left']
+        });
+
+        $('input').on('focus', function(e) {
+            console.log($(this).parents('.row'));
+            $(this).parent().parent().find('.pic-tooltip').trigger('click');
+        });
 
         function toggleWasherDryerSet() {
 
