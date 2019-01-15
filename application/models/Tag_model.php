@@ -23,8 +23,15 @@ class Tag_model extends CI_Model
      * @return mixed
      */
     function get_tags_for_category($category_id) {
+
+        if(is_array($category_id)) {
+            $this->db->where_in('category_id', $category_id);
+        } else {
+            $this->db->where('category_id', $category_id);
+        }
+
         $rows = $this->db->select('name')
-            ->get_where('tags', array('category_id' => $category_id))
+            ->get('tags')
             ->result_array();
 
         return array_map(function($item) { return $item['name']; }, $rows);

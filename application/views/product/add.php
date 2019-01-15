@@ -918,10 +918,12 @@
 
     $(function () {
 
+        <?php if($editing) { ?>
         $('.pic-tooltip').tooltipster({
             trigger: 'click',
             side: ['right', 'left']
         });
+        <?php } ?>
 
         $('input').on('focus', function(e) {
             console.log($(this).parents('.row'));
@@ -1253,6 +1255,8 @@
                     text: 'Comparable Price should always be greater than Price',
                 });
             }
+
+            $('.selCategory:eq(0)').prop('disabled', false);
         });
 
         $('#description, #features, #options, #cycles, #features2, #options2, #cycles2').on('keyup', function(e) {

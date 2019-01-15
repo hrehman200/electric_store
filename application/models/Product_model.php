@@ -201,6 +201,7 @@ class Product_model extends CI_Model
         $brand1 = $this->Brand_model->get_brand($params['brand_id1'])['name'];
         $color2 = $this->Color_model->get_color($params['color_id2'])['name'];
         $brand2 = $this->Brand_model->get_brand($params['brand_id2'])['name'];
+        $category1 = $this->Category_model->get_category($params['category_id1'][0])['name'];
         $subcategory1 = $this->Category_model->get_category($params['category_id1'][1])['name'];
         $subcategory2 = $this->Category_model->get_category($params['category_id2'][0])['name'];
         $user_selected_options1 = $this->get_options($params['option_id1']);
@@ -225,8 +226,17 @@ class Product_model extends CI_Model
                 $title = str_replace('Brand', '', $title);
             }
 
-            $title = $this->_str_replace_first('CuFt', $params['cubic_feet1'].' Cu Ft.', $title);
-            $title = $this->_str_replace_first('CuFt', $params['cubic_feet2'].' Cu Ft.', $title);
+            if($params['cubic_feet1'] > 0) {
+                $title = $this->_str_replace_first('CuFt', $params['cubic_feet1'] . ' Cu Ft.', $title);
+            } else {
+                $title = $this->_str_replace_first('CuFt', '', $title);
+            }
+
+            if($params['cubic_feet2'] > 0) {
+                $title = $this->_str_replace_first('CuFt', $params['cubic_feet2'] . ' Cu Ft.', $title);
+            } else {
+                $title = $this->_str_replace_first('CuFt', '', $title);
+            }
 
             $title = $this->_str_replace_first('Sub Category', $subcategory1.' Washer', $title);
             $title = $this->_str_replace_first('Sub Category', $subcategory2.' Dryer', $title);
@@ -245,7 +255,13 @@ class Product_model extends CI_Model
         } else {
             $title = str_replace('Brand', $brand1, $title);
             $title = str_replace('Color', $color1, $title);
-            $title = str_replace('CuFt', $params['cubic_feet1'].' Cu Ft.', $title);
+
+            if($params['cubic_feet1'] > 0) {
+                $title = str_replace('CuFt', $params['cubic_feet1'] . ' Cu Ft.', $title);
+            } else {
+                $title = str_replace('CuFt', '', $title);
+            }
+
             $title = str_replace('Sub Category', $subcategory1, $title);
 
             $allowed_options_in_title = ['Energy Star', 'Counter Depth', 'Convection', '5 Burners', 'Double Oven', 'Glasstop', 'Steam'];
@@ -258,6 +274,10 @@ class Product_model extends CI_Model
 
         $title = str_replace('(', '', $title);
         $title = str_replace(')', '', $title);
+
+        if($params['category_id1'][0] != WASHER_DRYER_SET) {
+            $title .= $category1;
+        }
 
         // replace double whitespace with single whitespace
         $title = preg_replace('/\s+/', ' ', $title);
@@ -476,7 +496,7 @@ class Product_model extends CI_Model
      */
     private function _get_conditional_tags(&$product) {
         $category_id1_arr = $product['category_id1_arr'];
-        $tags = $this->Tag_model->get_tags_for_category($category_id1_arr[0]);
+        $tags = $this->Tag_model->get_tags_for_category($category_id1_arr);
         return $tags;
     }
 
@@ -609,6 +629,10 @@ class Product_model extends CI_Model
                 if(count($accessory_tags) == 0) {
                     $accessory_tags = ['Accessory_None'];
                 }
+                break;
+
+            case 'Stove':
+                $accessory_tags = $this->Accessory_model->get_accessories_by_category($product['category_id1_arr'][1]);
                 break;
 
             case 'Washing Machine':
@@ -747,7 +771,7 @@ class Product_model extends CI_Model
                 break;
 
             default:
-                $description .= $product['description'];
+                $description .= sprintf('<br><p>%s</p>', $product['description']);
 
         }
 

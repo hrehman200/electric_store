@@ -67,11 +67,7 @@ class Product extends Auth_Controller
 
             $this->form_validation->set_rules('source', 'Source', 'required');
 
-            if(strlen($this->input->post('title')) == 0) {
-                $title = $this->Product_model->get_product_title($this->input->post());
-            } else {
-                $title = $this->input->post('title');
-            }
+            $title = $this->Product_model->get_product_title($this->input->post());
 
             $category_id1 = $this->input->post('category_id1');
             $category_id1 = $category_id1[count($category_id1) - 1];
