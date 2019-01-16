@@ -276,7 +276,7 @@ class Product_model extends CI_Model
         $title = str_replace(')', '', $title);
 
         if($params['category_id1'][0] != WASHER_DRYER_SET) {
-            $title .= $category1;
+            $title .= ' ' . $category1;
         }
 
         // replace double whitespace with single whitespace
@@ -645,7 +645,7 @@ class Product_model extends CI_Model
                 $accessory_tags = array_merge($accessory_tags1, $accessory_tags2);
                 break;
 
-            case 'Microwave':
+            case 'Microwaves':
                 $accessory_tags = ['Accessory_None'];
                 break;
 

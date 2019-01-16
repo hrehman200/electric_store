@@ -67,13 +67,17 @@ class Product extends Auth_Controller
 
             $this->form_validation->set_rules('source', 'Source', 'required');
 
-            $title = $this->Product_model->get_product_title($this->input->post());
-
             $category_id1 = $this->input->post('category_id1');
             $category_id1 = $category_id1[count($category_id1) - 1];
 
             $category_id2 = $this->input->post('category_id2');
             $category_id2 = $category_id2[count($category_id2) - 1];
+
+            if($category_id1 == MISCELLANIOUS) {
+                $title = $this->input->post('title');
+            } else {
+                $title = $this->Product_model->get_product_title($this->input->post());
+            }
 
             $params = array(
                 'tracking_no' => $this->input->post('tracking_no'),
